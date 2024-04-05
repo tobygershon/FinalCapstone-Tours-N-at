@@ -1,0 +1,1 @@
+<!-- search component for searching landmarks. Want filtering ability for types of attractions? -->
