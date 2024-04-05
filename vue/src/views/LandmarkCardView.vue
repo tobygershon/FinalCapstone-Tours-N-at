@@ -1,0 +1,1 @@
+<!-- view landmark details: displays individual landmark card with info -->
