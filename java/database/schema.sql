@@ -16,7 +16,7 @@ CREATE TABLE landmarks (
 	address_id INT NOT NULL,
 	hours_id INT,
 	landmark_designation VARCHAR(50) NOT NULL CHECK (landmark_designation IN ('Park', 'Restaurant', 'Hotel', 'Museum', 'Sporting Venue', 'Attraction', 'Historic Site', 'Church', 'Other')),
-	google_place_id VARCHAR(50) UNIQUE
+	google_place_id VARCHAR(100) UNIQUE
 );
 
 CREATE TABLE addresses (
