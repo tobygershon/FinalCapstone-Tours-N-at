@@ -6,6 +6,9 @@ public class Directions {
 
     private Routes[] routes;
 
+    public Directions() {
+    }
+
     public Directions(Routes[] routes) {
         this.routes = routes;
     }

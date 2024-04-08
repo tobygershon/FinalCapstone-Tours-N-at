@@ -5,20 +5,23 @@ import org.springframework.data.geo.Distance;
 public class Legs {
 
     private Steps[] steps;
-    private Distance distance;
+//    private Distance distance;
 
-    public Legs(Steps[] steps, Distance distance) {
-        this.steps = steps;
-        this.distance = distance;
+    public Legs() {
     }
 
-    public Distance getDistance() {
-        return distance;
-    }
+//    public Legs(Steps[] steps, Distance distance) {
+//        this.steps = steps;
+////        this.distance = distance;
+//    }
 
-    public void setDistance(Distance distance) {
-        this.distance = distance;
-    }
+//    public Distance getDistance() {
+////        return distance;
+//    }
+
+//    public void setDistance(Distance distance) {
+//        this.distance = distance;
+//    }
 
     public Steps[] getSteps() {
         return steps;

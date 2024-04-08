@@ -1,6 +1,7 @@
 package com.techelevator.service;
 
 import com.techelevator.service.models.Directions;
+import com.techelevator.service.models.Routes;
 import org.springframework.web.client.RestTemplate;
 
 public class DirectionsService {
@@ -22,10 +23,11 @@ public class DirectionsService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
+
     //methods
 
     public Directions getDirections(String originPlaceId, String destinationPlaceId) {
-        String url = DIRECTIONS_API_BASE_URL + "origin=place_id:" + originPlaceId + "&destination=place_id:" + destinationPlaceId;
+        String url = DIRECTIONS_API_BASE_URL + "origin=place_id:" + originPlaceId + "&destination=place_id:" + destinationPlaceId + "&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI";
 
         return restTemplate.getForObject(url, Directions.class);
     }

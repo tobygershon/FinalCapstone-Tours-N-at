@@ -8,6 +8,9 @@ public class Routes {
     @JsonProperty("overview_polyline")
     private PolylineOverview polylineOverview;
 
+    public Routes() {
+    }
+
     public Routes(Legs[] legs, PolylineOverview polylineOverview) {
         this.legs = legs;
         this.polylineOverview = polylineOverview;

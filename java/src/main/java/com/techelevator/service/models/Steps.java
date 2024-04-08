@@ -7,6 +7,9 @@ public class Steps {
     @JsonProperty("html_instructions")
     private String htmlStep;
 
+    public Steps() {
+    }
+
     public Steps(String htmlStep) {
         this.htmlStep = htmlStep;
     }

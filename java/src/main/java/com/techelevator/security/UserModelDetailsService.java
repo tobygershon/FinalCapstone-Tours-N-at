@@ -1,8 +1,8 @@
 package com.techelevator.security;
 
-import com.techelevator.dao.UserDao;
-import com.techelevator.model.Authority;
-import com.techelevator.model.User;
+import com.techelevator.dao.User.UserDao;
+import com.techelevator.dao.User.model.Authority;
+import com.techelevator.dao.User.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;

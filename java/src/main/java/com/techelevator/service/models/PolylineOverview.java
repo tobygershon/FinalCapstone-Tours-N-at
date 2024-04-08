@@ -4,6 +4,9 @@ public class PolylineOverview {
 
     private String points;
 
+    public PolylineOverview() {
+    }
+
     public PolylineOverview(String points) {
         this.points = points;
     }
