@@ -1,0 +1,1 @@
+<!-- search landmarks: list of the searched landmarks with clickable names to take to landmark cards -->

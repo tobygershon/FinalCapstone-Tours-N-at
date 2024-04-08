@@ -1,0 +1,1 @@
+<!-- thumbs up/down for landmarks and tracking the data users enter about if they liked it -->
