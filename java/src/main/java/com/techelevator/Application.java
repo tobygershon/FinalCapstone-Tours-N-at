@@ -14,22 +14,5 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 
-        Application testApplication = new Application();
-        testApplication.run();
-    }
-
-    public void run() {
-        DirectionsService directionsService = new DirectionsService();
-
-        Directions directions = directionsService.getDirections("ChIJMZPC9wfuNIgRtg_N_7urk1o", "ChIJG7npSPTtNIgRiSMbNqoVL_k");
-
-        for (Routes route : directions.getRoutes()) {
-            for (Legs leg: route.getLegs()) {
-                for (Steps step : leg.getSteps()) {
-                    System.out.println(step.getHtmlStep());
-                }
-            };
-
-        }
     }
 }
