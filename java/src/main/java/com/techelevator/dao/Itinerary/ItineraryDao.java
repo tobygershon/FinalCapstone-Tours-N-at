@@ -1,0 +1,20 @@
+package com.techelevator.dao.Itinerary;
+
+import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
+import com.techelevator.dao.Itinerary.Model.Itinerary;
+import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
+
+import java.util.List;
+
+public interface ItineraryDao {
+
+    List<Itinerary> getItinerariesByUserId(int userId);
+
+    Itinerary getItineraryById(int itineraryId);
+
+    Itinerary createItinerary(CreateItineraryDTO itinerary);
+
+    Itinerary updateItinerary(UpdateItineraryDTO itinerary);
+    boolean deleteItinerary(Itinerary itinerary);
+
+}
