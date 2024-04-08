@@ -13,22 +13,26 @@ CREATE TABLE users (
 CREATE TABLE landmarks (
 	landmark_id SERIAL PRIMARY KEY,
 	landmark_name VARCHAR(100) NOT NULL UNIQUE,
-	address_id INT NOT NULL,
+	address VARCHAR(200) NOT NULL,
 	hours_id INT,
-	landmark_designation VARCHAR(50) NOT NULL CHECK (landmark_designation IN ('Park', 'Restaurant', 'Hotel', 'Museum', 'Sporting Venue', 'Attraction', 'Historic Site', 'Church', 'Other')),
-	google_place_id VARCHAR(100) UNIQUE
+	google_place_id VARCHAR(200) UNIQUE
 );
 
-CREATE TABLE addresses (
-	address_id SERIAL PRIMARY KEY,
-	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
-	street_number INT NOT NULL,
-	street_name VARCHAR(100) NOT NULL,
-	additional_address_line VARCHAR(100),
-	city VARCHAR(25) NOT NULL DEFAULT 'Pittsburgh',
-	state VARCHAR(2) NOT NULL DEFAULT 'PA',
-	zip_code VARCHAR(9) NOT NULL
+CREATE TABLE designations (
+    designation_id SERIAL PRIMARY KEY,
+    designation_name VARCHAR(50) NOT NULL CHECK (designation_name IN ('Park', 'Food', 'Hotel', 'Museum', 'Scenic Viewpoint', 'Kid-Friendly', 'Sporting Venue', 'Attraction', 'Historic Site', 'Church', 'Other'))
 );
+
+--CREATE TABLE addresses (
+--	address_id SERIAL PRIMARY KEY,
+--	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
+--	street_number INT NOT NULL,
+--	street_name VARCHAR(100) NOT NULL,
+--	additional_address_line VARCHAR(100),
+--	city VARCHAR(25) NOT NULL DEFAULT 'Pittsburgh',
+--	state VARCHAR(2) NOT NULL DEFAULT 'PA',
+--	zip_code VARCHAR(9) NOT NULL
+--);
 
 CREATE TABLE hours_of_operation (
 	hours_id SERIAL PRIMARY KEY,
@@ -83,13 +87,22 @@ CREATE TABLE itineraries_landmarks (
 	CONSTRAINT PK_itineraries_landmarks PRIMARY KEY(itinerary_id, landmark_id)
 );
 
+CREATE TABLE landmarks_designations (
+	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
+	designation_id INT NOT NULL REFERENCES designations(designation_id),
+	CONSTRAINT PK_landmarks_designations PRIMARY KEY(landmark_id, designation_id)
+);
+
 ALTER TABLE users_itineraries ADD CONSTRAINT FK_users_itineraries_itinerary FOREIGN KEY(itinerary_id) REFERENCES itineraries(itinerary_id);
 ALTER TABLE users_itineraries ADD CONSTRAINT FK_users_itineraries_user FOREIGN KEY(user_id) REFERENCES users(user_id);
 
 ALTER TABLE itineraries_landmarks ADD CONSTRAINT FK_itineraries_landmarks_itinerary FOREIGN KEY(itinerary_id) REFERENCES itineraries(itinerary_id);
 ALTER TABLE itineraries_landmarks ADD CONSTRAINT FK_itineraries_landmarks_landmark FOREIGN KEY(landmark_id) REFERENCES landmarks(landmark_id);
 
-ALTER TABLE landmarks ADD CONSTRAINT FK_landmarks_address FOREIGN KEY(address_id) REFERENCES addresses(address_id);
+ALTER TABLE landmarks_designations ADD CONSTRAINT FK_landmarks_designations_landmark FOREIGN KEY(landmark_id) REFERENCES landmarks(landmark_id);
+ALTER TABLE landmarks_designations ADD CONSTRAINT FK_landmarks_designations_designation FOREIGN KEY(designation_id) REFERENCES designations(designation_id);
+
+
 ALTER TABLE landmarks ADD CONSTRAINT FK_landmarks_hours FOREIGN KEY(hours_id) REFERENCES hours_of_operation(hours_id);
 
 
