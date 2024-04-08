@@ -48,11 +48,11 @@ CREATE TABLE routes (
 CREATE TABLE tours (
 	tour_id SERIAL PRIMARY KEY,
 	route_1 INT NOT NULL REFERENCES routes(route_id),
-	route_2 INT NOT NULL REFERENCES routes(route_id),
-	route_3 INT NOT NULL REFERENCES routes(route_id),
-	route_4 INT NOT NULL REFERENCES routes(route_id),
-	route_5 INT NOT NULL REFERENCES routes(route_id),
-	route_6 INT NOT NULL REFERENCES routes(route_id)
+	route_2 INT REFERENCES routes(route_id),
+	route_3 INT REFERENCES routes(route_id),
+	route_4 INT REFERENCES routes(route_id),
+	route_5 INT REFERENCES routes(route_id),
+	route_6 INT REFERENCES routes(route_id)
 );
 
 CREATE TABLE itineraries (
