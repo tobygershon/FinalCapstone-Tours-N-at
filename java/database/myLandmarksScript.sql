@@ -1,9 +1,23 @@
+'Phipps Conservatory and Botanical Gardens', '1 Schenley Drive, Pittsburgh, PA 15213', 'Attraction', 'EilTY2hlbmxleSBEcml2ZSwgUGl0dHNidXJnaCwgUEEgMTUyMTMsIFVTQSIuKiwKFAoSCYEVKXQn8jSIEbxHu5qvxZwsEhQKEgnJgiLkKPI0iBFKDMJBbuR7oA'
+'The Frick Pittsburgh', '7227 Reynolds St, Pittsburgh, PA 15208', 'Museum', 'ChIJA_tYsujtNIgRsrxn4vaPuvc'
+'The Cafe at the Frick', '7227 Reynolds St, Pittsburgh, PA 15208', 'Food', 'ChIJjbGBQav2NIgRoARMOwbkqD4'
+'Point State Park', '601 Commonwealth Pl, Pittsburgh, PA 15222', 'Historic Site, Park', 'ChIJjbGBQav2NIgRoARMOwbkqD4'
+'Frick Park Environmental Center', '2005 Beechwood Blvd, Pittsburgh, PA 15217', 'Park', 'ChIJMZPC9wfuNIgRtg_N_7urk1o'
+'Mellon Park', '1047 Shady Ave, Pittsburgh, PA 15232', 'Park', 'ChIJG7npSPTtNIgRiSMbNqoVL_k'
+'The UPMC Rink at PPG place', '4 PPG Place, Third Ave Suite 100, Pittsburgh, PA 15222', 'Attraction', 'ChIJx3vgAVTxNIgRYlPY4_6Y1fQ'
+'Primanti Bros. Restaurant and Bar', '2 Market Square 5th Floor, Pittsburgh, PA 15222', 'Food', 'ChIJsW0CpVbxNIgRtyWHiG9FaQU'
+'Rivers of Steel: Carrie Blast Furnaces National Historic Landmark', '801 Carrie Furnace Blvd Pittsburgh, PA 15218', 'Historic Site', 'ChIJoeKbJELuNIgR6yWjDwhhvig'
+'Taiwan Bistro Cafe 33', 'Shady Avenue, Pittsburgh, PA', 'Food', 'ChIJR0IGCADyNIgRvOjy0MNoRTs'
+'PNC Park', '115 Federal St, Pittsburgh, PA 15212', 'Sporting Venue', 'ChIJdZvdU_7zNIgRGSPAei2BAbo'
+'Acrisure Stadium', '100 Art Rooney Ave, Pittsburgh, PA 15212', 'Sporting Venue', 'ChIJBeS8FAL0NIgRyLlVH4nRkIU'
+'Carnegie Museum of Art', '4400 Forbes Ave, Pittsburgh, PA 15213', 'Museum', 'ChIJMfTiXCbyNIgRdvqfBv4hy2M'
+'Carnegie Museum of Natural History', '4400 Forbes Ave, Pittsburgh, PA 15213', 'Museum', 'ChIJwRKe38LzNIgRqMb7UcsjkSI'
+
 Phipps Conservatory and Botanical Gardens
-1 Schenley Drive, Pittsburgh, PA 15213
 open daily 9:30 to 5
     friday 9:30 to 10
-Attraction
-place_id=EilTY2hlbmxleSBEcml2ZSwgUGl0dHNidXJnaCwgUEEgMTUyMTMsIFVTQSIuKiwKFAoSCYEVKXQn8jSIEbxHu5qvxZwsEhQKEgnJgiLkKPI0iBFKDMJBbuR7oA
+
+place_id=
 
 
 The Frick Pittsburgh
@@ -23,7 +37,7 @@ place_id=ChIJXRrgsujtNIgRWwtHCcC6TG0
 Point State Park
 601 Commonwealth Pl, Pittsburgh, PA 15222
 open 7-11 daily
-Park, Historic Site
+Historic Site
 place_id=ChIJjbGBQav2NIgRoARMOwbkqD4
 
 Five Points Artisan Bakeshop

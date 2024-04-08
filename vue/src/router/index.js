@@ -6,6 +6,11 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import LandmarkListView from '../views/LandmarkListView.vue';
+import LandmarkCardView from '../views/LandmarkCardView.vue';
+import ItineraryView from '../views/ItineraryView.vue';
+import EditItineraryView from '../views/EditItineraryView.vue';
+import TourRouteView from '../views/TourRouteView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -22,6 +27,47 @@ const routes = [
     component: HomeView,
     meta: {
       requiresAuth: true
+    }
+  },
+  {
+    path: '/landmarks',
+    name: 'landmarkList',
+    component: LandmarkListView,
+    meta: {
+      requiredAuth: false
+    }
+  },
+  {
+    path: '/landmarks/:id',
+    name: 'landmarkCard',
+    component: LandmarkCardView,
+    meta: {
+      requiredAuth: false
+    }
+  },
+  {
+    path: '/itineraries/:userId',
+    name: 'itineraryList',
+    component: ItineraryView,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    // do we want userId in path as well to access through $route?
+    path: '/itineraries/:userId/:itineraryId',
+    name: 'itineraryEdit',
+    component: EditItineraryView,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/tour/:itineraryId',
+    name: 'tourRoute',
+    component: TourRouteView,
+    meta: {
+      requiredAuth: true
     }
   },
   {
