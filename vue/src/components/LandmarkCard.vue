@@ -1,21 +1,23 @@
 <!-- individual card rep landmark with all data -->
 
 <template>
-<div>
-    test
-</div>
+    <div>
+        {{ this.landmark.landmarkName }} <br>
+        {{ this.landmark.address }}
+    </div>
 </template>
 
 
 <script>
 
 export default {
-    props: ['cardLandmark']
+
+    props: ['landmark']
+
 }
+
 
 </script>
 
 
-<style>
-
-</style>
+<style></style>
