@@ -57,10 +57,11 @@ public class JdbcTourDao implements TourDao {
     public Tour updateTour(UpdateTourDTO dto) {
         String sql = "UPDATE tours SET route_1 = ?, route_2 = ?, route_3 = ?, " +
                      "route_4 = ?, route_5 = ?, route_6 = ? WHERE tour_id = ?;";
+
         try {
-            int rowsUpdated = jdbcTemplate.update(sql, dto.getRoutes()[0], dto.getRoutes()[1],
-                    dto.getRoutes()[2], dto.getRoutes()[3], dto.getRoutes()[4],
-                    dto.getRoutes()[5], dto.getTourId());
+            int rowsUpdated = jdbcTemplate.update(sql, dto.getRoutes()[0].getRouteId(), dto.getRoutes()[1].getRouteId(),
+                    dto.getRoutes()[2].getRouteId(), dto.getRoutes()[3].getRouteId(), dto.getRoutes()[4].getRouteId(),
+                    dto.getRoutes()[5].getRouteId(), dto.getTourId());
 
             if (rowsUpdated == 0) {
                 throw new DaoException("Expected 1 row to be updated but zero were updated");

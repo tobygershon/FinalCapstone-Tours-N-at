@@ -26,6 +26,8 @@ public class SearchController {
 
     @GetMapping("/landmarks")
     public List<Landmark> getAllLandmarks() {
+        List<Landmark> testList = landmarkDao.getAllLandmarks();
+        System.out.println(testList.get(0).getAddress());
 
         return landmarkDao.getAllLandmarks();
     }
