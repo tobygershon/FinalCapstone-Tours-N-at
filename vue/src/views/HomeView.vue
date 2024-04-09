@@ -5,7 +5,7 @@
   </div>
   <!-- add nav bar: login logout itineraries 
     want to add map and search components -->
-    <Search />
+  <Search />
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
 
   components: {
     Search
-}
+  }
 
 };
 </script>
