@@ -22,7 +22,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public Landmark getLandmarkById(int id) {
         Landmark newLandmark = new Landmark();
-        String sql = "SELECT * FROM landmarks WHERE landmark_id = ?;";
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if(results.next()) {
@@ -37,7 +37,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public Landmark getLandmarkByName(String landmarkName) {
         Landmark newLandmark = new Landmark();
-        String sql = "SELECT * FROM landmarks WHERE landmark_name = ?;";
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_name = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkName);
             if(results.next()) {
@@ -52,7 +52,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public List<Landmark> getAllLandmarks() {
         List<Landmark> landmarksList = new ArrayList<>();
-        String sql = "SELECT * FROM landmarks;";
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while(results.next()) {
@@ -68,8 +68,9 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public List<Landmark> getLandmarksByDesignation(String landmarkDesignation) {
         List<Landmark> landmarksList = new ArrayList<>();
-        String sql = "SELECT * FROM landmarks JOIN landmarks_designations ON landmark_id " +
-                "JOIN designations ON designation_id WHERE designation_name = ?;";
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks JOIN landmarks_designations USING (landmark_id) " +
+                    "JOIN designations USING (designation_id) WHERE designation_name = ?;";
+
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkDesignation);
             while(results.next()) {

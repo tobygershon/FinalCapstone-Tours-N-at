@@ -5,9 +5,17 @@
   </div>
   <!-- add nav bar: login logout itineraries 
     want to add map and search components -->
+    <Search />
 </template>
 
 <script>
+import Search from '../components/Search.vue';
+
 export default {
+
+  components: {
+    Search
+}
+
 };
 </script>
