@@ -7,3 +7,10 @@
     <router-view />
   </div>
 </template>
+
+<style>
+#capstone-app {
+  background-color: #E9EAEC;
+}
+</style>
+
