@@ -1,7 +1,9 @@
 <!-- individual card rep landmark with all data -->
 
 <template>
-Test
+<div>
+    test
+</div>
 </template>
 
 

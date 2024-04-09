@@ -3,18 +3,22 @@
 <template>
     <div>
         <h2>Search Results</h2>
-        <div v-for="landmark in landmarks" :key="landmark.id" class="landmarkCardsList">
-                <LandmarkCard :landmark="cardLandmark"/>
-                <!-- <router-link 
-                :to="{name: 'landmarkCard', params: { id: landmark.id} }">
+        <div class="landmarkList">
+        <div v-for="landmark in landmarks" :key="landmark.landmarkId" class="landmarkCardsList">
             
-            </router-link> -->
+                {{landmark.landmarkName}} <br>
+                {{ landmark.address }}
+                <router-link to="{ name : 'landmarkCard' , params: {id: landmarkId}}">
+                click here
+            </router-link>
         </div>
+
+    </div>
     </div>
 </template>
 
 <script>
-import LandmarkCard from "../components/LandmarkCard.vue";
+// import LandmarkCard from "../components/LandmarkCard.vue";
 
 
 export default {
@@ -22,10 +26,32 @@ export default {
     props: ['landmarks'],
     
     components: {
-    LandmarkCard,
+   
 }
 }
-
-
 
 </script>
+
+<style>
+
+.landmarkCardsList {
+margin: 10px;
+padding: 10px 20px;
+background-color: #FBE134;
+text-align: center;
+border: solid 2px black;
+width: 400px;
+height: 100px;
+}
+
+.landmarkCardsList:hover {
+    cursor: pointer;
+}
+
+.landmarkList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+</style>

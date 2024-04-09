@@ -3,9 +3,9 @@
     <label for="points-of-interest-category-dropdown">Search Points of Interest:</label>
     <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
         <option value=""> </option>
-        <option value="Attractions">Attractions</option>
+        <option value="Attraction">Attractions</option>
         <option value="Food">Food</option>
-        <option value="Historic Sites">Historic Sites</option>
+        <option value="Historic Site">Historic Sites</option>
         <option value="Kid-Friendly">Kid-Friendly</option>
         <option value="Museum">Museum</option>
         <option value="Park">Park</option>
@@ -13,7 +13,10 @@
         <option value="Sporting Venue">Sporting Venue</option>
     </select>
     <input type="button" @click="retrieveLandmarks" value="Go!">
-    <LandmarkList :landmarks="landmarks"/>
+
+        <LandmarkList :landmarks="landmarks"/>
+    
+
 </template>
 
 <script>
@@ -68,3 +71,7 @@ export default {
 }
 
 </script>../services/LandmarkService.js
+
+<style>
+
+</style>
