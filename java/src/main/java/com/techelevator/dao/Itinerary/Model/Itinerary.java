@@ -11,6 +11,9 @@ public class Itinerary {
     private LocalDate tourDate;
     private int tourId;
 
+    public Itinerary() {
+
+    }
     public Itinerary(int id, int userId, String itineraryName, int startingLocationId, LocalDate tourDate, int tourId) {
         this.id = id;
         this.userId = userId;

@@ -10,15 +10,15 @@ public class Legs {
     public Legs() {
     }
 
-//    public Legs(Steps[] steps, Distance distance) {
-//        this.steps = steps;
-////        this.distance = distance;
-//    }
+    public Legs(Steps[] steps, Distance distance) {
+        this.steps = steps;
+//        this.distance = distance;
+    }
 
 //    public Distance getDistance() {
-////        return distance;
+//        return distance;
 //    }
-
+//
 //    public void setDistance(Distance distance) {
 //        this.distance = distance;
 //    }
