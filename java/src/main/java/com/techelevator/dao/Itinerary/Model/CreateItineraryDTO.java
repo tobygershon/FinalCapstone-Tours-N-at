@@ -5,7 +5,6 @@ import com.techelevator.dao.User.model.User;
 import java.time.LocalDate;
 
 public class CreateItineraryDTO {
-
     private int userId;
     private String itineraryName;
     private int startingLocationId;

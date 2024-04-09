@@ -18,7 +18,6 @@ import java.util.List;
 
 @Component
 public class JdbcItineraryDao implements ItineraryDao {
-
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcItineraryDao(JdbcTemplate jdbcTemplate) {

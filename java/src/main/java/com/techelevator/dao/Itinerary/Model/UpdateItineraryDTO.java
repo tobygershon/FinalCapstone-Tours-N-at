@@ -12,7 +12,6 @@ public class UpdateItineraryDTO {
     private LocalDate tourDate;
     private int tourId;
 
-
     public UpdateItineraryDTO(int itineraryId, int startingLocationId, LocalDate tourDate) {
         this.itineraryId = itineraryId;
         this.startingLocationId = startingLocationId;
