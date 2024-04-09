@@ -1,44 +1,45 @@
 <!-- search landmarks: list of the searched landmarks with clickable names to take to landmark cards -->
 
 <template>
+    <Search />
     <LandmarkList :landmarks="landmarks"/>
+    
 </template>
 
 
 <script>
 import LandmarkList from '../components/LandmarkList.vue';
-import SearchService from '../services/SearchService';
+import landmarkService from '../services/LandmarkService.js';
+import Search from '../components/Search.vue';
 
 export default {
 
-    props: ['designation'],
-    // designation brought in as prop?  or in data?
-
     components: {
-        LandmarkList
+        LandmarkList,
+        Search,
     },
 
     data() {
         return {
-            landmarks: []
+            landmarks: [],
         }
     },
 
     methods: {
 
         testSearchAll() {
-            SearchService.getAllLandmarks().then(response => {
+            landmarkService.getAllLandmarks().then(response => {
                 this.landmarks = response.data;
             })
         },
 
         retrieveSearchResults() {
             if (this.designation === '') {
-                SearchService.getAllLandmarks().then(response => {
+                landmarkService.getAllLandmarks().then(response => {
                     this.landmarks = response.data;
                 })
             } else {
-                SearchService.getLandmarksByDesignation(this.designation).then(response => {
+                landmarkService.getLandmarksByDesignation(this.designation).then(response => {
                     this.landmarks = response.data;
                 })
             }
@@ -51,4 +52,4 @@ export default {
     }
 }
 
-</script>
+</script>../services/LandmarkService

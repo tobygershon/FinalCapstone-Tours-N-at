@@ -13,7 +13,7 @@
 
 <script>
 import LandmarkCard from '../components/LandmarkCard.vue';
-import SearchService from '../services/SearchService';
+import landmarkService from '../services/LandmarkService';
 
 export default {
     components: {
@@ -35,7 +35,7 @@ export default {
 
         retrieveCard() {
             const id = this.$route.params.id;
-            SearchService.getLandmarkById(id).then(response => {
+            landmarkService.getLandmarkById(id).then(response => {
                 this.landmark = response.data;
     
             })

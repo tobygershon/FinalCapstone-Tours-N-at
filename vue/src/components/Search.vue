@@ -12,11 +12,14 @@
         <option value="Scenic Viewpoint">Scenic Viewpoint</option>
         <option value="Sporting Venue">Sporting Venue</option>
     </select>
-    <input type="submit" @click="retrieveLandmarks" value="Go!">
+    <input type="button" @click="retrieveLandmarks" value="Go!">
+    <LandmarkList :landmarks="landmarks"/>
 </template>
 
 <script>
-import searchService from '../services/SearchService';
+import landmarkService from '../services/LandmarkService.js';
+import LandmarkList from './LandmarkList.vue';
+
 export default {
 
     data() {
@@ -26,10 +29,14 @@ export default {
         }
     },
 
+    components: {
+        LandmarkList,
+    },
+
     methods: {
         retrieveLandmarks() {
             if (this.designationSelection === '') {
-                searchService.getAllLandmarks().then(response => {
+                landmarkService.getAllLandmarks().then(response => {
                     this.landmarks = response.data;
                 }).catch(error => {
                     if (error.response) {
@@ -41,8 +48,8 @@ export default {
                         this.$store.commit('SET_NOTIFICATION', "Error getting points of interest. Request could not be created.");
                     }
                 });
-        } else {
-            searchService.getLandmarksByDesignation(this.designationSelection).then(response => {
+            } else {
+                landmarkService.getLandmarksByDesignation(this.designationSelection).then(response => {
                     this.landmarks = response.data;
                 }).catch(error => {
                     if (error.response) {
@@ -54,10 +61,10 @@ export default {
                         this.$store.commit('SET_NOTIFICATION', "Error getting points of interest. Request could not be created.");
                     }
                 });
-        }
+            }
 
+        }
     }
 }
-}
 
-</script>
+</script>../services/LandmarkService.js
