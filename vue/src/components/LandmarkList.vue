@@ -6,7 +6,7 @@
         <div class="landmarkCardsList">
             <router-link v-for="landmark in landmarks" :key="landmark.id" 
                 :to="{name: 'landmarkCard', params: { id: landmark.id} }">
-                <LandmarkCard />
+                <LandmarkCard :cardLandmark="landmark"></LandmarkCard>
             </router-link>
         </div>
     </div>
@@ -21,7 +21,7 @@ export default {
     
     components: {
         LandmarkCard
-    },
+    }
 }
 
 

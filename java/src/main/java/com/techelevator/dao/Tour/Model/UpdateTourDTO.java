@@ -4,9 +4,9 @@ import com.techelevator.service.models.Routes;
 
 public class UpdateTourDTO {
     private int tourId;
-    private Routes[] routes;
+    private Route[] routes;
 
-    public UpdateTourDTO(int tourId, Routes[] routes) {
+    public UpdateTourDTO(int tourId, Route[] routes) {
         this.tourId = tourId;
         this.routes = routes;
     }
@@ -19,11 +19,11 @@ public class UpdateTourDTO {
         this.tourId = tourId;
     }
 
-    public Routes[] getRoutes() {
+    public Route[] getRoutes() {
         return routes;
     }
 
-    public void setRoutes(Routes[] routes) {
+    public void setRoutes(Route[] routes) {
         this.routes = routes;
     }
 }
