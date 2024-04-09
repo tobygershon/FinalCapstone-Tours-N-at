@@ -1,11 +1,14 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.Landmarks.JdbcLandmarkDao;
+import com.techelevator.dao.Landmarks.LandmarkDao;
 import com.techelevator.dao.Landmarks.Model.Landmark;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -13,14 +16,22 @@ import java.util.List;
 public class SearchController {
 
 //Fields for dependencies (services, jdbc's, other methods)
+    private final LandmarkDao landmarkDao;
+
+    public SearchController(LandmarkDao landmarkDao) {
+        this.landmarkDao = landmarkDao;
+    }
 
 //    Need Get Request for List of all Places
 
     @GetMapping("/landmarks")
     public List<Landmark> getAllLandmarks() {
+        List<Landmark> testList = landmarkDao.getAllLandmarks();
+        System.out.println(testList.get(0).getAddress());
 
-        return null;
+        return landmarkDao.getAllLandmarks();
     }
+    
 //    Need Get Request for List of Places by search criteria (times/days, proximity, category)
 
     @GetMapping("/landmarks/{designation}")

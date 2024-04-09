@@ -5,6 +5,9 @@ public class Tour {
     private int tourId;
     private Route[] routes;
 
+    public Tour() {
+    }
+
     public Tour(int tourId, Route[] routes) {
         this.tourId = tourId;
         this.routes = routes;

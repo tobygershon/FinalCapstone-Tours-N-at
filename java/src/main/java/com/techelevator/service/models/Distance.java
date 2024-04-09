@@ -3,14 +3,14 @@ package com.techelevator.service.models;
 public class Distance {
 
     private String text;
-    private String value;
+//    private String value;
 
     public Distance() {
     }
 
-    public Distance(String text, String value) {
+    public Distance(String text) {
         this.text = text;
-        this.value = value;
+//        this.value = Integer.parseInt(value);
     }
 
     public String getText() {
@@ -21,11 +21,11 @@ public class Distance {
         this.text = text;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
+//    public Integer getValue() {
+//        return value;
+//    }
+//
+//    public void setValue(String value) {
+//        this.value = Integer.parseInt(value);
+//    }
 }

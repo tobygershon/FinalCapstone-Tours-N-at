@@ -26,6 +26,12 @@ export default {
 
     methods: {
 
+        testSearchAll() {
+            SearchService.getAllLandmarks().then(response => {
+                this.landmarks = response.data;
+            })
+        },
+
         retrieveSearchResults() {
             if (this.designation === '') {
                 SearchService.getAllLandmarks().then(response => {
@@ -40,7 +46,8 @@ export default {
     },
 
     created() {
-        this.retrieveSearchResults();
+        this.testSearchAll();
+        // this.retrieveSearchResults();
     }
 }
 
