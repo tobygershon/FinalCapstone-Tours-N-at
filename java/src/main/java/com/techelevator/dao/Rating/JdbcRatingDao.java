@@ -66,9 +66,9 @@ public class JdbcRatingDao implements RatingDao {
     public Rating createRating(Rating rating) {
         String sql = "INSERT INTO ratings (user_id, landmark_id, is_good) VALUES (?, ?, ?) RETURNING rating_id";
         try {
-            int ratingId = jdbcTemplate.queryForObject(sql, Integer.class, rating.getUserId(), rating.getLandmarkId(), rating.isGood());
-            if (ratingId != null) {
-                rating.setRatingId(ratingId);
+            Integer generatedId = jdbcTemplate.queryForObject(sql, new Object[]{rating.getUserId(), rating.getLandmarkId(), rating.isGood()}, Integer.class);
+            if (generatedId != null) {
+                rating.setRatingId(generatedId);
                 return rating;
             } else {
                 throw new DaoException("Failed to create rating, no ID obtained.");
