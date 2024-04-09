@@ -6,7 +6,9 @@ import com.techelevator.dao.Itinerary.Model.Itinerary;
 import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
 import com.techelevator.dao.User.UserDao;
 import com.techelevator.dao.User.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
@@ -47,7 +49,12 @@ public class ItineraryController {
 
     @DeleteMapping("/itineraries/{itineraryId}")
     public void deleteItinerary(@PathVariable int itineraryId) {
-        return itineraryDao.deleteItinerary(itineraryId);
+        int rowsAffected = itineraryDao.deleteItinerary(itineraryId);
+
+        if (rowsAffected == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Itinerary not found.");
+        }
+
     }
 
 }
