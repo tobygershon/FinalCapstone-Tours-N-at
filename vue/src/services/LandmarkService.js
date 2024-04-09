@@ -11,7 +11,7 @@ export default {
     },
 
     getLandmarksByDesignation(designation) {
-        return http.get(`/landmarks/${designation}`);
+        return http.get(`/landmarks/designation/${designation}`);
     },
 
     getLandmarkById(landmarkId) {

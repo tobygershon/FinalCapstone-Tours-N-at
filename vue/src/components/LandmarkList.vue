@@ -3,11 +3,12 @@
 <template>
     <div>
         <h2>Search Results</h2>
-        <div class="landmarkCardsList">
-            <router-link v-for="landmark in landmarks" :key="landmark.id" 
+        <div v-for="landmark in landmarks" :key="landmark.id" class="landmarkCardsList">
+                <LandmarkCard :landmark="cardLandmark"/>
+                <!-- <router-link 
                 :to="{name: 'landmarkCard', params: { id: landmark.id} }">
-                <LandmarkCard :cardLandmark="landmark"></LandmarkCard>
-            </router-link>
+            
+            </router-link> -->
         </div>
     </div>
 </template>
@@ -15,13 +16,14 @@
 <script>
 import LandmarkCard from "../components/LandmarkCard.vue";
 
+
 export default {
 
     props: ['landmarks'],
     
     components: {
-        LandmarkCard
-    }
+    LandmarkCard,
+}
 }
 
 
