@@ -62,34 +62,68 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public Itinerary createItinerary(CreateItineraryDTO newItinerary) {
-        Itinerary itinerary = null;
-        String sql = "insert into itineraries (user_id, itinerary_name, starting_location, tour_date) values ?, ?, ?, ?;";
-        int userId = newItinerary.getUserId();
-        String name = newItinerary.getItineraryName();
-        int startingLocationId = newItinerary.getStartingLocationId();
-        Date date = Date.valueOf(newItinerary.getDate());
+    public Itinerary createItinerary(CreateItineraryDTO itineraryDTO) {
+        Itinerary newItinerary = null;
+        String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location, tour_date) VALUES (?, ?, ?, ?);";
+        int userId = itineraryDTO.getUserId();
+        String name = itineraryDTO.getItineraryName();
+        int startingLocationId = itineraryDTO.getStartingLocationId();
+        Date date = Date.valueOf(itineraryDTO.getDate());
 
         try {
             int newItineraryId = jdbcTemplate.queryForObject(sql, int.class, userId, name, startingLocationId, date);
-            itinerary = getItineraryById(newItineraryId);
+            newItinerary = getItineraryById(newItineraryId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
 
-        return itinerary;
+        return newItinerary;
     }
 
     @Override
-    public Itinerary updateItinerary(UpdateItineraryDTO itinerary) {
-        return null;
+    public Itinerary updateItinerary(UpdateItineraryDTO itineraryDTO) {
+        Itinerary updatedItinerary = null;
+        String sql = "UPDATE itineraries " +
+                "SET itinerary_name = ?, starting_location = ?, tour_date = ?, tour_id = ? " +
+                "WHERE itinerary_id = ?;";
+        int startingLocationId = itineraryDTO.getStartingLocationId();
+        String name = itineraryDTO.getItineraryName();
+        Date tourDate = Date.valueOf(itineraryDTO.getTourDate());
+        int tourId = itineraryDTO.getTourId();
+        int itineraryId = itineraryDTO.getItineraryId();
+
+        try {
+            int numOfRows = jdbcTemplate.update(sql, name, startingLocationId, tourDate, tourId, itineraryId);
+
+            if (numOfRows == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            } else {
+                updatedItinerary = getItineraryById(itineraryId);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+
+        return updatedItinerary;
     }
 
     @Override
-    public boolean deleteItinerary(Itinerary itinerary) {
-        return false;
+    public int deleteItinerary(int itineraryId) {
+        int numOfRows = 0;
+        String sql = "DELETE FROM itineraries WHERE itinerary_id = ?;";
+
+        try {
+            numOfRows = jdbcTemplate.update(sql, itineraryId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return numOfRows;
     }
 
     private Itinerary mapRowToItinerary(SqlRowSet rowSet) {
