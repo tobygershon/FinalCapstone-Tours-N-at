@@ -1,4 +1,4 @@
-npackage com.techelevator;
+package com.techelevator;
 
 import com.techelevator.service.DirectionsService;
 import com.techelevator.service.models.Directions;
