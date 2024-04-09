@@ -1,12 +1,14 @@
 package com.techelevator.dao.Rating;
 
 import com.techelevator.dao.Rating.Model.Rating;
-import com.techelevator.exception.DaoException; 
+import com.techelevator.exception.DaoException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +17,21 @@ public class JdbcRatingDao implements RatingDao {
 
     public JdbcRatingDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public List<Rating> getAllRatings() {
+        List<Rating> ratings = new ArrayList<>();
+        String sql = "SELECT rating_id, user_id, landmark_id, is_good FROM ratings;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()) {
+                ratings.add(mapRowToRating(results));
+            }
+        } catch (Exception e) {
+            throw new DaoException("Unable to retrieve all ratings", e);
+        }
+        return ratings;
     }
 
     @Override
@@ -33,7 +50,7 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     @Override
-    public List<Rating> getRatingsByLandMarkId(int landmarkId) {
+    public List<Rating> getRatingsByLandmarkId(int landmarkId) {
         List<Rating> ratings = new ArrayList<>();
         String sql = "SELECT rating_id, user_id, landmark_id, is_good FROM ratings WHERE landmark_id = ?;";
         try {
@@ -43,21 +60,6 @@ public class JdbcRatingDao implements RatingDao {
             }
         } catch (Exception e) {
             throw new DaoException("Unable to retrieve ratings by landmark ID", e);
-        }
-        return ratings;
-    }
-
-    @Override
-    public List<Rating> getAllRatings() {
-        List<Rating> ratings = new ArrayList<>();
-        String sql = "SELECT rating_id, user_id, landmark_id, is_good FROM ratings;";
-        try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-            while (results.next()) {
-                ratings.add(mapRowToRating(results));
-            }
-        } catch (Exception e) {
-            throw new DaoException("Unable to retrieve all ratings", e);
         }
         return ratings;
     }
@@ -105,10 +107,10 @@ public class JdbcRatingDao implements RatingDao {
 
     private Rating mapRowToRating(SqlRowSet rowSet) {
         return new Rating(
-            rowSet.getInt("rating_id"),
-            rowSet.getInt("user_id"),
-            rowSet.getInt("landmark_id"),
-            rowSet.getBoolean("is_good")
+                rowSet.getInt("rating_id"),
+                rowSet.getInt("user_id"),
+                rowSet.getInt("landmark_id"),
+                rowSet.getBoolean("is_good")
         );
     }
 }

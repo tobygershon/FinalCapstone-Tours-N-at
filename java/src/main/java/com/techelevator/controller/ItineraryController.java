@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class ItineraryController {
-
     private final ItineraryDao itineraryDao;
     private final UserDao userDao;
 
@@ -48,7 +47,7 @@ public class ItineraryController {
 
     @DeleteMapping("/itineraries/{itineraryId}")
     public void deleteItinerary(@PathVariable int itineraryId) {
-        itineraryDao.deleteItinerary(itineraryId);
+        return itineraryDao.deleteItinerary(itineraryId);
     }
 
 }
