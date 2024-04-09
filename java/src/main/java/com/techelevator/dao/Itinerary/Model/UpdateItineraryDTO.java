@@ -7,10 +7,10 @@ import java.time.LocalDate;
 public class UpdateItineraryDTO {
 
     private int itineraryId;
+    private String itineraryName;
     private int startingLocationId;
     private LocalDate tourDate;
-
-//    need tourId or itinerary name as fields to update?
+    private int tourId;
 
 
     public UpdateItineraryDTO(int itineraryId, int startingLocationId, LocalDate tourDate) {
@@ -27,6 +27,14 @@ public class UpdateItineraryDTO {
         this.itineraryId = itineraryId;
     }
 
+    public String getItineraryName() {
+        return itineraryName;
+    }
+
+    public void setItineraryName(String itineraryName) {
+        this.itineraryName = itineraryName;
+    }
+
     public int getStartingLocationId() {
         return startingLocationId;
     }
@@ -41,5 +49,13 @@ public class UpdateItineraryDTO {
 
     public void setTourDate(LocalDate tourDate) {
         this.tourDate = tourDate;
+    }
+
+    public int getTourId() {
+        return tourId;
+    }
+
+    public void setTourId(int tourId) {
+        this.tourId = tourId;
     }
 }
