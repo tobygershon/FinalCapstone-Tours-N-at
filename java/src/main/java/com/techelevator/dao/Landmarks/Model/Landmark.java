@@ -1,20 +1,22 @@
 package com.techelevator.dao.Landmarks.Model;
 
-public class Landmarks {
+public class Landmark {
 
     private int landmarkId;
     private String landmarkName;
-    private Address address;
+    private String address;
     private Hours hours;
-    private String landmarkDesignation;
     private String googlePlaceId;
 
-    public Landmarks(int landmarkId, String landmarkName, Address address, Hours hours, String landmarkDesignation, String googlePlaceId) {
+    public Landmark() {
+
+    }
+
+    public Landmark(int landmarkId, String landmarkName, String address, Hours hours, String googlePlaceId) {
         this.landmarkId = landmarkId;
         this.landmarkName = landmarkName;
         this.address = address;
         this.hours = hours;
-        this.landmarkDesignation = landmarkDesignation;
         this.googlePlaceId = googlePlaceId;
     }
 
@@ -34,11 +36,11 @@ public class Landmarks {
         this.landmarkName = landmarkName;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -48,14 +50,6 @@ public class Landmarks {
 
     public void setHours(Hours hours) {
         this.hours = hours;
-    }
-
-    public String getLandmarkDesignation() {
-        return landmarkDesignation;
-    }
-
-    public void setLandmarkDesignation(String landmarkDesignation) {
-        this.landmarkDesignation = landmarkDesignation;
     }
 
     public String getGooglePlaceId() {
