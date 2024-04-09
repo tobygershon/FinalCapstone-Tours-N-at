@@ -1,6 +1,9 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.Itinerary.ItineraryDao;
+import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
 import com.techelevator.dao.Itinerary.Model.Itinerary;
+import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,42 +12,36 @@ import java.util.List;
 @CrossOrigin
 public class ItineraryController {
 
-//Fields for dependencies (services, jdbc's, other methods)
+    private final ItineraryDao itineraryDao;
 
+    public ItineraryController(ItineraryDao itineraryDao) {
+        this.itineraryDao = itineraryDao;
+    }
 
-//    Need a Get Request for a list of itineraries for a user
     @GetMapping("/itineraries/{userId}")
     public List<Itinerary> getItinerariesByUserId(@PathVariable int userId) {
-
-        return null;
+        return itineraryDao.getItinerariesByUserId(userId);
     }
 
-//    Need a Get Request for a specific itinerary
+    // Need a Get Request for a specific itinerary
     @GetMapping("/itineraries/{itineraryId}")
     public Itinerary getItineraryById(@PathVariable int itineraryId) {
-
-        return null;
+        return itineraryDao.getItineraryById(itineraryId);
     }
 
-//    Need a Post Request to create itinerary
     @PostMapping("/itineraries")
-    public Itinerary createItinerary(@RequestBody Itinerary newItinerary) {
-
-        return null;
+    public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary) {
+        return itineraryDao.createItinerary(newItinerary);
     }
 
-//    Need an Update Request to update itinerary
     @PutMapping("/itineraries/{itineraryId")
-    public Itinerary updateItinerary(@RequestBody Itinerary itineraryToUpdate, @PathVariable int itineraryId) {
-
-        return null;
+    public Itinerary updateItinerary(@RequestBody UpdateItineraryDTO itineraryToUpdate, @PathVariable int itineraryId) {
+        return itineraryDao.updateItinerary(itineraryToUpdate);
     }
 
-//    Need a delete Request to delete itinerary
     @DeleteMapping("itineraries/{itineraryId}")
     public void deleteItinerary(@PathVariable int itineraryId) {
-
+        itineraryDao.deleteItinerary(itineraryId);
     }
 
-    //    Need a Get Request for Directions
 }
