@@ -5,7 +5,6 @@
         <h2>Search Results</h2>
         <div class="landmarkList">
         <div v-for="landmark in landmarks" :key="landmark.landmarkId" class="landmarkCardsList">
-            
                 {{landmark.landmarkName}} <br>
                 {{ landmark.address }}
                 <router-link to="{ name : 'landmarkCard' , params: {id: landmarkId}}">
