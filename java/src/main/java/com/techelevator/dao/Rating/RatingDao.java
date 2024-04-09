@@ -8,4 +8,7 @@ public interface RatingDao {
 
     List<Rating> getRatingsByUserId(int id);
     List<Rating> getRatingsByLandMarkId(int id);
+    boolean addRating(Rating rating);
+    boolean updateRating(Rating rating);
+    boolean deleteRating(int ratingId);
 }
