@@ -13,13 +13,13 @@ export default {
     methods: {
         updateItinerary() {
             itineraryService
-                .updateItinerary(this.editItinerary)
+                .updateItinerary(this.addItinerary)
                 .then(response => {
                     if (response.status === 200) {
                         this.$store.commit(
                             'SET_NOTIFICATION',
                             {
-                                message: `Itinerary ${this.editItinerary.id} was updated.`,
+                                message: `Itinerary ${this.addItinerary.id} was updated.`,
                                 type: 'success'
                             }
                         );
@@ -43,10 +43,10 @@ export default {
 
         validateForm() {
             let msg = '';
-            if (this.editItinerary.itineraryName.length === 0) {
+            if (this.addItinerary.itineraryName.length === 0) {
                 msg += 'The new itinerary must have a name. ';
             }
-            if (this.editItinerary.startingLocationId.length === 0) {
+            if (this.addItinerary.startingLocationId.length === 0) {
                 msg += 'The new card must have a starting location.';
             }
             if (msg.length > 0) {

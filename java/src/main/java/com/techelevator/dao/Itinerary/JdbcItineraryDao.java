@@ -3,14 +3,18 @@ package com.techelevator.dao.Itinerary;
 import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
 import com.techelevator.dao.Itinerary.Model.Itinerary;
 import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
-import com.techelevator.dao.Landmarks.Model.Landmark;
+import com.techelevator.dao.User.UserDao;
 import com.techelevator.exception.DaoException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.net.http.HttpResponse;
+import java.security.Principal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,9 +23,11 @@ import java.util.List;
 @Component
 public class JdbcItineraryDao implements ItineraryDao {
     private final JdbcTemplate jdbcTemplate;
+    private final UserDao userDao;
 
-    public JdbcItineraryDao(JdbcTemplate jdbcTemplate) {
+    public JdbcItineraryDao(JdbcTemplate jdbcTemplate, UserDao userDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.userDao = userDao;
     }
 
     @Override
@@ -82,15 +88,20 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public Itinerary createItinerary(CreateItineraryDTO itineraryDTO) {
+    public Itinerary createItinerary(CreateItineraryDTO itineraryDTO, Principal principal) {
         Itinerary newItinerary = null;
+        String sqlGet = "SELECT landmark_id FROM landmarks WHERE landmark_name = ?;";
         String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location, tour_date) VALUES (?, ?, ?, ?);";
+        int principalId = userDao.getLoggedInUserByPrinciple(principal).getId();
         int userId = itineraryDTO.getUserId();
         String name = itineraryDTO.getItineraryName();
-        int startingLocationId = itineraryDTO.getStartingLocationId();
-        Date date = Date.valueOf(itineraryDTO.getDate());
-
+        String startingLocation = itineraryDTO.getStartingLocation();
+        Date date = itineraryDTO.getDate();
+        if (principalId != userId) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
         try {
+            int startingLocationId = jdbcTemplate.queryForObject(sqlGet, int.class, startingLocation);
             int newItineraryId = jdbcTemplate.queryForObject(sql, int.class, userId, name, startingLocationId, date);
             newItinerary = getItineraryById(newItineraryId);
         } catch (CannotGetJdbcConnectionException e) {
