@@ -35,8 +35,8 @@ public class RatingController {
         return ratingDao.getRatingsByLandmarkId(landmarkId);
     }
 
-    @PostMapping("/ratings")
-    public Rating createRating(Rating rating) {
+    @PostMapping("/landmarks/{landmarkId}/ratings")
+    public Rating createRating(@PathVariable int landmarkId, Rating rating) {
         return ratingDao.createRating(rating);
     }
 
