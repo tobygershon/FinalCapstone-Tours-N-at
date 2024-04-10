@@ -7,7 +7,7 @@
     <div>
         <label for="startingPoint">Choose Your Starting Location:</label>
         <input type="text" name="startingPoint" id="startingPointText" placeholder="Starting Location"
-            v-model="startingLocationId">
+            v-model="startingLocation">
     </div>
     <div>
         <label for="dateSelector">Select a Tour Date:</label>
@@ -32,7 +32,7 @@ export default {
             editItinerary: {
                 id: '',
                 itineraryName: '',
-                startingLocationId: '',
+                startingLocation: '',
                 selectedDate: '',
             }
         }
@@ -56,7 +56,6 @@ export default {
                                     type: 'success'
                                 }
                             );
-                            this.$router.push({ name: 'BoardView', params: { id: this.editCard.boardId } });
                         }
                     })
                     .catch(error => {
@@ -74,7 +73,6 @@ export default {
                                     type: 'success'
                                 }
                             );
-                            this.$router.push({ name: 'BoardView', params: { id: this.editCard.boardId } });
                         }
                     })
                     .catch(error => {
