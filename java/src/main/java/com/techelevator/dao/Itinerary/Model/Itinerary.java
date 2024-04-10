@@ -3,7 +3,6 @@ package com.techelevator.dao.Itinerary.Model;
 import java.time.LocalDate;
 
 public class Itinerary {
-
     private int id;
     private int userId;
     private String itineraryName;
@@ -14,6 +13,7 @@ public class Itinerary {
     public Itinerary() {
 
     }
+
     public Itinerary(int id, int userId, String itineraryName, int startingLocationId, LocalDate tourDate, int tourId) {
         this.id = id;
         this.userId = userId;

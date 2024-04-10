@@ -42,5 +42,4 @@ public class LandmarkController {
         return landmarkDao.getLandmarkById(landmarkId);
     }
 
-
 }
