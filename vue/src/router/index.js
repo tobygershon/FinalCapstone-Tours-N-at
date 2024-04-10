@@ -46,7 +46,7 @@ const routes = [
     }
   },
   {
-    path: '/itineraries/:userId',
+    path: '/user/:userId/itineraries',
     name: 'itineraryList',
     component: ItineraryListView,
     meta: {
