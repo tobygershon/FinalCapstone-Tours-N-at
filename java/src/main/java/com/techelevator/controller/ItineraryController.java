@@ -24,7 +24,7 @@ public class ItineraryController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/itineraries/{userId}")
+    @GetMapping("/user/{userId}/itineraries")
     public List<Itinerary> getItinerariesByUserId(@PathVariable int userId, Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
         int loggedInUserId = loggedInUser.getId();
