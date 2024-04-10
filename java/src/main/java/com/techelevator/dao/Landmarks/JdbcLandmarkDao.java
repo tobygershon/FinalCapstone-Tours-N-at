@@ -22,7 +22,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public Landmark getLandmarkById(int id) {
         Landmark newLandmark = new Landmark();
-        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_id = ?;";
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE LOWER(landmark_name) LIKE ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if(results.next()) {
@@ -35,18 +35,21 @@ public class JdbcLandmarkDao implements LandmarkDao {
     }
 
     @Override
-    public Landmark getLandmarkByName(String landmarkName) {
-        Landmark newLandmark = new Landmark();
-        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_name = ?;";
+    public List<Landmark> getLandmarkByName(String landmarkName) {
+        List<Landmark> landmarksList = new ArrayList<>();
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id " +
+                "FROM landmarks " +
+                "WHERE landmark_name ILIKE ?;";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkName);
-            if(results.next()) {
-                newLandmark = mapRowToLandmark(results);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + landmarkName + "%");
+            while(results.next()) {
+                Landmark resultLandmark = mapRowToLandmark(results);
+                landmarksList.add(resultLandmark);
             }
         } catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Could not connect to the database.");
         }
-        return newLandmark;
+        return landmarksList;
     }
 
     @Override
@@ -83,8 +86,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarksList;
     }
 
-
-    // Need to add hours to this method
+    //TODO: Add hours to method
     private Landmark mapRowToLandmark(SqlRowSet rowSet) {
         Landmark landmark = new Landmark();
         landmark.setLandmarkId(rowSet.getInt("landmark_id"));
