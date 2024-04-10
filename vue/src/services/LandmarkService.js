@@ -16,5 +16,10 @@ export default {
 
     getLandmarkById(landmarkId) {
         return http.get(`/landmarks/${landmarkId}`);
-    }
+    },
+
+    getLandmarksByName(landmarkName) {
+        return http.get(`/landmarks/search/${landmarkName}`);
+    },
+    
 }
