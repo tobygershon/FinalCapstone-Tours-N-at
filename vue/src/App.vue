@@ -1,4 +1,5 @@
 <template>
+  <div id="container">
   <div id="capstone-app">
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
@@ -6,10 +7,13 @@
     </div>
     <router-view />
   </div>
+  </div>
 </template>
 
 <style>
-#capstone-app {
+#container {
+  width: 100%;
+  height: 100vh;
   background-color: #E9EAEC;
 }
 </style>
