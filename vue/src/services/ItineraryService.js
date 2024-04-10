@@ -6,8 +6,8 @@ const http = axios.create({
 });
 
 export default {
-    getItineraries(userId) {
-        return http.get(`/itineraries/${userId}`);
+    getItineraries() {
+        return http.get(`/itineraries`);
     },
 
     getItineraryById(itineraryId) {

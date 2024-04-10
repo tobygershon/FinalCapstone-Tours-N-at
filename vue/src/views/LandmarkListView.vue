@@ -2,20 +2,20 @@
 
 <template>
     <Search />
-    <LandmarkList :landmarks="landmarks"/>
+    <!-- <LandmarkList :landmarks="landmarks"/> -->
     
 </template>
 
 
 <script>
-import LandmarkList from '../components/LandmarkList.vue';
+// import LandmarkList from '../components/LandmarkList.vue';
 import landmarkService from '../services/LandmarkService.js';
 import Search from '../components/Search.vue';
 
 export default {
 
     components: {
-        LandmarkList,
+        // LandmarkList,
         Search,
     },
 

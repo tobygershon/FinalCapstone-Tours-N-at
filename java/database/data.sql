@@ -65,6 +65,11 @@ INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Carnegi
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Carnegie Museum of Art', '4400 Forbes Ave, Pittsburgh, PA 15213, USA', 'ChIJMfTiXCbyNIgRdvqfBv4hy2M');
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Pittsburgh Zoo & Aquarium', '7370 Baker St, Pittsburgh, PA 15206, USA', 'ChIJQWwT8oLyNIgRQJ7eRRxugRs');
 
+
+INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Kimpton Hotel Monaco Pittsburgh', '620 William Penn Pl, Pittsburgh, PA 15219, USA', 'ChIJlbtRylnxNIgRitsCzVjBaAg');
+
+
+
 --INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Monroeville Mall', '200 Mall Cir Dr, Monroeville, PA 15146', 'ChIJQ5dyb9nrNIgRorAIT670k6w', 'Movie scene')
 --INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('The UPMC Rink at PPG Place', '4 PPG Place, Third Ave Suite 100, Pittsburgh, PA 15222', 'ChIJx3vgAVTxNIgRYlPY4_6Y1fQ');
 
@@ -136,6 +141,9 @@ INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Carnegie Museum of Art'), (SELECT designation_id FROM designations WHERE designation_name = 'Museum'));
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Pittsburgh Zoo & Aquarium'), (SELECT designation_id FROM designations WHERE designation_name = 'Attraction'));
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Pittsburgh Zoo & Aquarium'), (SELECT designation_id FROM designations WHERE designation_name = 'Kid-Friendly'));
+
+
+INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Kimpton Hotel Monaco Pittsburgh'), (SELECT designation_id FROM designations WHERE designation_name = 'Hotel'));
 
 --INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'The UPMC Rink at PPG Place'), (SELECT designation_id FROM designations WHERE designation_name = 'Attraction'));
 --INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'The UPMC Rink at PPG Place'), (SELECT designation_id FROM designations WHERE designation_name = 'Kid-Friendly'));
