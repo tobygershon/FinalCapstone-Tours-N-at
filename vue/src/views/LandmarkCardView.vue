@@ -32,7 +32,7 @@ export default {
         //     const id = this.$route.params.id;
         //     landmarkService.getLandmarkById(id).then(response => {
         //         this.landmark = response.data;
-    
+
         //     })
         // }
     }
