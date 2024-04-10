@@ -7,9 +7,9 @@ import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import LandmarkListView from '../views/LandmarkListView.vue';
-import LandmarkCardView from '../views/LandmarkCardView.vue';
+import LandmarkDetailsView from '../views/LandmarkDetailView.vue';
 import ItineraryListView from '../views/ItineraryListView.vue';
-import EditItineraryDetailsView from '../views/EditItineraryDetailsView.vue';
+import ItineraryDetailsView from '../views/ItineraryDetailsView.vue';
 import TourRouteView from '../views/TourRouteView.vue';
 
 /**
@@ -40,7 +40,7 @@ const routes = [
   {
     path: '/landmarks/:id',
     name: 'landmarkCard',
-    component: LandmarkCardView,
+    component: LandmarkDetailsView,
     meta: {
       requiredAuth: false
     }
@@ -57,7 +57,7 @@ const routes = [
     // do we want userId in path as well to access through $route?
     path: '/itineraries/:itineraryId',
     name: 'itineraryEdit',
-    component: EditItineraryDetailsView,
+    component: ItineraryDetailsView,
     meta: {
       requiredAuth: true
     }
