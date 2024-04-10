@@ -14,7 +14,7 @@
 <style>
 #capstone-app {
   width: 100%;
-  height: 100ch;
+  height: 100vh;
   padding: 20px;
   margin: 10px;
   border-radius: 5px;
