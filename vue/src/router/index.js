@@ -46,7 +46,7 @@ const routes = [
     }
   },
   {
-    path: '/itineraries/:userId',
+    path: '/itineraries',
     name: 'itineraryList',
     component: ItineraryListView,
     meta: {
@@ -55,7 +55,7 @@ const routes = [
   },
   {
     // do we want userId in path as well to access through $route?
-    path: '/itineraries/:userId/:itineraryId',
+    path: '/itineraries/:itineraryId',
     name: 'itineraryEdit',
     component: EditItineraryDetailsView,
     meta: {

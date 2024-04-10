@@ -24,8 +24,8 @@ public class ItineraryController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/itineraries/{userId}")
-    public List<Itinerary> getItinerariesByUserId(@PathVariable int userId, Principal principal) {
+    @GetMapping("/itineraries")
+    public List<Itinerary> getItineraries(Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
         int loggedInUserId = loggedInUser.getId();
 
@@ -36,7 +36,7 @@ public class ItineraryController {
     public Itinerary getItineraryById(@PathVariable int itineraryId) {
         return itineraryDao.getItineraryById(itineraryId);
     }
-
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/itineraries")
     public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary) {
         return itineraryDao.createItinerary(newItinerary);
