@@ -10,6 +10,7 @@ import com.techelevator.service.DirectionsService;
 import com.techelevator.service.models.Directions;
 import com.techelevator.service.models.DirectionsDTO;
 import com.techelevator.service.models.Legs;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class DirectionController {
         this.tourDao = tourDao;
         this.landmarkDao = landmarkDao;
     }
-
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/directions/{itineraryId}")
     public DirectionsDTO getTourDirectionsList(@PathVariable int itineraryId) {
         DirectionsDTO newDTO = new DirectionsDTO();

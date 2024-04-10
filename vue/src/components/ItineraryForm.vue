@@ -43,69 +43,53 @@ export default {
             if (!this.validateForm()) {
                 return;
             }
-            if (this.editItinerary.id === 0) {
-                // add
-                itineraryService
-                    .createItinerary(this.editItinerary)
-                    .then(response => {
-                        if (response.status === 201) {
-                            this.$store.commit(
-                                'SET_NOTIFICATION',
-                                {
-                                    message: 'A new itinerary was added.',
-                                    type: 'success'
-                                }
-                            );
-                        }
-                    })
-                    .catch(error => {
-                        this.handleErrorResponse(error, 'adding');
-                    });
-            } else {
-                itineraryService
-                    .updateItinerary(this.editItinerary)
-                    .then(response => {
-                        if (response.status === 200) {
-                            this.$store.commit(
-                                'SET_NOTIFICATION',
-                                {
-                                    message: `Itinerary ${this.editItinerary.id} was updated.`,
-                                    type: 'success'
-                                }
-                            );
-                        }
-                    })
-                    .catch(error => {
-                        this.handleErrorResponse(error, 'updating');
-                    });
-            }
-        },
 
-        handleErrorResponse(error, verb) {
-            if (error.response) {
-                this.$store.commit('SET_NOTIFICATION',
-                    "Error " + verb + " itinerary. Response received was '" + error.response.statusText + "'.");
-            } else if (error.request) {
-                this.$store.commit('SET_NOTIFICATION', "Error " + verb + " itinerary. Server could not be reached.");
-            } else {
-                this.$store.commit('SET_NOTIFICATION', "Error " + verb + " itinerary. Request could not be created.");
-            }
-        },
-        validateForm() {
-            let msg = '';
-            if (this.editItinerary.itineraryName.length === 0) {
-                msg += 'The new itinerary must have a name. ';
-            }
-            if (this.editItinerary.startingLocationId.length === 0) {
-                msg += 'The new card must have a starting location.';
-            }
-            if (msg.length > 0) {
-                this.$store.commit('SET_NOTIFICATION', msg);
-                return false;
-            }
-            return true;
-        },
+            itineraryService
+                .createItinerary(this.editItinerary)
+                .then(response => {
+                    if (response.status === 201) {
+                        this.$store.commit(
+                            'SET_NOTIFICATION',
+                            {
+                                message: 'A new itinerary was added.',
+                                type: 'success'
+                            }
+                        );
+                    }
+                })
+                .catch(error => {
+                    this.handleErrorResponse(error, 'adding');
+                });
 
-    }
+
+        }
+    },
+
+    handleErrorResponse(error, verb) {
+        if (error.response) {
+            this.$store.commit('SET_NOTIFICATION',
+                "Error " + verb + " itinerary. Response received was '" + error.response.statusText + "'.");
+        } else if (error.request) {
+            this.$store.commit('SET_NOTIFICATION', "Error " + verb + " itinerary. Server could not be reached.");
+        } else {
+            this.$store.commit('SET_NOTIFICATION', "Error " + verb + " itinerary. Request could not be created.");
+        }
+    },
+    validateForm() {
+        let msg = '';
+        if (this.editItinerary.itineraryName.length === 0) {
+            msg += 'The new itinerary must have a name. ';
+        }
+        if (this.editItinerary.startingLocation.length === 0) {
+            msg += 'The new card must have a starting location.';
+        }
+        if (msg.length > 0) {
+            this.$store.commit('SET_NOTIFICATION', msg);
+            return false;
+        }
+        return true;
+    },
+
 }
+
 </script>

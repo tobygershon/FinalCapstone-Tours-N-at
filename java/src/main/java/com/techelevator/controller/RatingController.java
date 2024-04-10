@@ -5,12 +5,13 @@ import com.techelevator.dao.Rating.RatingDao;
 import com.techelevator.dao.User.UserDao;
 import com.techelevator.dao.User.model.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
-
+@PreAuthorize("isAuthenticated()")
 @RestController
 @CrossOrigin
 public class RatingController {
@@ -23,7 +24,7 @@ public class RatingController {
     }
 
     //TODO: get all ratings never implemented. Remove from DAO?
-    
+
     @GetMapping("/ratings/{userId}")
     public List<Rating> getRatingsByUserId(@PathVariable int userId, Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
@@ -31,7 +32,7 @@ public class RatingController {
 
         return ratingDao.getRatingsByUserId(loggedInUserId);
     }
-
+    @PreAuthorize("permitAll")
     @GetMapping("/landmarks/{landmarkId}/ratings")
     public List<Rating> getRatingsByLandmarkId(@PathVariable int landmarkId) {
         return ratingDao.getRatingsByLandmarkId(landmarkId);
