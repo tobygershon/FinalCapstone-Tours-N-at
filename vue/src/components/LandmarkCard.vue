@@ -3,7 +3,6 @@
 <template>
     <div>
         {{ this.landmark.landmarkName }} <br>
-        {{ this.landmark.address }}
     </div>
 </template>
 
