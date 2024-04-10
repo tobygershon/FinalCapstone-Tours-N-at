@@ -1,41 +1,43 @@
 <!-- view landmark details: displays individual landmark card with info -->
 
 <template>
-    <LandmarkCard />
+ Landmark Name:
+ {{ landmark.landmarkName }}
 </template>
 
 
 <script>
 
 import landmarkService from '../services/LandmarkService';
-import LandmarkCard from '../components/LandmarkCard.vue';
+
 
 export default {
+
     components: {
-        LandmarkCard
+    
     },
 
     data() {
         return {
-            landmark: {
-                name: '',
-                address: '',
-                hours: '',
-                designation: ''
+            landmark: {}
             }
-        }
-    },
+        },
 
     methods: {
 
-        // retrieveCard() {
-        //     const id = this.$route.params.id;
-        //     landmarkService.getLandmarkById(id).then(response => {
-        //         this.landmark = response.data;
+        retrieveCard() {
+            const id = this.$route.params.id;
+            landmarkService.getLandmarkById(id).then(response => {
+                this.landmark = response.data;
 
-        //     })
-        // }
+            })
+        }
+    },
+
+    created() {
+        this.retrieveCard();
     }
 }
+
 
 </script>

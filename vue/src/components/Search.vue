@@ -13,8 +13,7 @@
         <option value="Sporting Venue">Sporting Venue</option>
     </select>
     <input type="button" @click="retrieveLandmarks" value="Go!">
-
-    <LandmarkList :landmarks="landmarks" />
+    <LandmarkList :landmarks="landmarks"/>
 </template>
 
 <script>
@@ -69,5 +68,3 @@ export default {
 }
 
 </script>../services/LandmarkService.js
-
-<style></style>

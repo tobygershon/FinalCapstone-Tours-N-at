@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <button v-show="$store.state.token != ''" @click="goToItineraryView">My Itineraries</button>
   </div>
   <!-- add nav bar: login logout itineraries 
     want to add map and search components -->
@@ -15,6 +15,12 @@ export default {
 
   components: {
     Search
+  },
+
+  methods: {
+    goToItineraryView() {
+      this.$router.push({name: 'itineraryList', params: {userId: 1}})
+    }
   }
 
 };
