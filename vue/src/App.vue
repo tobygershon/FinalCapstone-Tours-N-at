@@ -8,17 +8,15 @@
       <router-view />
     </div>
   </div>
+    <router-view />
 </template>
 
 
 <style>
 #capstone-app, #main {
-  background-color: #E9EAEC;
-  min-height: 100vh;
   width: 100%;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
+  height: 100vh;
+  background-color: #E9EAEC;
 }
 </style>
 
