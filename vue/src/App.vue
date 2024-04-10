@@ -10,6 +10,7 @@
   </div>
 </template>
 
+
 <style>
 #capstone-app, #main {
   background-color: #E9EAEC;
