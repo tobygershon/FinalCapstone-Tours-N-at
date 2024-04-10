@@ -3,14 +3,14 @@ package com.techelevator.dao.Tour.Model;
 public class Route {
 
     private int routeId;
-    private String startingPointId;
-    private String endingPointId;
+    private int startingPointId;
+    private int endingPointId;
     private String polyline;
 
     public Route() {
     }
 
-    public Route(int routeId, String startingPointId, String endingPointId, String polyline) {
+    public Route(int routeId, int startingPointId, int endingPointId, String polyline) {
         this.routeId = routeId;
         this.startingPointId = startingPointId;
         this.endingPointId = endingPointId;
@@ -25,19 +25,19 @@ public class Route {
         this.routeId = routeId;
     }
 
-    public String getStartingPointId() {
+    public int getStartingPointId() {
         return startingPointId;
     }
 
-    public void setStartingPointId(String startingPointId) {
+    public void setStartingPointId(int startingPointId) {
         this.startingPointId = startingPointId;
     }
 
-    public String getEndingPointId() {
+    public int getEndingPointId() {
         return endingPointId;
     }
 
-    public void setEndingPointId(String endingPointId) {
+    public void setEndingPointId(int endingPointId) {
         this.endingPointId = endingPointId;
     }
 

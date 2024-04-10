@@ -85,8 +85,8 @@ public class JdbcTourDao implements TourDao {
     public Route mapRowToRoute(SqlRowSet results) {
         Route newRoute = new Route();
         newRoute.setRouteId(results.getInt("route_id"));
-        newRoute.setStartingPointId(results.getString("start_point"));
-        newRoute.setEndingPointId(results.getString("end_point"));
+        newRoute.setStartingPointId(results.getInt("start_point"));
+        newRoute.setEndingPointId(results.getInt("end_point"));
         newRoute.setPolyline(results.getString("polyline"));
 
         return newRoute;
