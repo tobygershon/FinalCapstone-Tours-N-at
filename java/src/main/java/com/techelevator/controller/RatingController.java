@@ -22,11 +22,8 @@ public class RatingController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/ratings")
-    public List<Rating> getAllRatings() {
-        return ratingDao.getAllRatings();
-    }
-
+    //TODO: get all ratings never implemented. Remove from DAO?
+    
     @GetMapping("/ratings/{userId}")
     public List<Rating> getRatingsByUserId(@PathVariable int userId, Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
@@ -35,18 +32,18 @@ public class RatingController {
         return ratingDao.getRatingsByUserId(loggedInUserId);
     }
 
-    @GetMapping("/ratings/{landmarkId}")
+    @GetMapping("/landmarks/{landmarkId}/ratings")
     public List<Rating> getRatingsByLandmarkId(@PathVariable int landmarkId) {
         return ratingDao.getRatingsByLandmarkId(landmarkId);
     }
 
-    @PostMapping("/ratings")
-    public Rating createRating(Rating rating) {
+    @PostMapping("/landmarks/{landmarkId}/ratings")
+    public Rating createRating(@PathVariable int landmarkId, Rating rating) {
         return ratingDao.createRating(rating);
     }
 
-    @PutMapping("/ratings")
-    public Rating updateRating(Rating rating) {
+    @PutMapping("/ratings/{ratingId}")
+    public Rating updateRating(@PathVariable int ratingId, Rating rating) {
         return ratingDao.updateRating(rating);
     }
 
