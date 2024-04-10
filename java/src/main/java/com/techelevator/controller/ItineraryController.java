@@ -1,50 +1,60 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.Itinerary.ItineraryDao;
+import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
 import com.techelevator.dao.Itinerary.Model.Itinerary;
+import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
+import com.techelevator.dao.User.UserDao;
+import com.techelevator.dao.User.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 public class ItineraryController {
+    private final ItineraryDao itineraryDao;
+    private final UserDao userDao;
 
-//Fields for dependencies (services, jdbc's, other methods)
-
-
-//    Need a Get Request for a list of itineraries for a user
-    @GetMapping("/itineraries/{userId}")
-    public List<Itinerary> getItinerariesByUserId(@PathVariable int userId) {
-
-        return null;
+    public ItineraryController(ItineraryDao itineraryDao, UserDao userDao) {
+        this.itineraryDao = itineraryDao;
+        this.userDao = userDao;
     }
 
-//    Need a Get Request for a specific itinerary
+    @GetMapping("/itineraries/{userId}")
+    public List<Itinerary> getItinerariesByUserId(@PathVariable int userId, Principal principal) {
+        User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
+        int loggedInUserId = loggedInUser.getId();
+
+        return itineraryDao.getItinerariesByUserId(loggedInUserId);
+    }
+
     @GetMapping("/itineraries/{itineraryId}")
     public Itinerary getItineraryById(@PathVariable int itineraryId) {
-
-        return null;
+        return itineraryDao.getItineraryById(itineraryId);
     }
 
-//    Need a Post Request to create itinerary
     @PostMapping("/itineraries")
-    public Itinerary createItinerary(@RequestBody Itinerary newItinerary) {
-
-        return null;
+    public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary) {
+        return itineraryDao.createItinerary(newItinerary);
     }
 
-//    Need an Update Request to update itinerary
-    @PutMapping("/itineraries/{itineraryId")
-    public Itinerary updateItinerary(@RequestBody Itinerary itineraryToUpdate, @PathVariable int itineraryId) {
-
-        return null;
+    @PutMapping("/itineraries/{itineraryId}")
+    public Itinerary updateItinerary(@RequestBody UpdateItineraryDTO itineraryToUpdate, @PathVariable int itineraryId) {
+        return itineraryDao.updateItinerary(itineraryToUpdate);
     }
 
-//    Need a delete Request to delete itinerary
-    @DeleteMapping("itineraries/{itineraryId}")
+    @DeleteMapping("/itineraries/{itineraryId}")
     public void deleteItinerary(@PathVariable int itineraryId) {
+        int rowsAffected = itineraryDao.deleteItinerary(itineraryId);
+
+        if (rowsAffected == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Itinerary not found.");
+        }
 
     }
 
-    //    Need a Get Request for Directions
 }
