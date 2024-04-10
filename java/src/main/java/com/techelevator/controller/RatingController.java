@@ -22,6 +22,8 @@ public class RatingController {
         this.userDao = userDao;
     }
 
+    //TODO: get all ratings never implemented. Remove from DAO?
+    
     @GetMapping("/ratings/{userId}")
     public List<Rating> getRatingsByUserId(@PathVariable int userId, Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
