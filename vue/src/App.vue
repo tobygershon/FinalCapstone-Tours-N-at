@@ -13,7 +13,7 @@
 <style>
 #capstone-app, #main {
   background-color: #E9EAEC;
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
   margin: 10px;
   padding: 10px;
