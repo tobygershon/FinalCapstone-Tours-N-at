@@ -4,13 +4,21 @@
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
     </div>
-    <router-view />
+    <div id="main">
+      <router-view />
+    </div>
   </div>
 </template>
 
+
 <style>
-#capstone-app {
+#capstone-app, #main {
   background-color: #E9EAEC;
+  min-height: 100vh;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
 }
 </style>
 
