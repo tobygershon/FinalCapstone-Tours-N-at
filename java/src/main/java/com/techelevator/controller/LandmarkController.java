@@ -12,21 +12,16 @@ import java.util.List;
 @CrossOrigin
 public class LandmarkController {
 
-//Fields for dependencies (services, jdbc's, other methods)
     private final LandmarkDao landmarkDao;
 
     public LandmarkController(LandmarkDao landmarkDao) {
         this.landmarkDao = landmarkDao;
     }
 
-//    Need Get Request for List of all Places
-
     @GetMapping("/landmarks")
     public List<Landmark> getAllLandmarks() {
         return landmarkDao.getAllLandmarks();
     }
-    
-//    Need Get Request for List of Places by search criteria (times/days, proximity, category)
 
     @GetMapping("/landmarks/designation/{designation}")
     public List<Landmark> getLandmarksByDesignation(@PathVariable String designation) {

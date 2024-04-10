@@ -86,8 +86,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarksList;
     }
 
-
-    // Need to add hours to this method
+    //TODO: Add hours to method
     private Landmark mapRowToLandmark(SqlRowSet rowSet) {
         Landmark landmark = new Landmark();
         landmark.setLandmarkId(rowSet.getInt("landmark_id"));
