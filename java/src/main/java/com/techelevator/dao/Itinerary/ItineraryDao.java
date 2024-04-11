@@ -14,7 +14,7 @@ public interface ItineraryDao {
 
     int getTourIdFromItineraryId(int itineraryId);
 
-    Itinerary createItinerary(CreateItineraryDTO itinerary);
+    Itinerary createItinerary(CreateItineraryDTO itinerary, int userId);
 
     Itinerary updateItinerary(UpdateItineraryDTO itinerary);
 
