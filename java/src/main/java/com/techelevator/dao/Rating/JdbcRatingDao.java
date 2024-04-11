@@ -84,7 +84,7 @@ public class JdbcRatingDao implements RatingDao {
     public Rating updateRating(Rating rating) {
         String sql = "UPDATE ratings SET is_good = ? WHERE user_id = ? AND landmark_id = ?";
         try {
-            int rowsAffected = jdbcTemplate.update(sql, rating.isGood(), rating.getUserId(), rating.getLandmarkId());
+            int rowsAffected = jdbcTemplate.update(sql, rating.getIsGood(), rating.getUserId(), rating.getLandmarkId());
             if (rowsAffected > 0) {
                 return rating;
             } else {

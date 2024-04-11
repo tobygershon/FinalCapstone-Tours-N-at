@@ -10,7 +10,7 @@ public class Rating {
         this.ratingId = ratingId;
         this.userId = userId;
         this.landmarkId = landmarkId;
-        this.isGood = isGood;
+        this.isGood = getIsGood();
     }
 
     public int getRatingId() {
@@ -37,7 +37,7 @@ public class Rating {
         this.landmarkId = landmarkId;
     }
 
-    public boolean isGood() {
+    public boolean getIsGood() {
         return isGood;
     }
 
