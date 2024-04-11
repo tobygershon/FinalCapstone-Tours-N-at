@@ -12,7 +12,7 @@ const googleDirections = axios.create({
 export default {
 
     getDirections(itineraryId) {
-        return http.get(`/itineraries/${itineraryId}/directions`);
+        return http.get(`/directions/${itineraryId}`);
     },
 
     //Delete method?
