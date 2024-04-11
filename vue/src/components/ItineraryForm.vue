@@ -2,16 +2,16 @@
 <template>
     <div>
         <label for="itineraryName">Name Your Itinerary:</label>
-        <input type="text" name="itineraryName" id="itineraryNameText" placeholder="Itinerary Name" v-model="itineraryName">
+        <input type="text" name="itineraryName" id="itineraryNameText" placeholder="Itinerary Name" v-model="editItinerary.itineraryName">
     </div>
     <div>
         <label for="startingPoint">Choose Your Starting Location:</label>
         <input type="text" name="startingPoint" id="startingPointText" placeholder="Starting Location"
-            v-model="startingLocation">
+            v-model="editItinerary.startingLocation">
     </div>
     <div>
         <label for="dateSelector">Select a Tour Date:</label>
-        <input type="date" id="dateSelector" v-model="selectedDate" :min="getCurrentDate">
+        <input type="date" id="dateSelector" v-model="editItinerary.selectedDate" :min="getCurrentDate">
     </div>
     <div>
         <input type="button" @click="submitItinerary" value="Create Itinerary">
