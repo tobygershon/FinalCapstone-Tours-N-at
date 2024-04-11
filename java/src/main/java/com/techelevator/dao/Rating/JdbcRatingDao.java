@@ -65,6 +65,22 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     @Override
+    public Rating getRatingById(int ratingId) {
+        Rating rating = null;
+        String sql = "SELECT user_id, landmark_id, is_good FROM ratings WHERE rating_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, ratingId);
+            if (results.next()) {
+                rating = mapRowToRating(results);
+                rating.setRatingId(ratingId);
+            }
+        } catch (Exception e) {
+            throw new DaoException("Unable to retrieve rating by rating id.", e);
+        }
+        return rating;
+    }
+
+    @Override
     public Rating createRating(Rating rating) {
         String sql = "INSERT INTO ratings (user_id, landmark_id, is_good) VALUES (?, ?, ?) RETURNING rating_id";
         try {

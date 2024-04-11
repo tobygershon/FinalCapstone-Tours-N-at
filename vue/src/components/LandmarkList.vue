@@ -4,13 +4,13 @@
     <div id="list">
         <h2>Search Results</h2>
         <div class="landmarkList">
-            
-                <router-link :to="{ name: 'landmarkCard', params: { id: landmark.landmarkId }}" 
-                                v-for="landmark in landmarks" :key="landmark.landmarkId">
-                    <div class="landmarkCardsList">
+
+            <router-link :to="{ name: 'landmarkCard', params: { id: landmark.landmarkId } }" v-for="landmark in landmarks"
+                :key="landmark.landmarkId">
+                <div class="landmarkCardsList">
                     <LandmarkCard :landmark="landmark" />
-                    </div>
-                </router-link>
+                </div>
+            </router-link>
 
         </div>
     </div>
@@ -32,12 +32,11 @@ export default {
 </script>
 
 <style>
-
 .landmarkList {
-    width: 100%; 
+    width: 100%;
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .landmarkCardsList {
@@ -49,7 +48,7 @@ export default {
     width: 20rem;
     height: 10rem;
     border-radius: 0.5rem;
-    flex: 1; 
+    flex: 1;
 }
 
 .landmarkCardsList:hover {
