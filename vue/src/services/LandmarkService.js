@@ -1,25 +1,23 @@
 import axios from 'axios';
 
-const http = axios.create({
-    baseURL: "http://localhost:9000"
-});
+
 
 export default {
 
     getAllLandmarks() {
-        return http.get('/landmarks');
+        return axios.get('/landmarks');
     },
 
     getLandmarksByDesignation(designation) {
-        return http.get(`/landmarks/designation/${designation}`);
+        return axios.get(`/landmarks/designation/${designation}`);
     },
 
     getLandmarkById(landmarkId) {
-        return http.get(`/landmarks/${landmarkId}`);
+        return axios.get(`/landmarks/${landmarkId}`);
     },
 
     getLandmarksByName(landmarkName) {
-        return http.get(`/landmarks/search/${landmarkName}`);
+        return axios.get(`/landmarks/search/${landmarkName}`);
     },
     
 }

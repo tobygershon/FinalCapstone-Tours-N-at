@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
-//@PreAuthorize("isAuthenticated()")
+@PreAuthorize("isAuthenticated()")
 @RestController
 @CrossOrigin
 public class ItineraryController {
@@ -41,7 +41,7 @@ public class ItineraryController {
     @PostMapping("/itineraries")
     public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary, Principal principal) {
         User user = userDao.getUserByUsername(principal.getName());
-        return itineraryDao.createItinerary(newItinerary, user.getId());
+        return itineraryDao.createItinerary(newItinerary, principal);
     }
 
     @PutMapping("/itineraries/{itineraryId}")

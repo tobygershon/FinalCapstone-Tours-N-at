@@ -32,7 +32,6 @@ export default {
         return {
             addItinerary: {
                 id: 0,
-                userId: '',
                 itineraryName: '',
                 startingLocation: '',
                 date: '',
@@ -56,9 +55,7 @@ export default {
 
     methods: {
 
-        setUserId() {
-            this.addItinerary.userId = 
-        },
+
         
         submitItinerary() {
             if (!this.validateForm()) {

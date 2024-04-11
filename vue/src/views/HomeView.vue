@@ -19,7 +19,7 @@ export default {
 
   methods: {
     goToItineraryView() {
-      this.$router.push({name: 'itineraryList', params: {userId: 1}})
+      this.$router.push({name: 'itineraryList'})
     }
   }
 

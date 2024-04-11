@@ -88,18 +88,14 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public Itinerary createItinerary(CreateItineraryDTO itineraryDTO, Principal principal) {
+    public Itinerary createItinerary(CreateItineraryDTO createItineraryDTO, Principal principal) {
         Itinerary newItinerary = null;
         String sqlGet = "SELECT landmark_id FROM landmarks WHERE landmark_name = ?;";
-        String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location, tour_date) VALUES (?, ?, ?, ?);";
-        int principalId = userDao.getLoggedInUserByPrinciple(principal).getId();
-        int userId = itineraryDTO.getUserId();
-        String name = itineraryDTO.getItineraryName();
-        String startingLocation = itineraryDTO.getStartingLocation();
-        Date date = itineraryDTO.getDate();
-        if (principalId != userId) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-        }
+        String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location, tour_date) VALUES (?, ?, ?, ?) RETURNING itinerary_id;";
+        int userId = userDao.getLoggedInUserByPrinciple(principal).getId();
+        String name = createItineraryDTO.getItineraryName();
+        String startingLocation = createItineraryDTO.getStartingLocation();
+        LocalDate date = createItineraryDTO.getDate();
         try {
             int startingLocationId = jdbcTemplate.queryForObject(sqlGet, int.class, startingLocation);
             int newItineraryId = jdbcTemplate.queryForObject(sql, int.class, userId, name, startingLocationId, date);

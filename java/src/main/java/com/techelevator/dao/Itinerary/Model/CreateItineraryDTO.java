@@ -6,25 +6,16 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class CreateItineraryDTO {
-    private int userId;
+
     private String itineraryName;
     private String startingLocation;
-    private Date date;
+    private LocalDate date;
 //    tour_id as field also in create?  or add later?
 
-    public CreateItineraryDTO(int userId, String itineraryName, String startingLocation, Date date) {
-        this.userId = userId;
+    public CreateItineraryDTO(String itineraryName, String startingLocation, LocalDate date) {
         this.itineraryName = itineraryName;
         this.startingLocation = startingLocation;
         this.date = date;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getItineraryName() {
@@ -43,11 +34,11 @@ public class CreateItineraryDTO {
         this.startingLocation = startingLocation;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
