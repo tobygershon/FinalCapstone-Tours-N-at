@@ -1,8 +1,8 @@
 <template>
-
-    <div>
-        {{ this.itinerary.itineraryName }} <br>
-        {{ this.itinerary.tourDate }}   <br>
+    <div id="itinerary-card">
+        <div>{{ this.itinerary.itineraryName }}</div>
+        <div>{{ this.itinerary.tourDate }}</div>
+        <div>Starting From: {{ this.itinerary.startingLocationName }}</div>
     </div>
 </template>
 
@@ -16,3 +16,10 @@ export default {
 }
 </script>
 
+<style>
+#itinerary-card {
+    display: flex;
+    align-items: center;
+}
+
+</style>
