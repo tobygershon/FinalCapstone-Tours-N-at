@@ -13,9 +13,12 @@
 
 
 <style>
-#capstone-app, #main {
+#capstone-app {
   width: 100%;
-  height: 100vh;
+  height: 100ch;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
   background-color: #E9EAEC;
 }
 </style>

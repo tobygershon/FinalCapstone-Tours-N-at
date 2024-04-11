@@ -7,7 +7,7 @@ import java.util.List;
 public interface LandmarkDao {
 
     Landmark getLandmarkById(int id);
-    Landmark getLandmarkByName(String landmarkName);
+    List<Landmark> getLandmarkByName(String name);
     List<Landmark> getAllLandmarks();
     List<Landmark> getLandmarksByDesignation(String landmarkDesignation);
     int createLandmarkStartingPoint(String address, String placeId);
