@@ -9,7 +9,6 @@ import com.techelevator.dao.Tour.TourDao;
 import com.techelevator.service.DirectionsService;
 import com.techelevator.service.models.Directions;
 import com.techelevator.service.models.DirectionsDTO;
-import com.techelevator.service.models.Legs;
 import com.techelevator.service.models.Routes;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
