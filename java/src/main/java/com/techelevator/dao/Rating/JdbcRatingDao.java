@@ -81,13 +81,12 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     @Override
-    public Rating updateRating(Rating rating) {
+    public void updateRating(Rating rating) {
         String sql = "UPDATE ratings SET is_good = ? WHERE user_id = ? AND landmark_id = ?";
         try {
             int rowsAffected = jdbcTemplate.update(sql, rating.getIsGood(), rating.getUserId(), rating.getLandmarkId());
-            if (rowsAffected > 0) {
-                return rating;
-            } else {
+
+            if (rowsAffected == 0) {
                 throw new DaoException("Update operation failed or no record was found to update.");
             }
         } catch (Exception e) {
@@ -96,10 +95,14 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     @Override
-    public int deleteRating(int ratingId) {
+    public void deleteRating(int ratingId) {
         String sql = "DELETE FROM ratings WHERE rating_id = ?";
+
         try {
-            return jdbcTemplate.update(sql, ratingId);
+            int rowsAffected = jdbcTemplate.update(sql, ratingId);
+            if (rowsAffected == 0) {
+                throw new DaoException("Delete operation failed or no record was found to delete.");
+            }
         } catch (Exception e) {
             throw new DaoException("Unable to delete rating", e);
         }

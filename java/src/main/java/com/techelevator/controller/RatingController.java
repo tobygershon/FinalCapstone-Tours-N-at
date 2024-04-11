@@ -23,7 +23,7 @@ public class RatingController {
     }
 
     //TODO: get all ratings never implemented. Remove from DAO?
-    
+
     @GetMapping("/ratings/{userId}")
     public List<Rating> getRatingsByUserId(@PathVariable int userId, Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
@@ -43,17 +43,20 @@ public class RatingController {
     }
 
     @PutMapping("/ratings/{ratingId}")
-    public Rating updateRating(@PathVariable int ratingId, Rating rating) {
-        return ratingDao.updateRating(rating);
+    public void updateRating(@PathVariable int landmarkId, @RequestBody Rating rating, Principal principal) {
+        String username = principal.getName();
+        User user = userDao.getUserByUsername(username);
+        int userId = user.getId();
+
+        rating.setUserId(userId);
+        rating.setLandmarkId(landmarkId);
+
+        ratingDao.updateRating(rating);
     }
 
     @DeleteMapping("/ratings/{ratingId}")
     public void deleteRating(@PathVariable int ratingId) {
-        int rowsAffected = ratingDao.deleteRating(ratingId);
-
-        if (rowsAffected == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating not found.");
-        }
+        ratingDao.deleteRating(ratingId);
     }
 
 }

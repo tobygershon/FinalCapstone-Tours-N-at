@@ -10,6 +10,6 @@ public interface RatingDao {
     List<Rating> getRatingsByUserId(int id);
     List<Rating> getRatingsByLandmarkId(int id);
     Rating createRating(Rating rating);
-    Rating updateRating(Rating rating);
-    int deleteRating(int ratingId);
+    void updateRating(Rating rating);
+    void deleteRating(int ratingId);
 }

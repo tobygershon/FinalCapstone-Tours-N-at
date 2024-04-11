@@ -1,16 +1,20 @@
 package com.techelevator.dao.Rating.Model;
 
+
 public class Rating {
     private int ratingId;
     private int userId;
     private int landmarkId;
     private boolean isGood;
 
+    public Rating() {
+    }
+
     public Rating(int ratingId, int userId, int landmarkId, boolean isGood) {
         this.ratingId = ratingId;
         this.userId = userId;
         this.landmarkId = landmarkId;
-        this.isGood = getIsGood();
+        this.isGood = isGood;
     }
 
     public int getRatingId() {
@@ -41,7 +45,7 @@ public class Rating {
         return isGood;
     }
 
-    public void setGood(boolean isGood) {
+    public void setIsGood(boolean isGood) {
         this.isGood = isGood;
     }
 }
