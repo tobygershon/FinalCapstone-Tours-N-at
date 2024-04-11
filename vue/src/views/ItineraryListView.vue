@@ -14,14 +14,12 @@
     
 <script>
 import itineraryService from '../services/ItineraryService';
-import ItineraryForm from '../components/ItineraryForm.vue';
 import ItineraryList from '../components/ItineraryList.vue';
 
 
 export default {
 
     components: {
-        ItineraryForm,
         ItineraryList
     },
 

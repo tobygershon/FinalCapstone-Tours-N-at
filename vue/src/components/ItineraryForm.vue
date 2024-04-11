@@ -16,7 +16,7 @@
     </div>
     <div>
         <input type="button" @click="submitItinerary" value="Save">
-        <input type="button" @click="" value="Cancel">
+        <input type="button" value="Cancel">
     </div>
 </template>
   
