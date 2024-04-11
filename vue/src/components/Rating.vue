@@ -1,5 +1,4 @@
 <template>
-    Displays the individual rating - landmark name and thumbs up/down
     <div>
         {{ this.rating.name }}
         <div v-if="rating.isGood">Thumbs Up</div>

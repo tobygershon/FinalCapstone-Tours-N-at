@@ -1,5 +1,4 @@
 <template>
-    <!-- Calls rating component and iterates over it to display logged-in user's ratings -->
     <div v-for="rating in userRatings" :key="rating.id">
         <Rating :rating="rating" />
     </div>
@@ -39,7 +38,7 @@ export default {
     },
 
     created() {
-        this.ratingsByUserId(); // Corrected method name from `ratingsBysUserId` to `ratingsByUserId`
+        this.ratingsByUserId();
     }
 }
 </script>
