@@ -10,6 +10,7 @@ import com.techelevator.service.DirectionsService;
 import com.techelevator.service.models.Directions;
 import com.techelevator.service.models.DirectionsDTO;
 import com.techelevator.service.models.Legs;
+import com.techelevator.service.models.Steps;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,15 +55,44 @@ public class DirectionController {
             }
         }
 
-        Legs[] legs = new Legs[tourRoutesList.size()];
+        List<String[]> directionsList = new ArrayList<>();
 
         for (int i = 0; i < tourRoutesList.size(); i++) {
-            legs[i] = tourRoutesList.get(i).getRoutes()[0].getLegs()[0];
+            Steps[] steps = tourRoutesList.get(i).getRoutes()[0].getLegs()[0].getSteps();
+            String[] stringSteps = new String[steps.length];
+
+            for (int j = 0; j < steps.length; j++) {
+                String nextStep = steps[j].getHtmlStep();
+
+                if (nextStep.contains("\\")) {
+                    String fixedString = removeBackSlash(nextStep);
+                    stringSteps[j] = fixedString;
+                } else {
+                    stringSteps[j] = nextStep;
+                }
+            }
+
+            directionsList.add(stringSteps);
         }
 
-        newDTO.setLegs(legs);
+        newDTO.setStepsStringList(directionsList);
 
         return newDTO;
+    }
+
+    //helper method to remove backslash
+
+    private String removeBackSlash(String string) {
+        String correctedString = "";
+
+        String[] splitString = string.split("");
+        for (String letter : splitString) {
+            if (!letter.equals("\\")) {
+                correctedString += letter;
+            }
+        }
+
+        return correctedString;
     }
 
 }

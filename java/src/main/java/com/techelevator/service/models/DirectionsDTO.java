@@ -1,21 +1,23 @@
 package com.techelevator.service.models;
 
+import java.util.List;
+
 public class DirectionsDTO {
 
-    private Legs[] legs;
+    private List<String[]> stepsStringList;
 
     public DirectionsDTO() {
     }
 
-    public DirectionsDTO(Legs[] legs) {
-        this.legs = legs;
+    public DirectionsDTO(List<String[]> stepsStringList) {
+        this.stepsStringList = stepsStringList;
     }
 
-    public Legs[] getLegs() {
-        return legs;
+    public List<String[]> getStepsStringList() {
+        return stepsStringList;
     }
 
-    public void setLegs(Legs[] legs) {
-        this.legs = legs;
+    public void setStepsStringList(List<String[]> stepsStringList) {
+        this.stepsStringList = stepsStringList;
     }
 }
