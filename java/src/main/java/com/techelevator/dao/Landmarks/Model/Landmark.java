@@ -1,5 +1,7 @@
 package com.techelevator.dao.Landmarks.Model;
 
+import java.util.List;
+
 public class Landmark {
 
     private int landmarkId;
@@ -59,4 +61,5 @@ public class Landmark {
     public void setGooglePlaceId(String googlePlaceId) {
         this.googlePlaceId = googlePlaceId;
     }
+
 }

@@ -86,14 +86,40 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarksList;
     }
 
-    //TODO: Add hours to method
-    private Landmark mapRowToLandmark(SqlRowSet rowSet) {
-        Landmark landmark = new Landmark();
-        landmark.setLandmarkId(rowSet.getInt("landmark_id"));
-        landmark.setLandmarkName(rowSet.getString("landmark_name"));
-        landmark.setAddress(rowSet.getString("address"));
-        landmark.setGooglePlaceId(rowSet.getString("google_place_id"));
-
-        return landmark;
+    @Override
+    public List<String> getDesignationsForLandmark(int landmarkId) {
+        List<String> designations = new ArrayList<>();
+        String sql = "SELECT designation_name FROM designations " +
+                "JOIN landmarks_designations USING (designation_id) " +
+                "WHERE landmark_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkId);
+        while (results.next()) {
+            designations.add(results.getString("designation_name"));
+        }
+        return designations;
     }
+
+    @Override
+    public List<String> getAllDesignations() {
+        List<String> designations = new ArrayList<>();
+        String sql = "SELECT DISTINCT designation_name FROM designations;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            designations.add(results.getString("designation_name"));
+        }
+        return designations;
+    }
+
+    //TODO: Add hours to method
+
+        private Landmark mapRowToLandmark(SqlRowSet rowSet) {
+            Landmark landmark = new Landmark();
+            landmark.setLandmarkId(rowSet.getInt("landmark_id"));
+            landmark.setLandmarkName(rowSet.getString("landmark_name"));
+            landmark.setAddress(rowSet.getString("address"));
+            landmark.setGooglePlaceId(rowSet.getString("google_place_id"));
+
+            return landmark;
+        }
+
 }

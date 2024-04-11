@@ -1,11 +1,9 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.Landmarks.JdbcLandmarkDao;
 import com.techelevator.dao.Landmarks.LandmarkDao;
 import com.techelevator.dao.Landmarks.Model.Landmark;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -27,10 +25,12 @@ public class LandmarkController {
     public List<Landmark> getLandmarksByDesignation(@PathVariable String designation) {
         return landmarkDao.getLandmarksByDesignation(designation);
     }
-
+    @GetMapping("/designations")
+    public List<String> getAllDesignations() {
+        return landmarkDao.getAllDesignations();
+    }
     @GetMapping("/landmarks/{landmarkId}")
     public Landmark getLandmarkById(@PathVariable int landmarkId) {
-
         return landmarkDao.getLandmarkById(landmarkId);
     }
 
@@ -38,5 +38,4 @@ public class LandmarkController {
     public List<Landmark> searchLandmarksByName(@PathVariable String landmarkName) {
         return landmarkDao.getLandmarkByName(landmarkName);
     }
-
 }

@@ -10,5 +10,6 @@ public interface LandmarkDao {
     List<Landmark> getLandmarkByName(String name);
     List<Landmark> getAllLandmarks();
     List<Landmark> getLandmarksByDesignation(String landmarkDesignation);
-
+    List<String> getDesignationsForLandmark(int landmarkId);
+    List<String> getAllDesignations();
 }
