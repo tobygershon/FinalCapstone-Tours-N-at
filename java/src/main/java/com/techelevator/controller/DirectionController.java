@@ -7,10 +7,7 @@ import com.techelevator.dao.Tour.Model.Route;
 import com.techelevator.dao.Tour.Model.Tour;
 import com.techelevator.dao.Tour.TourDao;
 import com.techelevator.service.DirectionsService;
-import com.techelevator.service.models.Directions;
-import com.techelevator.service.models.DirectionsDTO;
-import com.techelevator.service.models.Legs;
-import com.techelevator.service.models.Steps;
+import com.techelevator.service.models.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,56 +40,23 @@ public class DirectionController {
 
         Tour tour = tourDao.getTourById(tourId);
 
-        List<Directions> tourRoutesList = new ArrayList<>();
+        List<Routes> tourRoutesList = new ArrayList<>();
 
         for (Route route : tour.getRoutes()) {
             if (route != null) {
                 Landmark start = landmarkDao.getLandmarkById(route.getStartingPointId());
-                Landmark end = landmarkDao.getLandmarkById(route.getStartingPointId());
+                Landmark end = landmarkDao.getLandmarkById(route.getEndingPointId());
 
                 Directions newDirections = directionsService.getDirections(start.getGooglePlaceId(), end.getGooglePlaceId());
-                tourRoutesList.add(newDirections);
+                tourRoutesList.add(newDirections.getRoutes()[0]);
+                //routes[0] bc only 1 ist returned
             }
         }
 
-        List<String[]> directionsList = new ArrayList<>();
+        newDTO.setRoutes(tourRoutesList);
 
-        for (int i = 0; i < tourRoutesList.size(); i++) {
-            Steps[] steps = tourRoutesList.get(i).getRoutes()[0].getLegs()[0].getSteps();
-            String[] stringSteps = new String[steps.length];
-
-            for (int j = 0; j < steps.length; j++) {
-                String nextStep = steps[j].getHtmlStep();
-
-                if (nextStep.contains("\\")) {
-                    String fixedString = removeBackSlash(nextStep);
-                    stringSteps[j] = fixedString;
-                } else {
-                    stringSteps[j] = nextStep;
-                }
-            }
-
-            directionsList.add(stringSteps);
-        }
-
-        newDTO.setStepsStringList(directionsList);
 
         return newDTO;
-    }
-
-    //helper method to remove backslash
-
-    private String removeBackSlash(String string) {
-        String correctedString = "";
-
-        String[] splitString = string.split("");
-        for (String letter : splitString) {
-            if (!letter.equals("\\")) {
-                correctedString += letter;
-            }
-        }
-
-        return correctedString;
     }
 
 }
