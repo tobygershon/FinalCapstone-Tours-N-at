@@ -85,6 +85,25 @@ public class JdbcLandmarkDao implements LandmarkDao {
         }
         return landmarksList;
     }
+    @Override
+    public int createLandmarkStartingPoint(String address, String placeId) {
+        int returnedId = 0;
+//        Change 'Other' desgination to 'starting point' designation?
+        String sql = "INSERT INTO landmarks(landmark_name, address, google_place_id) VALUES ('Starting Point', ?, ?) returning landmark_id;";
+
+        try {
+            returnedId = jdbcTemplate.queryForObject(sql, int.class, address, placeId);
+
+            if (returnedId == 0) {
+                throw new DaoException("adding starting point didn't work");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Could not connect to the database");
+        }
+        return returnedId;
+    }
+
+
 
     @Override
     public List<String> getDesignationsForLandmark(int landmarkId) {

@@ -2,28 +2,20 @@ package com.techelevator.dao.Itinerary.Model;
 
 import com.techelevator.dao.User.model.User;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class CreateItineraryDTO {
-    private int userId;
+
     private String itineraryName;
-    private int startingLocationId;
+    private String startingLocation;
     private LocalDate date;
 //    tour_id as field also in create?  or add later?
 
-    public CreateItineraryDTO(int userId, String itineraryName, int startingLocationId, LocalDate date) {
-        this.userId = userId;
+    public CreateItineraryDTO(String itineraryName, String startingLocation, LocalDate date) {
         this.itineraryName = itineraryName;
-        this.startingLocationId = startingLocationId;
+        this.startingLocation = startingLocation;
         this.date = date;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getItineraryName() {
@@ -34,12 +26,12 @@ public class CreateItineraryDTO {
         this.itineraryName = itineraryName;
     }
 
-    public int getStartingLocationId() {
-        return startingLocationId;
+    public String getStartingLocation() {
+        return startingLocation;
     }
 
-    public void setStartingLocationId(int startingLocationId) {
-        this.startingLocationId = startingLocationId;
+    public void setStartingLocation(String startingLocation) {
+        this.startingLocation = startingLocation;
     }
 
     public LocalDate getDate() {

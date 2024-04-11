@@ -4,6 +4,7 @@ import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
 import com.techelevator.dao.Itinerary.Model.Itinerary;
 import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface ItineraryDao {
@@ -14,7 +15,7 @@ public interface ItineraryDao {
 
     int getTourIdFromItineraryId(int itineraryId);
 
-    Itinerary createItinerary(CreateItineraryDTO itinerary, int userId);
+    Itinerary createItinerary(CreateItineraryDTO itinerary, Principal principal);
 
     Itinerary updateItinerary(UpdateItineraryDTO itinerary);
 

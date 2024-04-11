@@ -7,12 +7,13 @@ import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
 import com.techelevator.dao.User.UserDao;
 import com.techelevator.dao.User.model.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
-
+@PreAuthorize("isAuthenticated()")
 @RestController
 @CrossOrigin
 public class ItineraryController {
@@ -36,11 +37,12 @@ public class ItineraryController {
     public Itinerary getItineraryById(@PathVariable int itineraryId) {
         return itineraryDao.getItineraryById(itineraryId);
     }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/itineraries")
     public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary, Principal principal) {
         User user = userDao.getUserByUsername(principal.getName());
-        return itineraryDao.createItinerary(newItinerary, user.getId());
+        return itineraryDao.createItinerary(newItinerary, principal);
     }
 
     @PutMapping("/itineraries/{itineraryId}")

@@ -1,14 +1,12 @@
-<!-- List of landmarks can click for cards -->
-
 <template>
-    <div id="list">
-        <h2>Search Results</h2>
-        <div class="landmarkList">
+    <div id="itinerary-list">
+        <h2>Your Itineraries</h2>
+        <div class="itineraryList">
 
-            <router-link :to="{ name: 'landmarkCard', params: { id: landmark.landmarkId } }" v-for="landmark in landmarks"
-                :key="landmark.landmarkId">
-                <div class="landmarkCardsList">
-                    <LandmarkCard :landmark="landmark" />
+            <router-link :to="{ name: 'itineraryDetail', params: { itineraryId: itinerary.itineraryId } }"
+                v-for="itinerary in itineraries" :key="itinerary.itineraryId">
+                <div class="itineraryCardList">
+                    <ItineraryCard :itinerary="itinerary" />
                 </div>
             </router-link>
 
@@ -17,15 +15,15 @@
 </template>
 
 <script>
-import LandmarkCard from "../components/LandmarkCard.vue";
+import ItineraryCard from "./ItineraryCard.vue";
 
 
 export default {
 
-    props: ['landmarks'],
+    props: ['itineraries'],
 
     components: {
-        LandmarkCard
+        ItineraryCard
     }
 }
 

@@ -11,6 +11,8 @@ import LandmarkDetailsView from '../views/LandmarkDetailView.vue';
 import ItineraryListView from '../views/ItineraryListView.vue';
 import ItineraryDetailsView from '../views/ItineraryDetailsView.vue';
 import TourRouteView from '../views/TourRouteView.vue';
+import AddItineraryDetailsView from '../views/AddItineraryDetailsView.vue'
+import EditItineraryDetailsView from '../views/EditItineraryDetailsView.vue'
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -56,10 +58,26 @@ const routes = [
   {
     // do we want userId in path as well to access through $route?
     path: '/itineraries/:itineraryId',
-    name: 'itineraryEdit',
+    name: 'itineraryDetail',
     component: ItineraryDetailsView,
     meta: {
       requiredAuth: true
+    }
+  },
+  {
+    path: "/itineraries/new",
+    name: "addItineraryDetailsView",
+    component: AddItineraryDetailsView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/itineraries/:itineraryId/editor",
+    name: "editItineraryDetailsView",
+    component: EditItineraryDetailsView,
+    meta: {
+      requiresAuth: true
     }
   },
   {
@@ -93,7 +111,7 @@ const routes = [
     meta: {
       requiresAuth: false
     }
-  }
+  },
 ];
 
 // Create the router
@@ -112,7 +130,7 @@ router.beforeEach((to) => {
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    return {name: "login"};
+    return { name: "login" };
   }
   // Otherwise, do nothing and they'll go to their next destination
 });
