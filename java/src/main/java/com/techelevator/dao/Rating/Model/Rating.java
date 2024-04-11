@@ -41,7 +41,7 @@ public class Rating {
         return isGood;
     }
 
-    public void setGood(boolean good) {
-        isGood = good;
+    public void setGood(boolean isGood) {
+        this.isGood = isGood;
     }
 }
