@@ -2,19 +2,21 @@
 <template>
     <div>
         <label for="itineraryName">Name Your Itinerary:</label>
-        <input type="text" name="itineraryName" id="itineraryNameText" placeholder="Itinerary Name" v-model="editItinerary.itineraryName">
+        <input type="text" name="itineraryName" id="itineraryNameText" placeholder="Itinerary Name"
+            v-model="addItinerary.itineraryName">
     </div>
     <div>
         <label for="startingPoint">Choose Your Starting Location:</label>
         <input type="text" name="startingPoint" id="startingPointText" placeholder="Starting Location"
-            v-model="editItinerary.startingLocation">
+            v-model="addItinerary.startingLocation">
     </div>
     <div>
         <label for="dateSelector">Select a Tour Date:</label>
-        <input type="date" id="dateSelector" v-model="editItinerary.selectedDate" :min="getCurrentDate">
+        <input type="date" id="dateSelector" v-model="addItinerary.date" :min="minDate">
     </div>
     <div>
-        <input type="button" @click="submitItinerary" value="Create Itinerary">
+        <input type="button" @click="submitItinerary" value="Save">
+        <input type="button" value="Cancel">
     </div>
 </template>
   
@@ -29,56 +31,56 @@ export default {
 
     data() {
         return {
-            editItinerary: {
-                id: '',
+            addItinerary: {
+                id: 0,
                 itineraryName: '',
                 startingLocation: '',
-                selectedDate: '',
-            }
+                date: '',
+            },
+            
         }
     },
 
+    computed: {
+
+        // Compute today's date in the format 'YYYY-MM-DD'
+        minDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        },
+
+    },
+
     methods: {
+
+
+        
         submitItinerary() {
             if (!this.validateForm()) {
                 return;
             }
-            if (this.editItinerary.id === 0) {
-                // add
-                itineraryService
-                    .createItinerary(this.editItinerary)
-                    .then(response => {
-                        if (response.status === 201) {
-                            this.$store.commit(
-                                'SET_NOTIFICATION',
-                                {
-                                    message: 'A new itinerary was added.',
-                                    type: 'success'
-                                }
-                            );
-                        }
-                    })
-                    .catch(error => {
-                        this.handleErrorResponse(error, 'adding');
-                    });
-            } else {
-                itineraryService
-                    .updateItinerary(this.editItinerary)
-                    .then(response => {
-                        if (response.status === 200) {
-                            this.$store.commit(
-                                'SET_NOTIFICATION',
-                                {
-                                    message: `Itinerary ${this.editItinerary.id} was updated.`,
-                                    type: 'success'
-                                }
-                            );
-                        }
-                    })
-                    .catch(error => {
-                        this.handleErrorResponse(error, 'updating');
-                    });
-            }
+
+            itineraryService
+                .createItinerary(this.addItinerary)
+                .then(response => {
+                    if (response.status === 201) {
+                        this.$store.commit(
+                            'SET_NOTIFICATION',
+                            {
+                                message: 'A new itinerary was added.',
+                                type: 'success'
+                            }
+                        );
+                    }
+                })
+                .catch(error => {
+                    this.handleErrorResponse(error, 'adding');
+                });
+
+
         },
 
         handleErrorResponse(error, verb) {
@@ -91,13 +93,17 @@ export default {
                 this.$store.commit('SET_NOTIFICATION', "Error " + verb + " itinerary. Request could not be created.");
             }
         },
+
         validateForm() {
             let msg = '';
-            if (this.editItinerary.itineraryName.length === 0) {
+            if (this.addItinerary.itineraryName.length === 0) {
                 msg += 'The new itinerary must have a name. ';
             }
-            if (this.editItinerary.startingLocationId.length === 0) {
-                msg += 'The new card must have a starting location.';
+            if (this.addItinerary.startingLocation.length === 0) {
+                msg += 'The new itinerary must have a starting location.';
+            }
+            if (this.addItinerary.date.length === 0) {
+                msg += 'The new itinerary must have a date.';
             }
             if (msg.length > 0) {
                 this.$store.commit('SET_NOTIFICATION', msg);
@@ -106,6 +112,7 @@ export default {
             return true;
         },
 
-    }
+    },
 }
+
 </script>
