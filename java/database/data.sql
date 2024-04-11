@@ -15,6 +15,7 @@ INSERT INTO designations (designation_name) VALUES ('Other');
 INSERT INTO designations (designation_name) VALUES ('Park');
 INSERT INTO designations (designation_name) VALUES ('Scenic Viewpoint');
 INSERT INTO designations (designation_name) VALUES ('Sporting Venue');
+INSERT INTO designations (designation_name) VALUES ('Starting Point');
 
 
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Randyland', '1501 Arch St, Pittsburgh, PA 15212', 'ChIJAS-KzAn0NIgRPWwtdsC6vBw');
