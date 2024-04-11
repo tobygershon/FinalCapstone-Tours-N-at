@@ -1,28 +1,25 @@
 import axios from 'axios';
 import { h } from 'vue';
 
-const http = axios.create({
-    baseURL: "http://localhost:9000"
-});
 
 export default {
     getItineraries() {
-        return http.get(`/itineraries`);
+        return axios.get(`/itineraries`);
     },
 
     getItineraryById(itineraryId) {
-        return http.get(`/itineraries/${itineraryId}`);
+        return axios.get(`/itineraries/${itineraryId}`);
     },
 
     createItinerary(itinerary) {
-        return http.post(`/itineraries`, itinerary);
+        return axios.post(`/itineraries`, itinerary);
     },
 
     updateItinerary(itinerary) {
-        return http.put(`itineraries/${itinerary.id}`, itinerary);
+        return axios.put(`itineraries/${itinerary.id}`, itinerary);
     },
 
     deleteItinerary(itineraryId) {
-        return http.delete(`itineraries/${itineraryId}`);
+        return axios.delete(`itineraries/${itineraryId}`);
     }
 }
