@@ -38,8 +38,9 @@ public class ItineraryController {
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/itineraries")
-    public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary) {
-        return itineraryDao.createItinerary(newItinerary);
+    public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary, Principal principal) {
+        User user = userDao.getUserByUsername(principal.getName());
+        return itineraryDao.createItinerary(newItinerary, user.getId());
     }
 
     @PutMapping("/itineraries/{itineraryId}")

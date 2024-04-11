@@ -82,10 +82,9 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public Itinerary createItinerary(CreateItineraryDTO itineraryDTO) {
+    public Itinerary createItinerary(CreateItineraryDTO itineraryDTO, int userId) {
         Itinerary newItinerary = null;
-        String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location, tour_date) VALUES (?, ?, ?, ?);";
-        int userId = itineraryDTO.getUserId();
+        String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location, tour_date) VALUES (?, ?, ?, ?) returning itinerary_id;";
         String name = itineraryDTO.getItineraryName();
         int startingLocationId = itineraryDTO.getStartingLocationId();
         Date date = Date.valueOf(itineraryDTO.getDate());

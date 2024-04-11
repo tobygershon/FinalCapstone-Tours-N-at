@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1>Tours N'at!</h1>
     <button v-show="$store.state.token != ''" @click="goToItineraryView">My Itineraries</button>
   </div>
   <!-- add nav bar: login logout itineraries 

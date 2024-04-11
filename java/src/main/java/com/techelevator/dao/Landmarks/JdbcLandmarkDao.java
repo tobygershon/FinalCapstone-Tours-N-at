@@ -21,17 +21,17 @@ public class JdbcLandmarkDao implements LandmarkDao {
 
     @Override
     public Landmark getLandmarkById(int id) {
-        Landmark newLandmark = new Landmark();
-        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE LOWER(landmark_name) LIKE ?";
+        Landmark landmark = new Landmark();
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if(results.next()) {
-                newLandmark = mapRowToLandmark(results);
+                landmark = mapRowToLandmark(results);
             }
         } catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Could not connect to the database.");
         }
-        return newLandmark;
+        return landmark;
     }
 
     @Override
