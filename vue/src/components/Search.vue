@@ -22,7 +22,7 @@
         <option value="Sporting Venue">Sporting Venue</option>
     </select>
     <input type="button" @click="retrieveLandmarks" value="Go!">
-    <LandmarkList :landmarks="landmarks"/>
+    <LandmarkList :landmarks="landmarks" />
 </template>
 
 <script>
@@ -76,23 +76,23 @@ export default {
         },
 
         searchByName() {
-    this.message = ''; 
-    if (this.searchTerm.trim() === '') {
-        this.message = "Please enter a landmark name into the search box to start your search.";
-    } else {
-        landmarkService.getLandmarksByName(this.searchTerm).then(response => {
-            if (response.data.length === 0) {
-                this.message = `No results found for "${this.searchTerm}". Try checking your spelling or using different keywords.`;
+            this.message = '';
+            if (this.searchTerm.trim() === '') {
+                this.message = "Please enter a landmark name into the search box to start your search.";
             } else {
-                this.landmarks = response.data;
+                landmarkService.getLandmarksByName(this.searchTerm).then(response => {
+                    if (response.data.length === 0) {
+                        this.message = `No results found for "${this.searchTerm}". Try checking your spelling or using different keywords.`;
+                    } else {
+                        this.landmarks = response.data;
+                    }
+                }).catch(error => {
+                    console.error('Error searching landmarks by name:', error);
+                    this.message = "We encountered an error while processing your search. Please try again later.";
+                    this.$store.commit('SET_NOTIFICATION', "Error searching landmarks by name.");
+                });
             }
-        }).catch(error => {
-            console.error('Error searching landmarks by name:', error);
-            this.message = "We encountered an error while processing your search. Please try again later.";
-            this.$store.commit('SET_NOTIFICATION', "Error searching landmarks by name.");
-        });
-    }
-},
+        },
 
     }
 }
