@@ -1,21 +1,24 @@
 package com.techelevator.service.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DirectionsDTO {
 
-    private Legs[] legs;
+    private List<Routes> routes;
 
     public DirectionsDTO() {
     }
 
-    public DirectionsDTO(Legs[] legs) {
-        this.legs = legs;
+    public DirectionsDTO(List<Routes> routes) {
+        this.routes = routes;
     }
 
-    public Legs[] getLegs() {
-        return legs;
+    public List<Routes> getRoutes() {
+        return routes;
     }
 
-    public void setLegs(Legs[] legs) {
-        this.legs = legs;
+    public void setRoutes(List<Routes> routes) {
+        this.routes = routes;
     }
 }

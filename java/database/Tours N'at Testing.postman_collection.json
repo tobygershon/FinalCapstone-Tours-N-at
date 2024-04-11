@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "39e96858-c19d-486e-9803-d7d0aa7a83ff",
+		"name": "Tours N'at Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33241157"
+	},
+	"item": [
+		{
+			"name": "Landmarks",
+			"item": [
+				{
+					"name": "Get Landmarks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/landmarks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"landmarks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Landmarks by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/landmarks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"landmarks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Landmarks by Designation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/landmarks/designation/Hotel",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"landmarks",
+								"designation",
+								"Hotel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Itineraries",
+			"item": [
+				{
+					"name": "Get Itineraries by UserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/itineraries/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"itineraries",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Itinerary",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"itineraryName\": \"my_itinerary\",\r\n    \"startingLocation\": 1,\r\n    \"tourDate\": \"2024-10-10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/itineraries",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"itineraries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Directions",
+			"item": [
+				{
+					"name": "Get Directions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/directions/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"directions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ratings",
+			"item": [
+				{
+					"name": "Get All Ratings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ratings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ratings by User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ratings/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ratings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ratings by Landmark Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/landmarks/10/ratings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"landmarks",
+								"10",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Rating",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isGood\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/landmarks/10/ratings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"landmarks",
+								"10",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Rating by Landmark Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isGood\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/ratings/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ratings",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Rating",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ratings/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ratings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {}
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTcxMjg3Nzk4MX0.cKP-2AXbkZeFNgNFaaeVmXqavnUghD-M3YnQP9ZpX1Ri_hh84NPteMpf54vylq7wsp3i6uVjKVCW_ZmLHGWliQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:9000",
+			"type": "string"
+		},
+		{
+			"key": "current_date",
+			"value": "{{__ISODateString}}",
+			"type": "string"
+		}
+	]
+}

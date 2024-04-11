@@ -20,7 +20,7 @@ CREATE TABLE landmarks (
 
 CREATE TABLE designations (
     designation_id SERIAL PRIMARY KEY,
-    designation_name VARCHAR(50) NOT NULL CHECK (designation_name IN ('Park', 'Food', 'Hotel', 'Museum', 'Scenic Viewpoint', 'Kid-Friendly', 'Sporting Venue', 'Attraction', 'Historic Site', 'Church', 'Other'))
+    designation_name VARCHAR(50) NOT NULL CHECK (designation_name IN ('Park', 'Food', 'Hotel', 'Museum', 'Scenic Viewpoint', 'Kid-Friendly', 'Sporting Venue', 'Attraction', 'Historic Site', 'Church', 'Starting Point', 'Other'))
 );
 
 --CREATE TABLE addresses (

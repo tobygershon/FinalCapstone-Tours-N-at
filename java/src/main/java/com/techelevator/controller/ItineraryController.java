@@ -37,6 +37,7 @@ public class ItineraryController {
     public Itinerary getItineraryById(@PathVariable int itineraryId) {
         return itineraryDao.getItineraryById(itineraryId);
     }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/itineraries")
     public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary, Principal principal) {

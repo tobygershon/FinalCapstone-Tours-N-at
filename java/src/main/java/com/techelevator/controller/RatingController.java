@@ -6,12 +6,14 @@ import com.techelevator.dao.User.UserDao;
 import com.techelevator.dao.User.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
-@PreAuthorize("isAuthenticated()")
+
+@PreAuthorize("#rating.userId == authentication.principal.userId")
 @RestController
 @CrossOrigin
 public class RatingController {
@@ -32,29 +34,46 @@ public class RatingController {
 
         return ratingDao.getRatingsByUserId(loggedInUserId);
     }
-    @PreAuthorize("permitAll")
+
+    @PreAuthorize("permitAll()")
     @GetMapping("/landmarks/{landmarkId}/ratings")
     public List<Rating> getRatingsByLandmarkId(@PathVariable int landmarkId) {
         return ratingDao.getRatingsByLandmarkId(landmarkId);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/landmarks/{landmarkId}/ratings")
     public Rating createRating(@PathVariable int landmarkId, Rating rating) {
         return ratingDao.createRating(rating);
     }
 
     @PutMapping("/ratings/{ratingId}")
-    public Rating updateRating(@PathVariable int ratingId, Rating rating) {
-        return ratingDao.updateRating(rating);
+    public void updateRating(@PathVariable int landmarkId, @RequestBody Rating rating, Principal principal) {
+        User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
+        int loggedInUserId = loggedInUser.getId();
+
+        if (rating.getUserId() != loggedInUserId) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to update this rating.");
+        }
+
+        rating.setUserId(loggedInUserId);
+        rating.setLandmarkId(landmarkId);
+
+        ratingDao.updateRating(rating);
     }
 
     @DeleteMapping("/ratings/{ratingId}")
-    public void deleteRating(@PathVariable int ratingId) {
-        int rowsAffected = ratingDao.deleteRating(ratingId);
+    public void deleteRating(@PathVariable int ratingId, Principal principal) {
+        Rating rating = ratingDao.getRatingById(ratingId);
 
-        if (rowsAffected == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating not found.");
+        User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
+        int loggedInUserId = loggedInUser.getId();
+
+        if (rating.getUserId() != loggedInUserId) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to delete this rating.");
         }
+
+        ratingDao.deleteRating(ratingId);
     }
 
 }
