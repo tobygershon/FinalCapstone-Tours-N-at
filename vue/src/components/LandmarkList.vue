@@ -33,31 +33,26 @@ export default {
 
 <style>
 
-#list {
+.landmarkList {
+    width: 100%; 
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap; 
+    justify-content: center; 
 }
+
 .landmarkCardsList {
     margin: 10px 20px 10px 10px;
     padding: 10px 20px;
     background-color: #FBE134;
     text-align: center;
     border: solid 2px black;
-    width: 400px;
-    height: 100px;
-    border-radius: 5px;
+    width: 20rem;
+    height: 10rem;
+    border-radius: 0.5rem;
+    flex: 1; 
 }
 
 .landmarkCardsList:hover {
     cursor: pointer;
-}
-
-.landmarkList {
-    width: 800px;
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: space-around;
-    flex-wrap: wrap;
 }
 </style>
