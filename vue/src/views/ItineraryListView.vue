@@ -1,24 +1,58 @@
 <!-- must be logged in: displays user's itineraries as a list
-    can click individual itinerary to take to addItineraryview 
+    can click individual itinerary to take to add Itinerary View 
     and ability to create itineraries from here -->
 <template>
-    Tour Route View
-    <ItineraryForm />
+    <router-link :to="{ name: 'addItineraryDetailsView'}">
+        <div class="addButton">
+           <button>Add Itinerary</button>
+        </div>
+    </router-link>
+
+   
+    <ItineraryList :itineraries="itineraries" />
 </template>
     
 <script>
 import itineraryService from '../services/ItineraryService';
 import ItineraryForm from '../components/ItineraryForm.vue';
+import ItineraryList from '../components/ItineraryList.vue';
 
 
 export default {
-    methods: {
-        
-    },
 
     components: {
-        ItineraryForm
+        ItineraryForm,
+        ItineraryList
+    },
+
+    data() {
+
+        return {
+            itineraries: [],
+        }
+    },
+
+    methods: {
+        retrieveItineraries() {
+            itineraryService.getItineraries().then(response => {
+                this.itineraries = response.data;
+            }).catch(error => {
+                if (error.response) {
+                    this.$store.commit('SET_NOTIFICATION',
+                        "Error getting itineraries. Response received was ''" + error.response.statusText + "'.");
+                } else if (error.request) {
+                    this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Server could not be reached.");
+                } else {
+                    this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
+                }
+            });
+        }
+    },
+
+    created() {
+        this.retrieveItineraries();
     }
+
 }
 
 

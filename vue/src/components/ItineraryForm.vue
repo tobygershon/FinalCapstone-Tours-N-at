@@ -15,7 +15,8 @@
         <input type="date" id="dateSelector" v-model="addItinerary.date" :min="minDate">
     </div>
     <div>
-        <input type="button" @click="submitItinerary" value="Create Itinerary">
+        <input type="button" @click="submitItinerary" value="Save">
+        <input type="button" @click="" value="Cancel">
     </div>
 </template>
   

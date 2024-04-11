@@ -6,14 +6,11 @@ import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
 import com.techelevator.dao.User.UserDao;
 import com.techelevator.exception.DaoException;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -155,7 +152,7 @@ public class JdbcItineraryDao implements ItineraryDao {
 
     private Itinerary mapRowToItinerary(SqlRowSet rowSet) {
         Itinerary itinerary = new Itinerary();
-        itinerary.setId(rowSet.getInt("itinerary_id"));
+        itinerary.setItineraryId(rowSet.getInt("itinerary_id"));
         itinerary.setUserId(rowSet.getInt("user_id"));
         itinerary.setItineraryName(rowSet.getString("itinerary_name"));
         itinerary.setStartingLocationId(rowSet.getInt("starting_location"));
