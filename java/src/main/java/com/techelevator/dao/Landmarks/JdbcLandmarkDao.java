@@ -22,7 +22,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public Landmark getLandmarkById(int id) {
         Landmark landmark = new Landmark();
-        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_id = ?";
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if(results.next()) {
