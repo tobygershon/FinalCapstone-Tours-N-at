@@ -7,9 +7,7 @@ import com.techelevator.dao.Tour.Model.Route;
 import com.techelevator.dao.Tour.Model.Tour;
 import com.techelevator.dao.Tour.TourDao;
 import com.techelevator.service.DirectionsService;
-import com.techelevator.service.models.Directions;
-import com.techelevator.service.models.DirectionsDTO;
-import com.techelevator.service.models.Legs;
+import com.techelevator.service.models.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,25 +40,21 @@ public class DirectionController {
 
         Tour tour = tourDao.getTourById(tourId);
 
-        List<Directions> tourRoutesList = new ArrayList<>();
+        List<Routes> tourRoutesList = new ArrayList<>();
 
         for (Route route : tour.getRoutes()) {
             if (route != null) {
                 Landmark start = landmarkDao.getLandmarkById(route.getStartingPointId());
-                Landmark end = landmarkDao.getLandmarkById(route.getStartingPointId());
+                Landmark end = landmarkDao.getLandmarkById(route.getEndingPointId());
 
                 Directions newDirections = directionsService.getDirections(start.getGooglePlaceId(), end.getGooglePlaceId());
-                tourRoutesList.add(newDirections);
+                tourRoutesList.add(newDirections.getRoutes()[0]);
+                //routes[0] bc only 1 ist returned
             }
         }
 
-        Legs[] legs = new Legs[tourRoutesList.size()];
+        newDTO.setRoutes(tourRoutesList);
 
-        for (int i = 0; i < tourRoutesList.size(); i++) {
-            legs[i] = tourRoutesList.get(i).getRoutes()[0].getLegs()[0];
-        }
-
-        newDTO.setLegs(legs);
 
         return newDTO;
     }
