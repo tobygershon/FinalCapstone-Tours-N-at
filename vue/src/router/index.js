@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: '/landmarks/:id',
-    name: 'landmarkCard',
+    name: 'landmarkDetailsView',
     component: LandmarkDetailsView,
     meta: {
       requiredAuth: false

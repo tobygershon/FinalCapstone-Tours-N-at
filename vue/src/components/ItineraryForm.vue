@@ -32,7 +32,7 @@ export default {
     data() {
         return {
             addItinerary: {
-                id: 0,
+                itineraryId: 0,
                 itineraryName: '',
                 startingLocation: '',
                 date: '',
@@ -74,6 +74,7 @@ export default {
                                 type: 'success'
                             }
                         );
+                        this.$router.push({ name: 'itineraryList', params: { id: this.addItinerary.itineraryId } });
                     }
                 })
                 .catch(error => {

@@ -5,7 +5,7 @@
         <h2>Search Results</h2>
         <div class="landmarkList">
 
-            <router-link :to="{ name: 'landmarkCard', params: { id: landmark.landmarkId } }" v-for="landmark in landmarks"
+            <router-link :to="{ name: 'landmarkDetailsView', params: { id: landmark.landmarkId } }" v-for="landmark in landmarks"
                 :key="landmark.landmarkId">
                 <div class="landmarkCardsList">
                     <LandmarkCard :landmark="landmark" />
