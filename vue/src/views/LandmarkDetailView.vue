@@ -7,15 +7,7 @@
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
     <button><i class="fas fa-plus"></i> Add to Itinerary</button><br>
-    <div class="button-container">
-      <button class="rating-button">
-        <i class="fas fa-thumbs-up"></i> Rate Up
-      </button>
-      <button>
-        <i class="fas fa-thumbs-down"></i> Rate Down
-      </button><br>
-    </div>
-
+    <ratingComponent :landmarkId="landmark.landmarkId" @rated="handleRating" />
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
   </div>
 </template>
@@ -23,6 +15,7 @@
 <script>
 
 import landmarkService from '../services/LandmarkService';
+import ratingComponent from '../components/LandmarkRating.vue';
 
 
 export default {
@@ -34,6 +27,9 @@ export default {
     };
   },
 
+  components: {
+    ratingComponent
+  },
 
   computed: {
     formattedDesignations() {
@@ -67,6 +63,27 @@ export default {
           this.$store.commit('SET_NOTIFICATION', "Error getting designations. Request could not be created.");
         }
       });
+    },
+
+    handleRating(ratingData) {
+      landmarkService.createRating(ratingData.landmarkId, ratingData.isGood)
+        .then(response => {
+          console.log('Rating successfully created:', response.data);
+          this.retrieveCard();
+        })
+        .catch(error => {
+          console.error('Error creating rating:', error);
+        });
+    },
+
+    handleUpdateRating(rating) {
+      landmarkService.updateRating(rating.id, rating.isGood)
+        .then(response => {
+          console.log('Rating successfully updated:', response.data);
+        })
+        .catch(error => {
+          console.error('Error updating rating:', error);
+        });
     },
 
     retrievePlacesAPIData() {
