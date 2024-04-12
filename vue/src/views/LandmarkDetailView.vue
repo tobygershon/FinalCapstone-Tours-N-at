@@ -16,20 +16,13 @@
       </button><br>
     </div>
 
-    
-    <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
-
-      <img :src="retrievePhoto(photo.photo_reference)" alt="landamark photos">
-
-    </div>
-
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
   </div>
 </template>
 
 <script>
-import landmarkService from '../services/LandmarkService.js';
-import itineraryService from '../services/ItineraryService.js';
+
+import landmarkService from '../services/LandmarkService';
 
 
 export default {
@@ -37,15 +30,10 @@ export default {
     return {
       landmark: {},
       designations: [],
-      placesData: {},
-      showDropdown: false,
-      userItineraries: [],
-      editItinerary: {
-        itineraryId: '',
-        landmarkId: this.$route.params.id
-      },
+      placesData: {}
     };
   },
+
 
   computed: {
     formattedDesignations() {
@@ -95,40 +83,29 @@ export default {
       });
     },
 
-    handleRating(ratingData) {
-      landmarkService.createRating(ratingData.landmarkId, ratingData.isGood)
-        .then(response => {
-          console.log('Rating successfully created:', response.data);
-          this.retrieveCard();
-        })
-        .catch(error => {
-          console.error('Error creating rating:', error);
-        });
-    },
-
-    handleUpdateRating(rating) {
-      landmarkService.updateRating(rating.id, rating.isGood)
-        .then(response => {
-          console.log('Rating successfully updated:', response.data);
-        })
-        .catch(error => {
-          console.error('Error updating rating:', error);
-        });
-    },
-
     retrievePlacesAPIData() {
       landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
+
         this.placesData = response.data;
       })
-    }
+    },
 
-  },
+    retrievePhoto(photoRef) {
+
+      const baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=';
+
+      const apiKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
+
+      return (baseURL + photoRef + apiKey);
+      }
+    },
 
   created() {
     this.retrieveCard();
     this.retrieveDesignations();
     this.retrievePlacesAPIData();
-    this.retrieveUserItineraries();
   },
 };
 </script>
+
+
