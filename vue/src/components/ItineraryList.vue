@@ -5,7 +5,7 @@
 
             <router-link :to="{ name: 'itineraryDetail', params: { itineraryId: itinerary.itineraryId } }"
                 v-for="itinerary in itineraries" :key="itinerary.itineraryId">
-                <div class="cardList">
+                <div class="cardsList">
                     <ItineraryCard :itinerary="itinerary" />
                 </div>
             </router-link>
