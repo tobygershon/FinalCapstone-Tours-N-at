@@ -1,6 +1,11 @@
 <!-- individual itinerary form to edit and delete the itinerary -->
 <template>
-    Tour
+    <div :="itinerary">
+        <div>{{ itinerary.itineraryName }}</div>
+        <div>{{ itinerary.startingLocationName}}</div>
+        <div>{{ itinerary.tourDate }}</div>
+        <div>{{ }}</div>
+    </div>
 </template>
 
 
@@ -10,8 +15,32 @@ import itineraryService from '../services/ItineraryService';
 
 export default {
 
+    data() {
+        return {
+
+            updateItinerary: {
+
+            },
+
+            itinerary: {
+
+            }
+        }
+    },
+
     methods: {
-        updateItinerary() {
+
+        getItinerary() {
+            const id = this.$route.params.itineraryId;
+            itineraryService.getItineraryById(id).then(response => {
+                this.itinerary = response.data;
+            }).catch(error => {
+                this.handleErrorResponse(error, 'retrieving');
+            });
+        },
+
+
+        updateCurrentItinerary() {
             itineraryService
                 .updateItinerary(this.addItinerary)
                 .then(response => {
@@ -56,6 +85,15 @@ export default {
             return true;
         },
 
+    },
+
+    created() {
+        this.getItinerary();
     }
 }
 </script>
+
+<style>
+
+
+</style>
