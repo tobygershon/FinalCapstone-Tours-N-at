@@ -46,8 +46,10 @@ public class DirectionController {
             Directions newDirections = directionsService.getDirections(googlePlaceIdList.get(i), googlePlaceIdList.get(i + 1));
             tourRoutesList.add(newDirections.getRoutes()[0]);
             //routes[0] bc only 1 is returned
+            System.out.println(newDirections);
         }
         newDTO.setRoutes(tourRoutesList);
+
         return newDTO;
     }
 
