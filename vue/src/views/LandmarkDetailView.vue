@@ -8,11 +8,11 @@
     <p>Ratings: {{ landmark.ratings }}</p>
     <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
     <div v-if="showDropdown">
-      <select>
+      <select v-model="editItinerary.itineraryId">
         <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}
         </option>
       </select>
-      <input type="button" @click="addItinerary(itin.itineraryId, itin)" value="Go!">
+      <input type="button" @click="addToItinerary()" value="Go!">
     </div>
     <div class="button-container">
       <button class="rating-button">
@@ -42,8 +42,8 @@ export default {
       userItineraries: [],
       editItinerary: {
         itineraryId: '',
-        landmarkId: ''
-      }
+        landmarkId: this.$route.params.id
+      },
     };
   },
 
@@ -83,7 +83,6 @@ export default {
 
     retrievePlacesAPIData() {
       landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
-
         this.placesData = response.data;
       })
     },
@@ -108,20 +107,44 @@ export default {
       });
     },
 
-    addItinerary(itineraryId, itinerary) {
-      itineraryService.updateItinerary(itineraryId, itinerary).then(response => {
-        
+    addToItinerary() {
+      if (!this.validateForm) {
+        return;
+      }
+      itineraryService.updateItinerary(this.editItinerary).then(response => {
+        if (response.status < 300 && response.status > 199) {
+          this.$store.commit(
+            'SET_NOTIFICATION',
+            {
+              message: 'A new stop was added to your itinerary.',
+              type: 'success'
+            }
+          )
+        }
       }).catch(error => {
         if (error.response) {
           this.$store.commit('SET_NOTIFICATION',
-            "Error getting itineraries. Response received was ''" + error.response.statusText + "'.");
+            "Error updating itinerary. Response received was ''" + error.response.statusText + "'.");
         } else if (error.request) {
-          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Server could not be reached.");
+          this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Server could not be reached.");
         } else {
-          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
+          this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Request could not be created.");
         }
       });
-    }
+    },
+
+    validateForm() {
+      let msg = '';
+      if (this.editItinerary.itineraryId.length === 0) {
+        msg += 'You must select an itinerary to add the landmark to.';
+      }
+      if (msg.length > 0) {
+        this.$store.commit('SET_NOTIFICATION', msg);
+        return false;
+      }
+      return true;
+    },
+
 
   },
 

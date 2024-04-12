@@ -115,7 +115,7 @@ public class JdbcItineraryDao implements ItineraryDao {
         String sql = "INSERT INTO itineraries_landmarks (itinerary_id, landmark_id, stop_order) VALUES (?, ?, ?);";
 
         try {
-            int numOfRows = jdbcTemplate.update(sql, int.class, itineraryId, landmarkId, stopNum);
+            int numOfRows = jdbcTemplate.update(sql, itineraryId, landmarkId, stopNum);
 
             if (numOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
@@ -184,8 +184,12 @@ public class JdbcItineraryDao implements ItineraryDao {
         String sql = "SELECT stop_order from itineraries_landmarks where itinerary_id = ? and landmark_id = ? ORDER BY stop_order DESC LIMIT 1;";
 
         try {
-            Integer results = jdbcTemplate.queryForObject(sql, int.class, itineraryId, landmarkId);
-            return results + 1;
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId, landmarkId);
+            if (results.next()) {
+                return results.getInt("stop_order") + 1;
+            } else {
+                return 1;
+            }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         }
