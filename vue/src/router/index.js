@@ -90,7 +90,7 @@ const routes = [
     }
   },
   {
-    path: '/ratings/:userId',
+    path: '/ratings',
     name: 'userRating',
     component: UserRatingView,
     meta: {
