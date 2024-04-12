@@ -16,7 +16,7 @@ export default {
     },
 
     updateItinerary(itinerary) {
-        return axios.put(`itineraries/${itinerary.id}`, itinerary);
+        return axios.put(`itineraries/${itinerary.itineraryId}`, itinerary);
     },
 
     deleteItinerary(itineraryId) {
