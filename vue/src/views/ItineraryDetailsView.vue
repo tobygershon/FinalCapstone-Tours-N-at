@@ -2,9 +2,9 @@
 <template>
     <div :="itinerary" class="landmark-container">
         <div>{{ itinerary.itineraryName }}</div>
-        <div>{{ itinerary.startingLocationName}}</div>
+        <div>{{ itinerary.startingLocationName }}</div>
         <div>{{ itinerary.tourDate }}</div>
-        <div>{{  }}</div>
+        <!-- <div v-for="itinerary.listOfStops">{{ object.landmarkName }}</div> -->
     </div>
 </template>
 
@@ -23,7 +23,14 @@ export default {
             },
 
             itinerary: {
-
+                itineraryId: '',
+                userId: '',
+                itineraryName: '',
+                startingLocationId: '',
+                startingLocationName: '',
+                tourDate: '',
+                tourId: '',
+                listOfStops: []
             }
         }
     },
@@ -93,7 +100,4 @@ export default {
 }
 </script>
 
-<style>
-
-
-</style>
+<style></style>

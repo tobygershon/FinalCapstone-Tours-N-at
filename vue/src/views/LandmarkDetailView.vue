@@ -44,6 +44,8 @@ export default {
         itineraryId: '',
         landmarkId: this.$route.params.id
       },
+
+
     };
   },
 
@@ -151,7 +153,9 @@ export default {
         } else {
           this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Request could not be created.");
         }
+        
       });
+      this.toggleDropdown();
     },
 
     validateForm() {
