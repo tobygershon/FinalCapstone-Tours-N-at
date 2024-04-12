@@ -1,4 +1,4 @@
-package com.techelevator.service.models;
+package com.techelevator.service.models.geocoder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
