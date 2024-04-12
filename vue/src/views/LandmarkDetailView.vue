@@ -6,7 +6,12 @@
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
-    <button><i class="fas fa-plus"></i> Add to Itinerary</button><br>
+    <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
+    <select v-if="showDropdown">
+      <option value=""> </option>
+      <option value="">Option 1</option>
+      <option value="">Option 2</option>
+    </select>
     <div class="button-container">
       <button class="rating-button">
         <i class="fas fa-thumbs-up"></i> Rate Up
@@ -30,10 +35,10 @@ export default {
     return {
       landmark: {},
       designations: [],
-      placesData: {}
+      placesData: {},
+      showDropdown: false
     };
   },
-
 
   computed: {
     formattedDesignations() {
@@ -74,7 +79,13 @@ export default {
 
         this.placesData = response.data;
       })
-    }
+    },
+
+    toggleDropdown() {
+      console.log('Toggle dropdown method called');
+      this.showDropdown = !this.showDropdown;
+      console.log('Dropdown visibility:', this.showDropdown);
+    },
 
   },
 
@@ -85,5 +96,3 @@ export default {
   },
 };
 </script>
-
-
