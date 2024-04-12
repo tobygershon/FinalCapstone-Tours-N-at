@@ -1,27 +1,32 @@
 package com.techelevator.dao.Landmarks.Model;
 
 public class Designations {
-    private String designation_name;
-    private int designation_id;
+    private String designationName;
+    private int designationId;
 
-    public Designations(String designation_name, int designation_id) {
-        this.designation_name = designation_name;
-        this.designation_id = designation_id;
+
+    public Designations(String designationName, int designationId) {
+        this.designationName = designationName;
+        this.designationId = designationId;
     }
 
-    public void setDesignation_name(String designation_name) {
-        this.designation_name = designation_name;
+    public Designations() {
+
     }
 
-    public void setDesignation_id(int designation_id) {
-        this.designation_id = designation_id;
+    public void setDesignationName(String designationName) {
+        this.designationName = designationName;
     }
 
-    public String getDesignation_name() {
-        return designation_name;
+    public void setDesignationId(int designationId) {
+        this.designationId = designationId;
     }
 
-    public int getDesignation_id() {
-        return designation_id;
+    public String getDesignationName() {
+        return designationName;
+    }
+
+    public int getDesignationId() {
+        return designationId;
     }
 }
