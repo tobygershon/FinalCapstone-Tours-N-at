@@ -20,4 +20,8 @@ public interface ItineraryDao {
     Itinerary updateItinerary(UpdateItineraryDTO itinerary);
 
     int deleteItinerary(int itineraryId);
+
+    List<String> retrieveItineraryStops(int itineraryId);
+
+
 }

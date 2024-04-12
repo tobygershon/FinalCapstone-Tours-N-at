@@ -16,3 +16,10 @@ export default {
 }
 </script>
 
+<style>
+#itinerary-card {
+    display: flex;
+    flex-direction: column;
+}
+
+</style>
