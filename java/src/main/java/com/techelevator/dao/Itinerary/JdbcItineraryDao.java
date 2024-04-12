@@ -107,33 +107,25 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public Itinerary updateItinerary(UpdateItineraryDTO itineraryDTO) {
+    public void updateItinerary(UpdateItineraryDTO itineraryDTO) {
         int itineraryId = itineraryDTO.getItineraryId();
         int landmarkId = itineraryDTO.getLandmarkId();
         int stopNum = getStopNum(itineraryId, landmarkId);
 
-        Itinerary itineraryToUpdate = getItineraryById(itineraryId);
-
-
-        String sql = "UPDATE itineraries " +
-                "SET itinerary_name = ?, starting_location_id = ?, tour_date = ?, tour_id = ? " +
-                "WHERE itinerary_id = ?;";
+        String sql = "INSERT INTO itineraries_landmarks (itinerary_id, landmark_id, stop_order) VALUES (?, ?, ?);";
 
         try {
-            int numOfRows = jdbcTemplate.update(sql);
+            int numOfRows = jdbcTemplate.update(sql, int.class, itineraryId, landmarkId, stopNum);
 
             if (numOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
-            } else {
-                Itinerary updatedItinerary = getItineraryById(itineraryId);
             }
+
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-
-        return updatedItinerary;
     }
 
     @Override
