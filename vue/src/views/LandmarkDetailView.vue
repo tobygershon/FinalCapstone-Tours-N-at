@@ -17,11 +17,11 @@
     </div>
 
     
-    <!-- <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
+    <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
 
       <img :src="retrievePhoto(photo.photo_reference)" alt="landamark photos">
 
-    </div> -->
+    </div>
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
   </div>
