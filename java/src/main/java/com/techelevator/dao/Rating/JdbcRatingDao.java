@@ -37,7 +37,7 @@ public class JdbcRatingDao implements RatingDao {
     @Override
     public List<Rating> getRatingsByUserId(int userId) {
         List<Rating> ratings = new ArrayList<>();
-        String sql = "SELECT rating_id, user_id, ratings.landmark_id, is_good, landmark_name FROM ratings JOIN landmarks ON ratings.landmark_id = landmarks.landmark_id WHERE user_id = ?;";
+        String sql = "SELECT rating_id, user_id, ratings.landmark_id, is_good, landmark_name FROM ratings JOIN landmarks USING (landmark_id) WHERE user_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while (results.next()) {

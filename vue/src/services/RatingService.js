@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export default {
     
-    getRatingsByUserId(userId) {
-        return axios.get(`/ratings/${userId}`);
+    getRatingsByUser() {
+        return axios.get(`/ratings`);
     },
 
     getRatingsByLandmarkId(landmarkId) {

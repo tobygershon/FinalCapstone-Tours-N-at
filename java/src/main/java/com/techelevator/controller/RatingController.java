@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.security.Principal;
 import java.util.List;
 
-@PreAuthorize("#rating.userId == authentication.principal.userId")
+@PreAuthorize("isAuthenticated()")
 @RestController
 @CrossOrigin
 public class RatingController {
@@ -27,12 +27,12 @@ public class RatingController {
 
     //TODO: get all ratings never implemented. Remove from DAO?
 
-    @GetMapping("/ratings/{userId}")
-    public List<Rating> getRatingsByUserId(@PathVariable int userId, Principal principal) {
+    @GetMapping("/ratings")
+    public List<Rating> getRatingsByUser(Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
-        int loggedInUserId = loggedInUser.getId();
+        int userId = loggedInUser.getId();
 
-        return ratingDao.getRatingsByUserId(loggedInUserId);
+        return ratingDao.getRatingsByUserId(userId);
     }
 
     @PreAuthorize("permitAll()")

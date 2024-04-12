@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{ this.rating.id }}
+        {{ this.rating.landmarkId }}
         <div v-if="rating.isGood">Thumbs Up</div>
         <div v-else>Thumbs Down</div>
     </div>
