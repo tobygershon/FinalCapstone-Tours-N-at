@@ -150,6 +150,24 @@ public class JdbcItineraryDao implements ItineraryDao {
         return numOfRows;
     }
 
+    @Override
+    public List<String> retrieveItineraryStops(int itineraryId) {
+        List<String> listOfItineraryLandmarkGooglePlaceIds = new ArrayList<>();
+        String sql = "SELECT google_place_id FROM landmarks JOIN itineraries_landmarks USING (landmark_id) WHERE itinerary_id = ? ORDER BY stop_order;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
+            while (results.next()) {
+                listOfItineraryLandmarkGooglePlaceIds.add(results.getString("google_place_id"));
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+
+        return null;
+    }
+
     private Itinerary mapRowToItinerary(SqlRowSet rowSet) {
         Itinerary itinerary = new Itinerary();
         itinerary.setItineraryId(rowSet.getInt("itinerary_id"));
