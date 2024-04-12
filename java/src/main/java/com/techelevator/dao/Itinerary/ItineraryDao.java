@@ -17,7 +17,7 @@ public interface ItineraryDao {
 
     Itinerary createItinerary(CreateItineraryDTO itinerary, Principal principal);
 
-    Itinerary updateItinerary(UpdateItineraryDTO itinerary);
+    void updateItinerary(UpdateItineraryDTO itinerary);
 
     int deleteItinerary(int itineraryId);
 

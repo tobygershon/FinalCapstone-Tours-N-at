@@ -47,7 +47,8 @@ public class ItineraryController {
 
     @PutMapping("/itineraries/{itineraryId}")
     public Itinerary updateItinerary(@RequestBody UpdateItineraryDTO itineraryToUpdate, @PathVariable int itineraryId) {
-        return itineraryDao.updateItinerary(itineraryToUpdate);
+        itineraryDao.updateItinerary(itineraryToUpdate);
+        return getItineraryById(itineraryId);
     }
 
     @DeleteMapping("/itineraries/{itineraryId}")

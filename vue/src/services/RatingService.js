@@ -10,12 +10,12 @@ export default {
         return axios.get(`/landmarks/${landmarkId}/ratings`);
     },
 
-    createRating(landmarkId) {
-        return axios.post(`/landmarks/${landmarkId}/ratings`);
+    createRating(landmarkId, isGood) {
+        return axios.post(`/landmarks/${landmarkId}/ratings`, { isGood });
     },
 
-    updateRating(ratingId) {
-        return axios.put(`/ratings/${ratingId}`);
+    updateRating(ratingId, isGood) {
+        return axios.put(`/ratings/${ratingId}`, { isGood });
     },
 
     deleteRating(ratingId) {
