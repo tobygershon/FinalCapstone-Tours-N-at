@@ -2,9 +2,9 @@
   <div class="landmark-container">
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
-    <p>Description: {{ landmark.description }}</p>
+    <p>Description: {{ placesData.editorial_summary.overview }}</p>
     <p>Designation: {{ formattedDesignations }}</p>
-    <p>Hours: {{ landmark.hours }}</p>
+    <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
     <button><i class="fas fa-plus"></i> Add to Itinerary</button><br>
     <div class="button-container">
@@ -30,6 +30,7 @@ export default {
     return {
       landmark: {},
       designations: [],
+      placesData: {}
     };
   },
 
@@ -37,6 +38,10 @@ export default {
   computed: {
     formattedDesignations() {
       return this.designations.map(d => d.designationName).join(', ');
+    },
+
+    hoursArray() {
+      return this.placesData.current_opening_hours.hours;
     }
   },
 
@@ -62,6 +67,13 @@ export default {
           this.$store.commit('SET_NOTIFICATION', "Error getting designations. Request could not be created.");
         }
       });
+    },
+
+    retrievePlacesAPIData() {
+      landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
+
+        this.placesData = response.data;
+      })
     }
 
   },
@@ -69,6 +81,7 @@ export default {
   created() {
     this.retrieveCard();
     this.retrieveDesignations();
+    this.retrievePlacesAPIData();
   },
 };
 </script>

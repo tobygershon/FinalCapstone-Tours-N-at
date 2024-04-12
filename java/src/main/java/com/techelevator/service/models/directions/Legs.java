@@ -1,6 +1,7 @@
-package com.techelevator.service.models;
+package com.techelevator.service.models.directions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.techelevator.service.models.geocoder.StartLocation;
 
 public class Legs {
 

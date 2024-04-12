@@ -1,6 +1,4 @@
-package com.techelevator.service.models;
-
-import org.springframework.util.RouteMatcher;
+package com.techelevator.service.models.directions;
 
 public class Directions {
 
