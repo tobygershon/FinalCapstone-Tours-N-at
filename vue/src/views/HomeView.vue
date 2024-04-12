@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img id="tour-logo" src="../assets/Tours_Nat.png" alt="">
+    
 
   </div>    
   <!-- add nav bar: login logout itineraries 
