@@ -2,7 +2,7 @@
   <div class="landmark-container">
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
-    <p>Description: {{ placesData.editorial_summary.overview }}</p>
+    <p>Description: {{ description }}</p>
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
@@ -14,6 +14,11 @@
       <button>
         <i class="fas fa-thumbs-down"></i> Rate Down
       </button><br>
+    </div>
+    <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
+
+      {{ retrievePhoto(photo) }}
+
     </div>
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
@@ -41,7 +46,21 @@ export default {
     },
 
     hoursArray() {
-      return this.placesData.current_opening_hours.hours;
+      if (this.placesData.current_opening_hours.hours != null) {
+        return this.placesData.current_opening_hours.hours;
+      }
+      return '';
+    },
+
+    description() {
+      if (this.placesData.editorial_summary.overview != null) {
+        return this.placesData.editorial_summary.overview;
+      }
+      return '';
+    },
+
+    photos() {
+        return this.placesData.photos;
     }
   },
 
@@ -73,6 +92,12 @@ export default {
       landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
 
         this.placesData = response.data;
+      })
+    },
+
+    retrievePhoto() {
+      landmarkService.getPhotosForLandmark(this.photo.photo_reference).then(response => {
+        return response.data;
       })
     }
 
