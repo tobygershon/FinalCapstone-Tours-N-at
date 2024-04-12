@@ -1,5 +1,5 @@
 <template>
-  <div class="landmark-container">
+  <div class="landmark-container" >
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
     <p>Description: {{ placesData.editorial_summary.overview }}</p>
@@ -44,6 +44,8 @@ export default {
         itineraryId: '',
         landmarkId: this.$route.params.id
       },
+
+
     };
   },
 
@@ -151,7 +153,9 @@ export default {
         } else {
           this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Request could not be created.");
         }
+        
       });
+      this.toggleDropdown();
     },
 
     validateForm() {

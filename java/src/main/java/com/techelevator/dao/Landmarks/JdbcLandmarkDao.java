@@ -74,7 +74,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public List<Landmark> getAllLandmarks() {
         List<Landmark> landmarksList = new ArrayList<>();
-        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks;";
+        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks ORDER BY landmark_name;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -91,7 +91,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     public List<Landmark> getLandmarksByDesignation(String landmarkDesignation) {
         List<Landmark> landmarksList = new ArrayList<>();
         String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks JOIN landmarks_designations USING (landmark_id) " +
-                "JOIN designations USING (designation_id) WHERE designation_name = ?;";
+                "JOIN designations USING (designation_id) WHERE designation_name = ? ORDER BY landmark_name;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkDesignation);
@@ -110,7 +110,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
         List<Designations> designations = new ArrayList<>();
         String sql = "SELECT designation_id, designation_name FROM designations " +
                 "JOIN landmarks_designations USING (designation_id) " +
-                "WHERE landmark_id = ?";
+                "WHERE landmark_id = ? ORDER BY designation_name";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkId);
             while (results.next()) {
@@ -134,7 +134,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
 
     //TODO: Add hours to method
 
-    private Landmark mapRowToLandmark(SqlRowSet rowSet) {
+    public Landmark mapRowToLandmark(SqlRowSet rowSet) {
         Landmark landmark = new Landmark();
         landmark.setLandmarkId(rowSet.getInt("landmark_id"));
         landmark.setLandmarkName(rowSet.getString("landmark_name"));
