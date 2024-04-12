@@ -30,14 +30,15 @@ export default {
 </script>
 
 <style>
-.landmarkList {
+.itineraryList {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-justify: center;
 }
 
-.landmarkCardsList {
+.itineraryCardList {
     margin: 10px 20px 10px 10px;
     padding: 10px 20px;
     background-color: #FBE134;
@@ -49,7 +50,7 @@ export default {
     flex: 1;
 }
 
-.landmarkCardsList:hover {
+.itineraryCardList:hover {
     cursor: pointer;
 }
 </style>

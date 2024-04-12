@@ -30,7 +30,7 @@ public class JdbcItineraryDao implements ItineraryDao {
     @Override
     public List<Itinerary> getItinerariesByUserId(int userId) {
         List<Itinerary> userItineraries = new ArrayList<>();
-        String sql = "SELECT * FROM itineraries WHERE user_id = ? ORDER BY tour_date;";
+        String sql = "SELECT itineraries.*, landmark_name FROM itineraries JOIN landmarks ON starting_location_id = landmark_id WHERE user_id = ? ORDER BY tour_date;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -48,7 +48,7 @@ public class JdbcItineraryDao implements ItineraryDao {
     @Override
     public Itinerary getItineraryById(int itineraryId) {
         Itinerary itinerary = null;
-        String sql = "SELECT * FROM itineraries WHERE itinerary_id = ?;";
+        String sql = "SELECT itineraries.*, landmark_name FROM itineraries JOIN landmarks ON starting_location_id = landmark_id WHERE itinerary_id = ?;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
@@ -88,7 +88,7 @@ public class JdbcItineraryDao implements ItineraryDao {
     public Itinerary createItinerary(CreateItineraryDTO createItineraryDTO, Principal principal) {
         Itinerary newItinerary = null;
         String sqlGet = "SELECT landmark_id FROM landmarks WHERE landmark_name = ?;";
-        String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location, tour_date) VALUES (?, ?, ?, ?) RETURNING itinerary_id;";
+        String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location_id, tour_date) VALUES (?, ?, ?, ?) RETURNING itinerary_id;";
         int userId = userDao.getLoggedInUserByPrinciple(principal).getId();
         String name = createItineraryDTO.getItineraryName();
         String startingLocation = createItineraryDTO.getStartingLocation();
@@ -110,7 +110,7 @@ public class JdbcItineraryDao implements ItineraryDao {
     public Itinerary updateItinerary(UpdateItineraryDTO itineraryDTO) {
         Itinerary updatedItinerary = null;
         String sql = "UPDATE itineraries " +
-                "SET itinerary_name = ?, starting_location = ?, tour_date = ?, tour_id = ? " +
+                "SET itinerary_name = ?, starting_location_id = ?, tour_date = ?, tour_id = ? " +
                 "WHERE itinerary_id = ?;";
         int startingLocationId = itineraryDTO.getStartingLocationId();
         String name = itineraryDTO.getItineraryName();
@@ -155,7 +155,8 @@ public class JdbcItineraryDao implements ItineraryDao {
         itinerary.setItineraryId(rowSet.getInt("itinerary_id"));
         itinerary.setUserId(rowSet.getInt("user_id"));
         itinerary.setItineraryName(rowSet.getString("itinerary_name"));
-        itinerary.setStartingLocationId(rowSet.getInt("starting_location"));
+        itinerary.setStartingLocationId(rowSet.getInt("starting_location_id"));
+        itinerary.setStartingLocationName(rowSet.getString("landmark_name"));
 
         Date tourDateTemp = rowSet.getDate("tour_date");
         LocalDate tourDate = null;
@@ -168,3 +169,4 @@ public class JdbcItineraryDao implements ItineraryDao {
         return itinerary;
     }
 }
+
