@@ -11,8 +11,9 @@ import LandmarkDetailsView from '../views/LandmarkDetailView.vue';
 import ItineraryListView from '../views/ItineraryListView.vue';
 import ItineraryDetailsView from '../views/ItineraryDetailsView.vue';
 import TourRouteView from '../views/TourRouteView.vue';
-import AddItineraryDetailsView from '../views/AddItineraryDetailsView.vue'
-import EditItineraryDetailsView from '../views/EditItineraryDetailsView.vue'
+import AddItineraryDetailsView from '../views/AddItineraryDetailsView.vue';
+import EditItineraryDetailsView from '../views/EditItineraryDetailsView.vue';
+import UserRatingView from '../views/UserRatingView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -84,6 +85,14 @@ const routes = [
     path: '/tour/:itineraryId',
     name: 'tourRoute',
     component: TourRouteView,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/ratings/:userId',
+    name: 'userRating',
+    component: UserRatingView,
     meta: {
       requiredAuth: true
     }
