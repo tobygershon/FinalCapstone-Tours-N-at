@@ -1,6 +1,6 @@
 <!-- individual itinerary form to edit and delete the itinerary -->
 <template>
-    <div :="itinerary">
+    <div :="itinerary" class="landmark-container">
         <div>{{ itinerary.itineraryName }}</div>
         <div>{{ itinerary.startingLocationName}}</div>
         <div>{{ itinerary.tourDate }}</div>
