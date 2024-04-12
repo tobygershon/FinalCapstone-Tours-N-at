@@ -81,6 +81,27 @@ export default {
       });
     },
 
+    handleRating(ratingData) {
+      landmarkService.createRating(ratingData.landmarkId, ratingData.isGood)
+        .then(response => {
+          console.log('Rating successfully created:', response.data);
+          this.retrieveCard();
+        })
+        .catch(error => {
+          console.error('Error creating rating:', error);
+        });
+    },
+
+    handleUpdateRating(rating) {
+      landmarkService.updateRating(rating.id, rating.isGood)
+        .then(response => {
+          console.log('Rating successfully updated:', response.data);
+        })
+        .catch(error => {
+          console.error('Error updating rating:', error);
+        });
+    },
+
     retrievePlacesAPIData() {
       landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
         this.placesData = response.data;
