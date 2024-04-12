@@ -1,4 +1,4 @@
-package com.techelevator.service.models;
+package com.techelevator.service.models.geocoder;
 
 public class StartLocation {
 

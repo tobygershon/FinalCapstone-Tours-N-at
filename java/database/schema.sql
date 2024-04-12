@@ -21,17 +21,6 @@ CREATE TABLE designations (
     designation_name VARCHAR(50) NOT NULL CHECK (designation_name IN ('Park', 'Food', 'Hotel', 'Museum', 'Scenic Viewpoint', 'Kid-Friendly', 'Sporting Venue', 'Attraction', 'Historic Site', 'Church', 'Starting Point', 'Other'))
 );
 
---CREATE TABLE addresses (
---	address_id SERIAL PRIMARY KEY,
---	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
---	street_number INT NOT NULL,
---	street_name VARCHAR(100) NOT NULL,
---	additional_address_line VARCHAR(100),
---	city VARCHAR(25) NOT NULL DEFAULT 'Pittsburgh',
---	state VARCHAR(2) NOT NULL DEFAULT 'PA',
---	zip_code VARCHAR(9) NOT NULL
---);
-
 CREATE TABLE hours_of_operation (
 	hours_id SERIAL PRIMARY KEY,
 	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
@@ -40,30 +29,29 @@ CREATE TABLE hours_of_operation (
 	closing_time TIME
 );
 
-CREATE TABLE routes (
-	route_id SERIAL PRIMARY KEY,
-	start_point INT NOT NULL REFERENCES landmarks(landmark_id),
-	end_point INT NOT NULL REFERENCES landmarks(landmark_id),
-	polyline VARCHAR (50)
-);
-
-CREATE TABLE tours (
-	tour_id SERIAL PRIMARY KEY,
-	route_1 INT NOT NULL REFERENCES routes(route_id),
-	route_2 INT REFERENCES routes(route_id),
-	route_3 INT REFERENCES routes(route_id),
-	route_4 INT REFERENCES routes(route_id),
-	route_5 INT REFERENCES routes(route_id),
-	route_6 INT REFERENCES routes(route_id)
-);
+--CREATE TABLE routes (
+--	route_id SERIAL PRIMARY KEY,
+--	start_point INT NOT NULL REFERENCES landmarks(landmark_id),
+--	end_point INT NOT NULL REFERENCES landmarks(landmark_id),
+--	polyline VARCHAR (50)
+--);
+--
+--CREATE TABLE tours (
+--	tour_id SERIAL PRIMARY KEY,
+--	route_1 INT NOT NULL REFERENCES routes(route_id),
+--	route_2 INT REFERENCES routes(route_id),
+--	route_3 INT REFERENCES routes(route_id),
+--	route_4 INT REFERENCES routes(route_id),
+--	route_5 INT REFERENCES routes(route_id),
+--	route_6 INT REFERENCES routes(route_id)
+--);
 
 CREATE TABLE itineraries (
 	itinerary_id SERIAL PRIMARY KEY,
 	user_id INT NOT NULL REFERENCES users(user_id),
 	itinerary_name VARCHAR (100) NOT NULL,
 	starting_location_id INT NOT NULL REFERENCES landmarks(landmark_id),
-	tour_date DATE NOT NULL CHECK (tour_date >= CURRENT_DATE),
-	tour_id INT REFERENCES tours(tour_id)
+	tour_date DATE NOT NULL CHECK (tour_date >= CURRENT_DATE)
 );
 
 CREATE TABLE ratings (
@@ -82,6 +70,7 @@ CREATE TABLE users_itineraries (
 CREATE TABLE itineraries_landmarks (
 	itinerary_id INT NOT NULL REFERENCES itineraries(itinerary_id),
 	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
+	stop_order INT NOT NULL,
 	CONSTRAINT PK_itineraries_landmarks PRIMARY KEY(itinerary_id, landmark_id)
 );
 

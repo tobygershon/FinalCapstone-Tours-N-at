@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <h1>Tours N'at!</h1>
-    <button v-show="$store.state.token != ''" @click="goToItineraryView">My Itineraries</button>
-  </div>
+    <img id="tour-logo" src="../assets/Tours_Nat.png" alt="">
+
+  </div>    
   <!-- add nav bar: login logout itineraries 
     want to add map and search components -->
   <Search />
@@ -17,11 +17,12 @@ export default {
     Search,
   },
 
-  methods: {
-    goToItineraryView() {
-      this.$router.push({name: 'itineraryList'})
-    }
-  }
-
 };
 </script>
+
+<style>
+#tour-logo {
+  height: 100px;
+}
+
+</style>

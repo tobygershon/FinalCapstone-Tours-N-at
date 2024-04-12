@@ -36,6 +36,24 @@ public class JdbcLandmarkDao implements LandmarkDao {
     }
 
     @Override
+    public String getPlaceIdByLandmarkId(int landmarkId) {
+        String returnedPlaceId = "";
+        String sql = "SELECT google_place_id FROM landmarks WHERE landmark_id = ?;";
+
+        try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, landmarkId);
+
+            if (result.next()) {
+                returnedPlaceId = result.getString("google_place_id");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Could not connect to database");
+        }
+
+        return returnedPlaceId;
+    }
+
+    @Override
     public List<Landmark> getLandmarkByName(String landmarkName) {
         List<Landmark> landmarksList = new ArrayList<>();
         String sql = "SELECT landmark_id, landmark_name, address, google_place_id " +

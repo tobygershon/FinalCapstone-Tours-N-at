@@ -1,6 +1,5 @@
-package com.techelevator.service.models;
+package com.techelevator.service.models.directions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DirectionsDTO {

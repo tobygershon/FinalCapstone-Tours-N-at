@@ -1,7 +1,5 @@
 package com.techelevator.dao.Tour.Model;
 
-import com.techelevator.service.models.Routes;
-
 public class UpdateTourDTO {
     private int tourId;
     private Route[] routes;

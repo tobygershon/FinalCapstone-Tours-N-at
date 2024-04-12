@@ -3,7 +3,7 @@
     <div>
         <span>Search landmark by its name:</span>
         <input v-model="searchTerm" placeholder="Enter landmark name" />
-        <button @click="searchByName">Search</button>
+        <input type="button" @click="searchByName" value="Go!">
         <div v-if="message" class="alert-message">
             {{ message }}
         </div>
@@ -98,7 +98,7 @@ export default {
     },
 
     created() {
-        this.retrieveLandmarks();
+        
     }
 }
 

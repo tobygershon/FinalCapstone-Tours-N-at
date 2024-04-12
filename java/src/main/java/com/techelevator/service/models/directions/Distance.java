@@ -1,4 +1,4 @@
-package com.techelevator.service.models;
+package com.techelevator.service.models.directions;
 
 public class Distance {
 
