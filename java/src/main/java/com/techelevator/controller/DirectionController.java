@@ -38,28 +38,18 @@ public class DirectionController {
     @GetMapping("/directions/{itineraryId}")
     public DirectionsDTO getTourDirectionsList(@PathVariable int itineraryId) {
         DirectionsDTO newDTO = new DirectionsDTO();
-
-        int tourId = itineraryDao.getTourIdFromItineraryId(itineraryId);
-
-        Tour tour = tourDao.getTourById(tourId);
-
+        List<String> googlePlaceIdList = itineraryDao.retrieveItineraryStops(itineraryId);
         List<Routes> tourRoutesList = new ArrayList<>();
 
-        for (Route route : tour.getRoutes()) {
-            if (route != null) {
-                Landmark start = landmarkDao.getLandmarkById(route.getStartingPointId());
-                Landmark end = landmarkDao.getLandmarkById(route.getEndingPointId());
+        for (int i = 0; i < googlePlaceIdList.size()-1; i++) {
 
-                Directions newDirections = directionsService.getDirections(start.getGooglePlaceId(), end.getGooglePlaceId());
-                tourRoutesList.add(newDirections.getRoutes()[0]);
-                //routes[0] bc only 1 ist returned
-            }
+            Directions newDirections = directionsService.getDirections(googlePlaceIdList.get(i), googlePlaceIdList.get(i + 1));
+            tourRoutesList.add(newDirections.getRoutes()[0]);
+            //routes[0] bc only 1 is returned
         }
-
         newDTO.setRoutes(tourRoutesList);
-
-
         return newDTO;
     }
 
 }
+
