@@ -1,23 +1,25 @@
 package com.techelevator.service.models.places;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.techelevator.dao.Landmarks.Model.Hours;
 
 public class CurrentHours {
 
-    private Hours hours;
+    @JsonProperty("weekday_text")
+    private String[] dayHours;
 
     public CurrentHours() {
     }
 
-    public CurrentHours(Hours hours) {
-        this.hours = hours;
+    public CurrentHours(String[] dayHours) {
+        this.dayHours = dayHours;
     }
 
-    public Hours getHours() {
-        return hours;
+    public String[] getHours() {
+        return dayHours;
     }
 
-    public void setHours(Hours hours) {
-        this.hours = hours;
+    public void setHours(String[] dayHours) {
+        this.dayHours = dayHours;
     }
 }

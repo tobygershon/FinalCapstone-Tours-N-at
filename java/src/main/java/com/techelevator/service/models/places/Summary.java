@@ -2,20 +2,20 @@ package com.techelevator.service.models.places;
 
 public class Summary {
 
-    private Overview overview;
+    private String overview;
 
     public Summary() {
     }
 
-    public Summary(Overview overview) {
+    public Summary(String overview) {
         this.overview = overview;
     }
 
-    public Overview getOverview() {
+    public String getOverview() {
         return overview;
     }
 
-    public void setOverview(Overview overview) {
+    public void setOverview(String overview) {
         this.overview = overview;
     }
 }

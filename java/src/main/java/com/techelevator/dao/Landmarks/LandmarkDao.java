@@ -11,5 +11,7 @@ public interface LandmarkDao {
     List<Landmark> getAllLandmarks();
     List<Landmark> getLandmarksByDesignation(String landmarkDesignation);
     int createLandmarkStartingPoint(String address, String placeId);
+    String getPlaceIdByLandmarkId(int landmarkId);
+
 
 }
