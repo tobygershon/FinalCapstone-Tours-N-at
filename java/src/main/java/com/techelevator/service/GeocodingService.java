@@ -1,6 +1,6 @@
 package com.techelevator.service;
 
-import com.techelevator.service.models.GeocodeResults;
+import com.techelevator.service.models.geocoder.GeocodeResults;
 import org.springframework.web.client.RestTemplate;
 
 public class GeocodingService {

@@ -1,7 +1,6 @@
 package com.techelevator.service;
 
-import com.techelevator.service.models.Directions;
-import com.techelevator.service.models.Routes;
+import com.techelevator.service.models.directions.Directions;
 import org.springframework.web.client.RestTemplate;
 
 public class DirectionsService {

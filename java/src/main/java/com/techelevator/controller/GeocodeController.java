@@ -3,9 +3,8 @@ package com.techelevator.controller;
 import com.techelevator.dao.Landmarks.LandmarkDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.service.GeocodingService;
-import com.techelevator.service.models.GeocodeDTO;
-import com.techelevator.service.models.Results;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
+import com.techelevator.service.models.geocoder.GeocodeDTO;
+import com.techelevator.service.models.geocoder.Results;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
