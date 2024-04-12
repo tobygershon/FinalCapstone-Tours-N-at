@@ -16,10 +16,3 @@ export default {
 }
 </script>
 
-<style>
-#itinerary-card {
-    display: flex;
-    align-items: center;
-}
-
-</style>
