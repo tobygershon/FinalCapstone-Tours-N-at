@@ -17,6 +17,13 @@
     </div>
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
+
+    <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
+
+      <img :src="retrievePhoto(photo.photo_reference)" alt="landamark photos">
+
+    </div>
+    
   </div>
 </template>
 
@@ -55,7 +62,7 @@ export default {
     },
 
     photos() {
-        return this.placesData.photos;
+      return this.placesData.photos;
     }
   },
 
@@ -97,8 +104,8 @@ export default {
       const apiKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
 
       return (baseURL + photoRef + apiKey);
-      }
-    },
+    }
+  },
 
   created() {
     this.retrieveCard();
