@@ -8,9 +8,7 @@
     <p>Ratings: {{ landmark.ratings }}</p>
     <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
     <select v-if="showDropdown">
-      <option value=""> </option>
-      <option value="">Option 1</option>
-      <option value="">Option 2</option>
+      <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}</option>
     </select>
     <div class="button-container">
       <button class="rating-button">
@@ -36,7 +34,8 @@ export default {
       landmark: {},
       designations: [],
       placesData: {},
-      showDropdown: false
+      showDropdown: false,
+      userItineraries: []
     };
   },
 
@@ -82,12 +81,24 @@ export default {
     },
 
     toggleDropdown() {
-      console.log('Toggle dropdown method called');
       this.showDropdown = !this.showDropdown;
-      console.log('Dropdown visibility:', this.showDropdown);
     },
 
-    
+    retrieveUserItineraries() {
+      itineraryService.getItineraries().then(response => {
+        this.userItineraries = response.data;
+        console.log(this.userItineraries);
+      }).catch(error => {
+        if (error.response) {
+          this.$store.commit('SET_NOTIFICATION',
+            "Error getting itineraries. Response received was ''" + error.response.statusText + "'.");
+        } else if (error.request) {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Server could not be reached.");
+        } else {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
+        }
+      });
+    }
 
   },
 
@@ -95,6 +106,7 @@ export default {
     this.retrieveCard();
     this.retrieveDesignations();
     this.retrievePlacesAPIData();
+    this.retrieveUserItineraries();
   },
 };
 </script>
