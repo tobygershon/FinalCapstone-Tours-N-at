@@ -6,15 +6,17 @@ public class Rating {
     private int userId;
     private int landmarkId;
     private boolean isGood;
+    private String landmarkName;
 
     public Rating() {
     }
 
-    public Rating(int ratingId, int userId, int landmarkId, boolean isGood) {
+    public Rating(int ratingId, int userId, int landmarkId, boolean isGood, String landmarkName) {
         this.ratingId = ratingId;
         this.userId = userId;
         this.landmarkId = landmarkId;
         this.isGood = isGood;
+        this.landmarkName = landmarkName;
     }
 
     public int getRatingId() {
@@ -47,5 +49,21 @@ public class Rating {
 
     public void setIsGood(boolean isGood) {
         this.isGood = isGood;
+    }
+
+    public boolean isGood() {
+        return isGood;
+    }
+
+    public void setGood(boolean good) {
+        isGood = good;
+    }
+
+    public String getLandmarkName() {
+        return landmarkName;
+    }
+
+    public void setLandmarkName(String landmarkName) {
+        this.landmarkName = landmarkName;
     }
 }
