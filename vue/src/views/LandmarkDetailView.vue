@@ -15,11 +15,13 @@
         <i class="fas fa-thumbs-down"></i> Rate Down
       </button><br>
     </div>
-    <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
 
-      {{ retrievePhoto(photo) }}
+    
+    <!-- <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
 
-    </div>
+      <img :src="retrievePhoto(photo.photo_reference)" alt="landamark photos">
+
+    </div> -->
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
   </div>
@@ -95,13 +97,15 @@ export default {
       })
     },
 
-    retrievePhoto() {
-      landmarkService.getPhotosForLandmark(this.photo.photo_reference).then(response => {
-        return response.data;
-      })
-    }
+    retrievePhoto(photoRef) {
 
-  },
+      const baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=';
+
+      const apiKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
+
+      return (baseURL + photoRef + apiKey);
+      }
+    },
 
   created() {
     this.retrieveCard();
