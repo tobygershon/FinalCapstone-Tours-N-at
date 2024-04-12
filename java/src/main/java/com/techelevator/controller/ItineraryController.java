@@ -50,6 +50,7 @@ public class ItineraryController {
         return itineraryDao.updateItinerary(itineraryToUpdate);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/itineraries/{itineraryId}")
     public void deleteItinerary(@PathVariable int itineraryId) {
         int rowsAffected = itineraryDao.deleteItinerary(itineraryId);
