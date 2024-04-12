@@ -12,6 +12,7 @@
     <label for="points-of-interest-category-dropdown">Search Points of Interest:</label>
     <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
         <option value=""> </option>
+        <option value="Search All">Search All</option>
         <option value="Attraction">Attractions</option>
         <option value="Food">Food</option>
         <option value="Historic Site">Historic Sites</option>
@@ -46,7 +47,7 @@ export default {
 
     methods: {
         retrieveLandmarks() {
-            if (this.designationSelection === '') {
+            if (this.designationSelection === ''|| this.designationSelection === 'Search All' ) {
                 landmarkService.getAllLandmarks().then(response => {
                     this.landmarks = response.data;
                 }).catch(error => {
@@ -94,6 +95,10 @@ export default {
             }
         },
 
+    },
+
+    created() {
+        this.retrieveLandmarks();
     }
 }
 

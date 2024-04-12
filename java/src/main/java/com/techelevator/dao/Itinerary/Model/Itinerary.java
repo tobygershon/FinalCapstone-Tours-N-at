@@ -7,6 +7,7 @@ public class Itinerary {
     private int userId;
     private String itineraryName;
     private int startingLocationId;
+    private String startingLocationName;
     private LocalDate tourDate;
     private int tourId;
 
@@ -14,11 +15,12 @@ public class Itinerary {
 
     }
 
-    public Itinerary(int itineraryId, int userId, String itineraryName, int startingLocationId, LocalDate tourDate, int tourId) {
+    public Itinerary(int itineraryId, int userId, String itineraryName, int startingLocationId, String startingLocationName, LocalDate tourDate, int tourId) {
         this.itineraryId = itineraryId;
         this.userId = userId;
         this.itineraryName = itineraryName;
         this.startingLocationId = startingLocationId;
+        this.startingLocationName = startingLocationName;
         this.tourDate = tourDate;
         this.tourId = tourId;
     }
@@ -53,6 +55,14 @@ public class Itinerary {
 
     public void setStartingLocationId(int startingLocationId) {
         this.startingLocationId = startingLocationId;
+    }
+
+    public String getStartingLocationName() {
+        return startingLocationName;
+    }
+
+    public void setStartingLocationName(String startingLocationName) {
+        this.startingLocationName = startingLocationName;
     }
 
     public LocalDate getTourDate() {
