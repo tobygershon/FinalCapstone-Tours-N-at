@@ -1,5 +1,6 @@
 package com.techelevator.dao.Landmarks;
 
+import com.techelevator.dao.Landmarks.Model.Designations;
 import com.techelevator.dao.Landmarks.Model.Landmark;
 import com.techelevator.exception.DaoException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -15,7 +16,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcLandmarkDao(JdbcTemplate jdbcTemplate){
+    public JdbcLandmarkDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -25,10 +26,10 @@ public class JdbcLandmarkDao implements LandmarkDao {
         String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks WHERE landmark_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-            if(results.next()) {
+            if (results.next()) {
                 landmark = mapRowToLandmark(results);
             }
-        } catch (CannotGetJdbcConnectionException e){
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Could not connect to the database.");
         }
         return landmark;
@@ -60,11 +61,11 @@ public class JdbcLandmarkDao implements LandmarkDao {
                 "WHERE landmark_name ILIKE ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + landmarkName + "%");
-            while(results.next()) {
+            while (results.next()) {
                 Landmark resultLandmark = mapRowToLandmark(results);
                 landmarksList.add(resultLandmark);
             }
-        } catch (CannotGetJdbcConnectionException e){
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Could not connect to the database.");
         }
         return landmarksList;
@@ -76,11 +77,11 @@ public class JdbcLandmarkDao implements LandmarkDao {
         String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-            while(results.next()) {
+            while (results.next()) {
                 Landmark resultLandmark = mapRowToLandmark(results);
                 landmarksList.add(resultLandmark);
             }
-        } catch (CannotGetJdbcConnectionException e){
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Could not connect to the database.");
         }
         return landmarksList;
@@ -90,40 +91,49 @@ public class JdbcLandmarkDao implements LandmarkDao {
     public List<Landmark> getLandmarksByDesignation(String landmarkDesignation) {
         List<Landmark> landmarksList = new ArrayList<>();
         String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks JOIN landmarks_designations USING (landmark_id) " +
-                    "JOIN designations USING (designation_id) WHERE designation_name = ?;";
+                "JOIN designations USING (designation_id) WHERE designation_name = ?;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkDesignation);
-            while(results.next()) {
+            while (results.next()) {
                 Landmark resultLandmark = mapRowToLandmark(results);
                 landmarksList.add(resultLandmark);
             }
-        } catch (CannotGetJdbcConnectionException e){
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Could not connect to the database.");
         }
         return landmarksList;
     }
+
     @Override
-    public int createLandmarkStartingPoint(String address, String placeId) {
-        int returnedId = 0;
-//        Change 'Other' desgination to 'starting point' designation?
-        String sql = "INSERT INTO landmarks(landmark_name, address, google_place_id) VALUES ('Starting Point', ?, ?) returning landmark_id;";
-
+    public List<Designations> getDesignationsForLandmark(int landmarkId) {
+        List<Designations> designations = new ArrayList<>();
+        String sql = "SELECT designation_id, designation_name FROM designations " +
+                "JOIN landmarks_designations USING (designation_id) " +
+                "WHERE landmark_id = ?";
         try {
-            returnedId = jdbcTemplate.queryForObject(sql, int.class, address, placeId);
-
-            if (returnedId == 0) {
-                throw new DaoException("adding starting point didn't work");
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, landmarkId);
+            while (results.next()) {
+                Designations newDesignation = new Designations(); // Correctly instantiate the object
+                newDesignation.setDesignationId(results.getInt("designation_id"));
+                newDesignation.setDesignationName(results.getString("designation_name"));
+                designations.add(newDesignation);
             }
         } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Could not connect to the database");
+            throw new DaoException("Could not connect to the database.");
         }
-        return returnedId;
+        return designations;
+    }
+
+    @Override
+    public int createLandmarkStartingPoint(String address, String placeId) {
+        //TODO: write this method
+        return 0;
     }
 
 
-
     //TODO: Add hours to method
+
     private Landmark mapRowToLandmark(SqlRowSet rowSet) {
         Landmark landmark = new Landmark();
         landmark.setLandmarkId(rowSet.getInt("landmark_id"));
@@ -133,4 +143,5 @@ public class JdbcLandmarkDao implements LandmarkDao {
 
         return landmark;
     }
+
 }
