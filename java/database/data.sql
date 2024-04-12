@@ -149,5 +149,9 @@ INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT
 --INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'The UPMC Rink at PPG Place'), (SELECT designation_id FROM designations WHERE designation_name = 'Attraction'));
 --INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'The UPMC Rink at PPG Place'), (SELECT designation_id FROM designations WHERE designation_name = 'Kid-Friendly'));
 
+INSERT INTO ratings (user_id, landmark_id, is_good) VALUES ((SELECT user_id FROM users WHERE username = 'user'),(SELECT landmark_id FROM landmarks WHERE landmark_name = 'Pittsburgh Zoo & Aquarium'), true);
+INSERT INTO ratings (user_id, landmark_id, is_good) VALUES ((SELECT user_id FROM users WHERE username = 'user'),(SELECT landmark_id FROM landmarks WHERE landmark_name = 'National Aviary'), true);
+INSERT INTO ratings (user_id, landmark_id, is_good) VALUES ((SELECT user_id FROM users WHERE username = 'user'),(SELECT landmark_id FROM landmarks WHERE landmark_name = 'Randyland'), true);
+INSERT INTO ratings (user_id, landmark_id, is_good) VALUES ((SELECT user_id FROM users WHERE username = 'user'),(SELECT landmark_id FROM landmarks WHERE landmark_name = 'Kimpton Hotel Monaco Pittsburgh'), false);
 
 COMMIT TRANSACTION;

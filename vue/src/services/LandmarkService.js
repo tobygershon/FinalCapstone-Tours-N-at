@@ -8,6 +8,7 @@ export default {
         return axios.get('/landmarks');
     },
 
+    
     getLandmarksByDesignation(designation) {
         return axios.get(`/landmarks/designation/${designation}`);
     },
@@ -20,4 +21,7 @@ export default {
         return axios.get(`/landmarks/search/${landmarkName}`);
     },
     
+    getDesignationsForLandmark(landmarkId) {
+        return axios.get(`/landmarks/${landmarkId}/designation`);
+    },
 }
