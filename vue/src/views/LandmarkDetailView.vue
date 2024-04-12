@@ -9,6 +9,7 @@
     <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
     <select v-if="showDropdown">
       <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}</option>
+      <input type="button" @click="addItinerary(itin.itineraryId, itin)" value="Go!">
     </select>
     <div class="button-container">
       <button class="rating-button">
@@ -98,6 +99,10 @@ export default {
           this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
         }
       });
+    },
+
+    addItinerary(itineraryId, itinerary) {
+      itineraryService.updateItinerary(itineraryId, itinerary);
     }
 
   },
