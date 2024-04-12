@@ -2,16 +2,25 @@
 
 <template>
     <div>
-        {{ this.landmark.landmarkName }} <br>
+        <p>{{ landmark.landmarkName }}</p>
     </div>
 </template>
 
 
 <script>
+import landmarkService from '../services/LandmarkService';
 
 export default {
 
-    props: ['landmark']
+    props: ['landmark'],
+
+    data() {
+        return {
+
+        }
+    },
+
+
 
 }
 
@@ -19,4 +28,3 @@ export default {
 </script>
 
 
-<style></style>

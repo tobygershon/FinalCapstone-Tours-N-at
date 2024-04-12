@@ -1,0 +1,78 @@
+.background-container {
+    display: flex;    
+    justify-content: center;   
+    align-items: center;  
+    background-image: url('https://cdn.britannica.com/74/65574-050-B1A02E0C/Downtown-Pittsburgh-Pennsylvania-Fort-Pitt-Bridge-Monongahela.jpg');
+    background-size: cover;        
+    background-position: center;     
+    background-repeat: no-repeat;    
+    background-attachment: fixed;    
+    min-height: 100vh;  
+}
+
+.landmark-container {
+    align-items: center;
+    margin: 20px auto;  
+    padding: 20px;
+    background-color: rgba(251, 225, 52, 0.7);
+    text-align: center;
+    border: solid 2px black;
+    width: auto;        
+    max-width: 80%;     
+    min-width: 500px;   
+    min-height: 10rem;
+    border-radius: 0.5rem;
+    overflow: auto;
+  }
+  
+  .button-container button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: rgba(251, 225, 52, 0.7); 
+    border: 2px solid black; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+  }
+  
+  .button-container button:hover {
+    background-color: rgba(228, 182, 26, 0.7); 
+  }
+  
+  .button-container .fas {
+    margin-right: 5px; 
+  }
+
+  .itineraryList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-justify: center;
+}
+
+.CardList:hover {
+    cursor: pointer;
+}
+
+.landmarkList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cardsList {
+    margin: 10px 20px 10px 10px;
+    padding: 10px 20px;
+    background-color: rgba(251, 225, 52, 0.9);
+    text-align: center;
+    border: solid 2px black;
+    width: 20rem;
+    height: 10rem;
+    border-radius: 0.5rem;
+    flex: 1;
+    color: black;
+    font-weight: 500;
+}
