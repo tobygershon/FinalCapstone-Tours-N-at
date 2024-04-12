@@ -19,7 +19,7 @@ export default {
 <style>
 #itinerary-card {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 </style>
