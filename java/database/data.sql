@@ -23,7 +23,7 @@ INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('The Mat
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('The Andy Warhol Museum', '117 Sandusky St, Pittsburgh, PA 15212', 'ChIJq6qqqofxNIgRMCSmPhfoAcs');
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Phipps Conservatory and Botanical Gardens', '1 Schenley Drive, Pittsburgh, PA 15213', 'ChIJBZlC-InxNIgRDUaGB-UvoSg');
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('The Frick Pittsburgh', '7227 Reynolds St, Pittsburgh, PA 15208', 'ChIJA_tYsujtNIgRsrxn4vaPuvc');
-INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('The Cafe at the Frick', '7227 Reynolds St, Pittsburgh, PA 15208', ' ChIJXRrgsujtNIgRWwtHCcC6TG0');
+INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('The Cafe at the Frick', '7227 Reynolds St, Pittsburgh, PA 15208', 'ChIJXRrgsujtNIgRWwtHCcC6TG0');
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Point State Park', '601 Commonwealth Pl, Pittsburgh, PA 15222', 'ChIJjbGBQav2NIgRoARMOwbkqD4');
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Mellon Park', '1047 Shady Ave, Pittsburgh, PA 15232', 'ChIJG7npSPTtNIgRiSMbNqoVL_k');
 INSERT INTO landmarks (landmark_name, address, google_place_id) VALUES ('Primanti Bros. Restaurant and Bar', '2 Market Square 5th Floor, Pittsburgh, PA 15222', 'ChIJsW0CpVbxNIgRtyWHiG9FaQU');

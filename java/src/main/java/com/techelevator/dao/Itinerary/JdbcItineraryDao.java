@@ -165,7 +165,7 @@ public class JdbcItineraryDao implements ItineraryDao {
             throw new DaoException("Unable to connect to server or database", e);
         }
 
-        return null;
+        return listOfItineraryLandmarkGooglePlaceIds;
     }
 
     private Itinerary mapRowToItinerary(SqlRowSet rowSet) {
