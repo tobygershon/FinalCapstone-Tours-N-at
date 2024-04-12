@@ -26,8 +26,8 @@
 </template>
 
 <script>
-
-import landmarkService from '../services/LandmarkService';
+import landmarkService from '../services/LandmarkService.js';
+import itineraryService from '../services/ItineraryService.js';
 
 
 export default {
@@ -86,6 +86,8 @@ export default {
       this.showDropdown = !this.showDropdown;
       console.log('Dropdown visibility:', this.showDropdown);
     },
+
+    
 
   },
 
