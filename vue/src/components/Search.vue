@@ -1,7 +1,7 @@
 <!-- search component for searching landmarks. Want filtering ability for types of attractions? -->
 <template>
     <div>
-        <span>Search landmark by its name:</span>
+        <span>Search Points of Interest by Name:</span>
         <input v-model="searchTerm" placeholder="Enter landmark name" />
         <input type="button" @click="searchByName" value="Go!">
         <div v-if="message" class="alert-message">
@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <label for="points-of-interest-category-dropdown">Search Points of Interest:</label>
+    <label for="points-of-interest-category-dropdown">Search Points of Interest by Category:</label>
     <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
         <option value=""> </option>
         <option value="Search All">Search All</option>

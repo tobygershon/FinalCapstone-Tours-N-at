@@ -4,7 +4,7 @@
         <div>{{ itinerary.itineraryName }}</div>
         <div>{{ itinerary.startingLocationName}}</div>
         <div>{{ itinerary.tourDate }}</div>
-        <div>{{ }}</div>
+        <div>{{  }}</div>
     </div>
 </template>
 

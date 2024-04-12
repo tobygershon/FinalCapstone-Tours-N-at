@@ -48,11 +48,12 @@ public class JdbcItineraryDao implements ItineraryDao {
     @Override
     public Itinerary getItineraryById(int itineraryId) {
         Itinerary itinerary = null;
-        String sql = "SELECT itineraries.*, landmark_name FROM itineraries JOIN landmarks ON starting_location_id = landmark_id WHERE itinerary_id = ?;";
+        String sql = "SELECT itineraries.*, itineraries_landmarks.*, landmark_name FROM itineraries JOIN itineraries_landmarks USING (itinerary_id) JOIN landmarks USING (landmark_id) " +
+                "WHERE itinerary_id = ? ORDER BY stop_order";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
-            if (results.next()) {
+            while (results.next()) {
                 itinerary = mapRowToItinerary(results);
             }
 
@@ -174,6 +175,9 @@ public class JdbcItineraryDao implements ItineraryDao {
         itinerary.setUserId(rowSet.getInt("user_id"));
         itinerary.setItineraryName(rowSet.getString("itinerary_name"));
         itinerary.setStartingLocationId(rowSet.getInt("starting_location_id"));
+        itinerary.set(rowSet.getString("landmark_name"));
+        itinerary.setStartingLocationName(rowSet.getString("landmark_name"));
+        itinerary.setStartingLocationName(rowSet.getString("landmark_name"));
         itinerary.setStartingLocationName(rowSet.getString("landmark_name"));
 
         Date tourDateTemp = rowSet.getDate("tour_date");
