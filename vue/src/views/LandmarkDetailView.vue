@@ -7,10 +7,13 @@
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
     <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
-    <select v-if="showDropdown">
-      <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}</option>
+    <div v-if="showDropdown">
+      <select>
+        <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}
+        </option>
+      </select>
       <input type="button" @click="addItinerary(itin.itineraryId, itin)" value="Go!">
-    </select>
+    </div>
     <div class="button-container">
       <button class="rating-button">
         <i class="fas fa-thumbs-up"></i> Rate Up
@@ -36,7 +39,11 @@ export default {
       designations: [],
       placesData: {},
       showDropdown: false,
-      userItineraries: []
+      userItineraries: [],
+      editItinerary: {
+        itineraryId: '',
+        landmarkId: ''
+      }
     };
   },
 
@@ -102,7 +109,18 @@ export default {
     },
 
     addItinerary(itineraryId, itinerary) {
-      itineraryService.updateItinerary(itineraryId, itinerary);
+      itineraryService.updateItinerary(itineraryId, itinerary).then(response => {
+        
+      }).catch(error => {
+        if (error.response) {
+          this.$store.commit('SET_NOTIFICATION',
+            "Error getting itineraries. Response received was ''" + error.response.statusText + "'.");
+        } else if (error.request) {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Server could not be reached.");
+        } else {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
+        }
+      });
     }
 
   },

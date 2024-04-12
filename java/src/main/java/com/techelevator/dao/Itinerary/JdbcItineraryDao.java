@@ -108,23 +108,24 @@ public class JdbcItineraryDao implements ItineraryDao {
 
     @Override
     public Itinerary updateItinerary(UpdateItineraryDTO itineraryDTO) {
-        Itinerary updatedItinerary = null;
+        int itineraryId = itineraryDTO.getItineraryId();
+        int landmarkId = itineraryDTO.getLandmarkId();
+        int stopNum = getStopNum(itineraryId, landmarkId);
+
+        Itinerary itineraryToUpdate = getItineraryById(itineraryId);
+
+
         String sql = "UPDATE itineraries " +
                 "SET itinerary_name = ?, starting_location_id = ?, tour_date = ?, tour_id = ? " +
                 "WHERE itinerary_id = ?;";
-        int startingLocationId = itineraryDTO.getStartingLocationId();
-        String name = itineraryDTO.getItineraryName();
-        Date tourDate = Date.valueOf(itineraryDTO.getTourDate());
-        int tourId = itineraryDTO.getTourId();
-        int itineraryId = itineraryDTO.getItineraryId();
 
         try {
-            int numOfRows = jdbcTemplate.update(sql, name, startingLocationId, tourDate, tourId, itineraryId);
+            int numOfRows = jdbcTemplate.update(sql);
 
             if (numOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
             } else {
-                updatedItinerary = getItineraryById(itineraryId);
+                Itinerary updatedItinerary = getItineraryById(itineraryId);
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -185,6 +186,17 @@ public class JdbcItineraryDao implements ItineraryDao {
         itinerary.setTourDate(tourDate);
 
         return itinerary;
+    }
+
+    private int getStopNum(int itineraryId, int landmarkId) {
+        String sql = "SELECT stop_order from itineraries_landmarks where itinerary_id = ? and landmark_id = ? ORDER BY stop_order DESC LIMIT 1;";
+
+        try {
+            Integer results = jdbcTemplate.queryForObject(sql, int.class, itineraryId, landmarkId);
+            return results + 1;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
     }
 }
 
