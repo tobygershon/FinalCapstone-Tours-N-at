@@ -1,7 +1,5 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, landmarks, addresses, hours_of_operation, routes, tours, itineraries, ratings, users_itineraries, itineraries_landmarks;
-
 CREATE TABLE users (
 	user_id SERIAL,
 	username VARCHAR(50) NOT NULL UNIQUE,
@@ -63,7 +61,7 @@ CREATE TABLE itineraries (
 	itinerary_id SERIAL PRIMARY KEY,
 	user_id INT NOT NULL REFERENCES users(user_id),
 	itinerary_name VARCHAR (100) NOT NULL,
-	starting_location INT NOT NULL REFERENCES landmarks(landmark_id),
+	starting_location_id INT NOT NULL REFERENCES landmarks(landmark_id),
 	tour_date DATE NOT NULL CHECK (tour_date >= CURRENT_DATE),
 	tour_id INT REFERENCES tours(tour_id)
 );
