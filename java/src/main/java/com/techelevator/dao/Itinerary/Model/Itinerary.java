@@ -1,6 +1,9 @@
 package com.techelevator.dao.Itinerary.Model;
 
+import com.techelevator.dao.Landmarks.Model.Landmark;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class Itinerary {
     private int itineraryId;
@@ -10,12 +13,14 @@ public class Itinerary {
     private String startingLocationName;
     private LocalDate tourDate;
     private int tourId;
+    private List<Landmark> listOfStops;
+
 
     public Itinerary() {
 
     }
 
-    public Itinerary(int itineraryId, int userId, String itineraryName, int startingLocationId, String startingLocationName, LocalDate tourDate, int tourId) {
+    public Itinerary(int itineraryId, int userId, String itineraryName, int startingLocationId, String startingLocationName, LocalDate tourDate, int tourId, List<Landmark> listOfStops) {
         this.itineraryId = itineraryId;
         this.userId = userId;
         this.itineraryName = itineraryName;
@@ -23,6 +28,7 @@ public class Itinerary {
         this.startingLocationName = startingLocationName;
         this.tourDate = tourDate;
         this.tourId = tourId;
+        this.listOfStops = listOfStops;
     }
 
     public int getItineraryId() {
@@ -79,5 +85,13 @@ public class Itinerary {
 
     public void setTourId(int tourId) {
         this.tourId = tourId;
+    }
+
+    public List<Landmark> getListOfStops() {
+        return listOfStops;
+    }
+
+    public void setListOfStops(List<Landmark> listOfStops) {
+        this.listOfStops = listOfStops;
     }
 }
