@@ -7,8 +7,7 @@
            <button>Add Itinerary</button>
         </div>
     </router-link>
-
-   
+    
     <ItineraryList :itineraries="itineraries" />
 </template>
     

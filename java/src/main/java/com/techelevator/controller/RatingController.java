@@ -40,6 +40,7 @@ public class RatingController {
         return ratingDao.getRatingsByLandmarkId(landmarkId);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/landmarks/{landmarkId}/ratings")
     public Rating createRating(@PathVariable int landmarkId, Rating rating) {
@@ -60,7 +61,7 @@ public class RatingController {
 
         ratingDao.updateRating(rating);
     }
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/ratings/{ratingId}")
     public void deleteRating(@PathVariable int ratingId, Principal principal) {
         Rating rating = ratingDao.getRatingById(ratingId);

@@ -6,29 +6,43 @@
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
-    <button><i class="fas fa-plus"></i> Add to Itinerary</button><br>
-    <ratingComponent :landmarkId="landmark.landmarkId" @rated="handleRating" />
+    <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
+    <div v-if="showDropdown">
+      <select v-model="editItinerary.itineraryId">
+        <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}
+        </option>
+      </select>
+      <input type="button" @click="addToItinerary()" value="Go!">
+    </div>
+    <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
+
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
   </div>
 </template>
 
 <script>
-
-import landmarkService from '../services/LandmarkService';
-import ratingComponent from '../components/LandmarkRating.vue';
+import landmarkService from '../services/LandmarkService.js';
+import itineraryService from '../services/ItineraryService.js';
+import LandmarkRating from '../components/LandmarkRating.vue';
 
 
 export default {
+  components: {
+    LandmarkRating
+  },
+
   data() {
     return {
       landmark: {},
       designations: [],
-      placesData: {}
+      placesData: {},
+      showDropdown: false,
+      userItineraries: [],
+      editItinerary: {
+        itineraryId: '',
+        landmarkId: this.$route.params.id
+      },
     };
-  },
-
-  components: {
-    ratingComponent
   },
 
   computed: {
@@ -88,10 +102,69 @@ export default {
 
     retrievePlacesAPIData() {
       landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
-
         this.placesData = response.data;
       })
-    }
+    },
+
+    toggleDropdown() {
+      this.showDropdown = !this.showDropdown;
+    },
+
+    retrieveUserItineraries() {
+      itineraryService.getItineraries().then(response => {
+        this.userItineraries = response.data;
+        console.log(this.userItineraries);
+      }).catch(error => {
+        if (error.response) {
+          this.$store.commit('SET_NOTIFICATION',
+            "Error getting itineraries. Response received was ''" + error.response.statusText + "'.");
+        } else if (error.request) {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Server could not be reached.");
+        } else {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
+        }
+      });
+    },
+
+    addToItinerary() {
+      if (!this.validateForm) {
+        return;
+      }
+      itineraryService.updateItinerary(this.editItinerary).then(response => {
+        if (response.status < 300 && response.status > 199) {
+          this.$store.commit(
+            'SET_NOTIFICATION',
+            {
+              message: 'A new stop was added to your itinerary.',
+              type: 'success'
+            }
+          )
+        }
+      }).catch(error => {
+        if (error.response) {
+          this.$store.commit('SET_NOTIFICATION',
+            "Error updating itinerary. Response received was ''" + error.response.statusText + "'.");
+        } else if (error.request) {
+          this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Server could not be reached.");
+        } else {
+          this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Request could not be created.");
+        }
+
+      });
+      this.toggleDropdown();
+    },
+
+    validateForm() {
+      let msg = '';
+      if (this.editItinerary.itineraryId.length === 0) {
+        msg += 'You must select an itinerary to add the landmark to.';
+      }
+      if (msg.length > 0) {
+        this.$store.commit('SET_NOTIFICATION', msg);
+        return false;
+      }
+      return true;
+    },
 
   },
 
@@ -99,8 +172,7 @@ export default {
     this.retrieveCard();
     this.retrieveDesignations();
     this.retrievePlacesAPIData();
+    this.retrieveUserItineraries();
   },
 };
 </script>
-
-

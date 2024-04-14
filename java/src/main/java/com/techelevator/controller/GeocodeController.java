@@ -5,6 +5,7 @@ import com.techelevator.exception.DaoException;
 import com.techelevator.service.GeocodingService;
 import com.techelevator.service.models.geocoder.GeocodeDTO;
 import com.techelevator.service.models.geocoder.Results;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class GeocodeController {
         this.landmarkDao = landmarkDao;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/geocode")
     public GeocodeDTO getInfoFromAddress(@RequestBody GeocodeDTO dto) {
         // right now GeocodeDTO consists of only an address string that is being posted from front end and formatted string returned to front end.

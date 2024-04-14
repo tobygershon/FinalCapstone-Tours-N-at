@@ -2,6 +2,7 @@ package com.techelevator.dao.Landmarks;
 
 import com.techelevator.dao.Landmarks.Model.Designations;
 import com.techelevator.dao.Landmarks.Model.Landmark;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.util.List;
 
@@ -18,7 +19,10 @@ public interface LandmarkDao {
     List<Designations> getDesignationsForLandmark(int landmarkId);
 
     int createLandmarkStartingPoint(String address, String placeId);
+
     String getPlaceIdByLandmarkId(int landmarkId);
+
+    Landmark mapRowToLandmark(SqlRowSet rowSet);
 
 
 }
