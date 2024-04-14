@@ -4,19 +4,7 @@ import com.techelevator.service.models.directions.Directions;
 import org.springframework.web.client.RestTemplate;
 
 public class DirectionsService {
-// Don't forget to add API key to header?
-    /*
-    public ResponseEntity<String> callExternalApi(@RequestBody String url) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("x-api-key", "Hnmn1nhsg7wbkItsAdv");
-        HttpEntity<Object> entity=new HttpEntity<Object>(headers);
 
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
-        return response;
-    }
-     */
     private static final String DIRECTIONS_API_BASE_URL = "https://maps.googleapis.com/maps/api/directions/json?";
 //            using place_id's, url continues... origin=place_id:ChIJC4jFktX1NIgRenofIj7o45I&destination=place_id:ChIJjbGBQav2NIgRoARMOwbkqD4
 

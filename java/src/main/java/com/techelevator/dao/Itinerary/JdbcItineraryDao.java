@@ -123,18 +123,37 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public Itinerary createItinerary(CreateItineraryDTO createItineraryDTO, Principal principal) {
+    public Itinerary createItinerary(CreateItineraryDTO createItineraryDTO, Principal principal, String placeId, String address) {
         Itinerary newItinerary = null;
-        String sqlGet = "SELECT landmark_id FROM landmarks WHERE landmark_name = ?;";
+        Integer startingLocationId = null;
+
+        String checkIfExistsSql = "SELECT landmark_name, landmark_id FROM landmarks WHERE google_place_id = ?;";
+//        String sqlGet = "SELECT landmark_id FROM landmarks WHERE landmark_name = ?;";
+        String newLandmarkSql = "INSERT into landmarks(landmark_name, address, google_place_id) VALUES (?, ?, ?) returning landmark_id";
         String sql = "INSERT INTO itineraries (user_id, itinerary_name, starting_location_id, tour_date) VALUES (?, ?, ?, ?) RETURNING itinerary_id;";
+        String landmarkItineraryTableInsertSql = "INSERT INTO itineraries_landmarks(itinerary_id, landmark_id, stop_order) values(?, ?, 1) returning stop_order;";
+
         int userId = userDao.getLoggedInUserByPrinciple(principal).getId();
+//        String startingLocation = createItineraryDTO.getStartingLocation();
         String name = createItineraryDTO.getItineraryName();
-        String startingLocation = createItineraryDTO.getStartingLocation();
         LocalDate date = createItineraryDTO.getDate();
+
         try {
-            int startingLocationId = jdbcTemplate.queryForObject(sqlGet, int.class, startingLocation);
-            int newItineraryId = jdbcTemplate.queryForObject(sql, int.class, userId, name, startingLocationId, date);
+            SqlRowSet result = jdbcTemplate.queryForRowSet(checkIfExistsSql, placeId);
+            if (result.next()) {
+                startingLocationId = result.getInt("landmark_id");
+            } else {
+                startingLocationId = jdbcTemplate.queryForObject(newLandmarkSql, Integer.class, createItineraryDTO.getStartingLocation(), address, placeId);
+            }
+            Integer newItineraryId = jdbcTemplate.queryForObject(sql, Integer.class, userId, name, startingLocationId, date);
+            if (newItineraryId == null) {
+                throw new DaoException("Itinerary was not created correctly");
+            }
             newItinerary = getItineraryById(newItineraryId);
+            Integer returnedStopOrder = jdbcTemplate.queryForObject(landmarkItineraryTableInsertSql, Integer.class, newItineraryId, startingLocationId);
+            if (returnedStopOrder == null || returnedStopOrder != 1) {
+                throw new DaoException("Itinerary starting point was not inserted correctly");
+            }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
