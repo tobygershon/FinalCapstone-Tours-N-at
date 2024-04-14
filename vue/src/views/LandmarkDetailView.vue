@@ -1,20 +1,21 @@
 <template>
   <div class="landmark-container">
+  <div class="landmark-container">
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
     <p>Description: {{ description }}</p>
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
-    <button><i class="fas fa-plus"></i> Add to Itinerary</button><br>
-    <div class="button-container">
-      <button class="rating-button">
-        <i class="fas fa-thumbs-up"></i> Rate Up
-      </button>
-      <button>
-        <i class="fas fa-thumbs-down"></i> Rate Down
-      </button><br>
+    <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
+    <div v-if="showDropdown">
+      <select v-model="editItinerary.itineraryId">
+        <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}
+        </option>
+      </select>
+      <input type="button" @click="addToItinerary()" value="Go!">
     </div>
+    <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
 
@@ -28,16 +29,27 @@
 </template>
 
 <script>
-
-import landmarkService from '../services/LandmarkService';
+import landmarkService from '../services/LandmarkService.js';
+import itineraryService from '../services/ItineraryService.js';
+import LandmarkRating from '../components/LandmarkRating.vue';
 
 
 export default {
+  components: {
+    LandmarkRating
+  },
+
   data() {
     return {
       landmark: {},
       designations: [],
-      placesData: {}
+      placesData: {},
+      showDropdown: false,
+      userItineraries: [],
+      editItinerary: {
+        itineraryId: '',
+        landmarkId: this.$route.params.id
+      },
     };
   },
 
@@ -101,10 +113,46 @@ export default {
 
       const baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=';
 
-      const apiKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
+    addToItinerary() {
+      if (!this.validateForm) {
+        return;
+      }
+      itineraryService.updateItinerary(this.editItinerary).then(response => {
+        if (response.status < 300 && response.status > 199) {
+          this.$store.commit(
+            'SET_NOTIFICATION',
+            {
+              message: 'A new stop was added to your itinerary.',
+              type: 'success'
+            }
+          )
+        }
+      }).catch(error => {
+        if (error.response) {
+          this.$store.commit('SET_NOTIFICATION',
+            "Error updating itinerary. Response received was ''" + error.response.statusText + "'.");
+        } else if (error.request) {
+          this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Server could not be reached.");
+        } else {
+          this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Request could not be created.");
+        }
 
-      return (baseURL + photoRef + apiKey);
-    }
+      });
+      this.toggleDropdown();
+    },
+
+    validateForm() {
+      let msg = '';
+      if (this.editItinerary.itineraryId.length === 0) {
+        msg += 'You must select an itinerary to add the landmark to.';
+      }
+      if (msg.length > 0) {
+        this.$store.commit('SET_NOTIFICATION', msg);
+        return false;
+      }
+      return true;
+    },
+
   },
 
   created() {
