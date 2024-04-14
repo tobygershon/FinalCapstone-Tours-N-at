@@ -44,11 +44,13 @@ export default {
             const lat = this.latitude;
             const comma = ',';
             const lng = this.longitude;
-            const middleURL = '&zoom=11&path=weight:4%7Ccolor:red%7Cenc:';
+            const zoomURL = '&zoom=';
+            const zoomLevel = this.zoomLevel;
+            const middleURL = '&path=weight:4%7Ccolor:red%7Cenc:';
             const line = this.polyline;
             const APIKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
 
-            return (baseURL + lat + comma + lng + middleURL + line + APIKey);
+            return (baseURL + lat + comma + lng + zoomURL + zoomLevel + middleURL + line + APIKey);
         }
     },
 
