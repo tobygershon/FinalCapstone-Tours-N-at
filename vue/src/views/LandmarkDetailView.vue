@@ -1,5 +1,5 @@
 <template>
-  <div class="landmark-container" >
+  <div class="landmark-container">
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
     <p>Description: {{ placesData.editorial_summary.overview }}</p>
@@ -14,14 +14,7 @@
       </select>
       <input type="button" @click="addToItinerary()" value="Go!">
     </div>
-    <div class="button-container">
-      <button class="rating-button">
-        <i class="fas fa-thumbs-up"></i> Rate Up
-      </button>
-      <button>
-        <i class="fas fa-thumbs-down"></i> Rate Down
-      </button><br>
-    </div>
+    <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
   </div>
@@ -30,9 +23,14 @@
 <script>
 import landmarkService from '../services/LandmarkService.js';
 import itineraryService from '../services/ItineraryService.js';
+import LandmarkRating from '../components/LandmarkRating.vue';
 
 
 export default {
+  components: {
+    LandmarkRating
+  },
+
   data() {
     return {
       landmark: {},
@@ -44,8 +42,6 @@ export default {
         itineraryId: '',
         landmarkId: this.$route.params.id
       },
-
-
     };
   },
 
@@ -153,7 +149,7 @@ export default {
         } else {
           this.$store.commit('SET_NOTIFICATION', "Error updating itinerary. Request could not be created.");
         }
-        
+
       });
       this.toggleDropdown();
     },
@@ -169,7 +165,6 @@ export default {
       }
       return true;
     },
-
 
   },
 
