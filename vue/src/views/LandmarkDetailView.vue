@@ -58,20 +58,24 @@ export default {
     },
 
     hoursArray() {
-      if (this.placesData.current_opening_hours.hours != null) {
+      if (this.placesData.current_opening_hours != null) {
         return this.placesData.current_opening_hours.hours;
       }
       return '';
     },
 
     description() {
-      if (this.placesData.editorial_summary.overview != null) {
+      if (this.placesData.editorial_summary != null) {
         return this.placesData.editorial_summary.overview;
       }
       return '';
     },
 
     photos() {
+      const emptyArray = [];
+      if (this.placesData.photos == null) {
+        return emptyArray;
+      }
       return this.placesData.photos;
     }
   },

@@ -48,8 +48,10 @@ export default {
 
 #directionsStep {
   display: flex;
+  margin: 20px 0;
+  padding: 10px 0;
   border: solid rgb(42, 46, 52) 5px;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: rgb(251, 225, 52, .9);
   width: 90vw;
 }
