@@ -40,25 +40,55 @@ public class RatingController {
         return ratingDao.getRatingsByLandmarkId(landmarkId);
     }
 
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PreAuthorize("isAuthenticated()")
+//    @PostMapping("/landmarks/{landmarkId}/ratings")
+//    public Rating createRating(@PathVariable int landmarkId, Rating rating) {
+//        return ratingDao.createRating(rating);
+//    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/landmarks/{landmarkId}/ratings")
-    public Rating createRating(@PathVariable int landmarkId, Rating rating) {
+    public Rating createRating(@PathVariable int landmarkId, @RequestBody Rating rating, Principal principal) {
+        User user = userDao.getLoggedInUserByPrinciple(principal);
+        int userId = user.getId();
+        rating.setUserId(userId);
+        rating.setLandmarkId(landmarkId);
         return ratingDao.createRating(rating);
     }
 
+//    @PutMapping("/ratings/{ratingId}")
+//    public void updateRating(@PathVariable int landmarkId, @RequestBody Rating rating, Principal principal) {
+//        User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
+//        int loggedInUserId = loggedInUser.getId();
+//
+//        if (rating.getUserId() != loggedInUserId) {
+//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to update this rating.");
+//        }
+//
+//        rating.setUserId(loggedInUserId);
+//        rating.setLandmarkId(landmarkId);
+//
+//        ratingDao.updateRating(rating);
+//    }
+
     @PutMapping("/ratings/{ratingId}")
-    public void updateRating(@PathVariable int landmarkId, @RequestBody Rating rating, Principal principal) {
+    public void updateRating(@PathVariable int ratingId, @RequestBody Rating rating, Principal principal) {
         User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
         int loggedInUserId = loggedInUser.getId();
-
         if (rating.getUserId() != loggedInUserId) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to update this rating.");
         }
-
+        Rating existingRating = ratingDao.getRatingById(ratingId);
+        if (existingRating == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating not found.");
+        }
+        if (existingRating.getLandmarkId() != rating.getLandmarkId()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Mismatched landmark ID.");
+        }
         rating.setUserId(loggedInUserId);
-        rating.setLandmarkId(landmarkId);
-
+        rating.setRatingId(ratingId);
         ratingDao.updateRating(rating);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
