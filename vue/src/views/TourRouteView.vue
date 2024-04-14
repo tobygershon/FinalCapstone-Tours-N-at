@@ -43,3 +43,15 @@ export default {
 
 
 </script>
+
+<style scoped>
+
+#directionsStep {
+  display: flex;
+  border: solid rgb(42, 46, 52) 5px;
+  border-radius: 5px;
+  background-color: rgb(251, 225, 52, .9);
+  width: 90vw;
+}
+
+</style>
