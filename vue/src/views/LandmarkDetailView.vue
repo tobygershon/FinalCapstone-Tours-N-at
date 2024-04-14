@@ -32,7 +32,6 @@ import landmarkService from '../services/LandmarkService.js';
 import itineraryService from '../services/ItineraryService.js';
 import LandmarkRating from '../components/LandmarkRating.vue';
 
-
 export default {
   components: {
     LandmarkRating
@@ -101,6 +100,27 @@ export default {
       });
     },
 
+    handleRating(ratingData) {
+      landmarkService.createRating(ratingData.landmarkId, ratingData.isGood)
+        .then(response => {
+          console.log('Rating successfully created:', response.data);
+          this.retrieveCard();
+        })
+        .catch(error => {
+          console.error('Error creating rating:', error);
+        });
+    },
+
+    handleUpdateRating(rating) {
+      landmarkService.updateRating(rating.id, rating.isGood)
+        .then(response => {
+          console.log('Rating successfully updated:', response.data);
+        })
+        .catch(error => {
+          console.error('Error updating rating:', error);
+        });
+    },
+
     retrievePlacesAPIData() {
       landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
 
@@ -118,19 +138,42 @@ export default {
 
     },
 
+    toggleDropdown() {
+      this.showDropdown = !this.showDropdown;
+    },
+
+    retrieveUserItineraries() {
+      itineraryService.getItineraries().then(response => {
+        this.userItineraries = response.data;
+        console.log(this.userItineraries);
+      }).catch(error => {
+        if (error.response) {
+          this.$store.commit('SET_NOTIFICATION',
+            "Error getting itineraries. Response received was ''" + error.response.statusText + "'.");
+        } else if (error.request) {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Server could not be reached.");
+        } else {
+          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
+        }
+      });
+    },
+
     addToItinerary() {
       if (!this.validateForm) {
         return;
       }
       itineraryService.updateItinerary(this.editItinerary).then(response => {
         if (response.status < 300 && response.status > 199) {
+          // this.$toasted.success('Location added to your itinerary', {
+          //   duration: 2000
+          // });
           this.$store.commit(
             'SET_NOTIFICATION',
             {
               message: 'A new stop was added to your itinerary.',
               type: 'success'
             }
-          )
+          );
         }
       }).catch(error => {
         if (error.response) {
@@ -164,6 +207,7 @@ export default {
     this.retrieveCard();
     this.retrieveDesignations();
     this.retrievePlacesAPIData();
+    this.retrieveUserItineraries();
   },
 };
 </script>
