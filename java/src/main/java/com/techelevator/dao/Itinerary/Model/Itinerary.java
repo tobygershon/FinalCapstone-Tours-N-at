@@ -12,7 +12,6 @@ public class Itinerary {
     private int startingLocationId;
     private String startingLocationName;
     private LocalDate tourDate;
-    private int tourId;
     private List<Landmark> listOfStops;
 
 
@@ -27,7 +26,6 @@ public class Itinerary {
         this.startingLocationId = startingLocationId;
         this.startingLocationName = startingLocationName;
         this.tourDate = tourDate;
-        this.tourId = tourId;
         this.listOfStops = listOfStops;
     }
 
@@ -77,14 +75,6 @@ public class Itinerary {
 
     public void setTourDate(LocalDate tourDate) {
         this.tourDate = tourDate;
-    }
-
-    public int getTourId() {
-        return tourId;
-    }
-
-    public void setTourId(int tourId) {
-        this.tourId = tourId;
     }
 
     public List<Landmark> getListOfStops() {
