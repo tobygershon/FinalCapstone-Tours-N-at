@@ -17,7 +17,7 @@ export default {
 
     data() {
         return {
-            zoom: ''
+        
         }
     },
 
@@ -25,6 +25,23 @@ export default {
 
         distance() {
             return this.thisRoute.legs[0].distance;
+        },
+
+        zoomLevel() {
+            let zoom = '9';
+
+            if (this.distance.value <1500) {
+                zoom = '14';
+            } else if (this.distance.value < 3000) {
+                zoom = '13';
+            } else if (this.distance.value < 6000) {
+                zoom = '12';
+            } else if (this.distance.value < 12000) {
+                zoom = '11';
+            } else {
+                zoom = '10';
+            }
+            return zoom.toString();
         },
 
         latitude() {
