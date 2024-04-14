@@ -44,19 +44,16 @@ export default {
             const lat = this.latitude;
             const comma = ',';
             const lng = this.longitude;
-            const middleURL = '&zoom=';
-            const nextURL = '&path=weight:4%7Ccolor:red%7Cenc:';
+            const middleURL = '&zoom=11&path=weight:4%7Ccolor:red%7Cenc:';
             const line = this.polyline;
             const APIKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
-            const zoomLevel = this.computeMapZoom();
 
-            return (baseURL + lat + comma + lng + middleURL + zoomLevel + line + APIKey);
+            return (baseURL + lat + comma + lng + middleURL + line + APIKey);
         }
     },
 
     methods: {
         computeMapZoom() {
-            const zoom = '9'
             if (this.distance.value < 1500) {
                 this.zoom = '13';
             } else if (this.distance.value <4500) {
@@ -66,7 +63,7 @@ export default {
             } else {
                 this.zoom = '10';
             }
-            return zoom;
+            return this.zoom;
         }
     }
 }
