@@ -4,7 +4,12 @@
         <div>{{ itinerary.itineraryName }}</div>
         <div>{{ itinerary.startingLocationName }}</div>
         <div>{{ itinerary.tourDate }}</div>
-        <!-- <div v-for="itinerary.listOfStops">{{ object.landmarkName }}</div> -->
+        <router-link  :to="{ name: 'landmarkDetailsView', params: { id: landmark.landmarkId } }"
+            v-for="landmark in itinerary.listOfStops" :key="landmark.landmarkId">
+            <div class="button-container"><button>
+                {{ landmark.landmarkName }}
+            </button></div>
+        </router-link>
     </div>
 </template>
 

@@ -13,10 +13,5 @@
   </div>
 </template>
 
-<style>
-#tour-logo {
-  height: 50px;
-}
-</style>
 
 
