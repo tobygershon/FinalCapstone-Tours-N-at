@@ -7,7 +7,7 @@
   <!-- add nav bar: login logout itineraries 
     want to add map and search components -->
   <Search />
-  <!-- <img id="tour-logo" src="./assets/Tours_Nat.png" alt=""> -->
+  <img id="tour-logo" src="./assets/Tours_Nat.png" alt="">
 </template>
 
 <script>
@@ -25,6 +25,10 @@ export default {
 <style>
 #tour-logo {
   height: 100px;
+}
+
+#tour-logo {
+  height: 50px;
 }
 
 </style>
