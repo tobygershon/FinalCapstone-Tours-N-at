@@ -21,7 +21,7 @@ public class GeocodingService {
         }
         urlInput += addressArray[addressArray.length - 1];
 
-        String url = BASE_URL + urlInput + API_KEY;
+        String url = BASE_URL + urlInput + "Pittsburgh" + API_KEY;
 
         return restTemplate.getForObject(url, GeocodeResults.class);
     }

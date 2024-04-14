@@ -2,7 +2,7 @@
   <div class="landmark-container">
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
-    <p>Description: {{ placesData.editorial_summary.overview }}</p>
+    <p>Description: {{ description }}</p>
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
@@ -17,6 +17,13 @@
     <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
+
+    <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
+
+      <img :src="retrievePhoto(photo.photo_reference)" alt="landmark photos">
+
+    </div>
+
   </div>
 </template>
 
@@ -45,13 +52,28 @@ export default {
     };
   },
 
+
   computed: {
     formattedDesignations() {
       return this.designations.map(d => d.designationName).join(', ');
     },
 
     hoursArray() {
-      return this.placesData.current_opening_hours.hours;
+      if (this.placesData.current_opening_hours.hours != null) {
+        return this.placesData.current_opening_hours.hours;
+      }
+      return '';
+    },
+
+    description() {
+      if (this.placesData.editorial_summary.overview != null) {
+        return this.placesData.editorial_summary.overview;
+      }
+      return '';
+    },
+
+    photos() {
+      return this.placesData.photos;
     }
   },
 
@@ -79,51 +101,21 @@ export default {
       });
     },
 
-    handleRating(ratingData) {
-      landmarkService.createRating(ratingData.landmarkId, ratingData.isGood)
-        .then(response => {
-          console.log('Rating successfully created:', response.data);
-          this.retrieveCard();
-        })
-        .catch(error => {
-          console.error('Error creating rating:', error);
-        });
-    },
-
-    handleUpdateRating(rating) {
-      landmarkService.updateRating(rating.id, rating.isGood)
-        .then(response => {
-          console.log('Rating successfully updated:', response.data);
-        })
-        .catch(error => {
-          console.error('Error updating rating:', error);
-        });
-    },
-
     retrievePlacesAPIData() {
       landmarkService.getLandmarkInfoFromPlaces(this.$route.params.id).then(response => {
+
         this.placesData = response.data;
       })
     },
 
-    toggleDropdown() {
-      this.showDropdown = !this.showDropdown;
-    },
+    retrievePhoto(photoRef) {
 
-    retrieveUserItineraries() {
-      itineraryService.getItineraries().then(response => {
-        this.userItineraries = response.data;
-        console.log(this.userItineraries);
-      }).catch(error => {
-        if (error.response) {
-          this.$store.commit('SET_NOTIFICATION',
-            "Error getting itineraries. Response received was ''" + error.response.statusText + "'.");
-        } else if (error.request) {
-          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Server could not be reached.");
-        } else {
-          this.$store.commit('SET_NOTIFICATION', "Error getting itineraries. Request could not be created.");
-        }
-      });
+      const baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=';
+
+      const apiKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
+
+      return (baseURL + photoRef + apiKey);
+
     },
 
     addToItinerary() {
@@ -172,7 +164,15 @@ export default {
     this.retrieveCard();
     this.retrieveDesignations();
     this.retrievePlacesAPIData();
-    this.retrieveUserItineraries();
   },
 };
 </script>
+
+<styles scoped>
+
+
+
+
+</styles>
+
+

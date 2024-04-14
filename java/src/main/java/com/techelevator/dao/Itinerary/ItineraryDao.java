@@ -15,7 +15,7 @@ public interface ItineraryDao {
 
     int getTourIdFromItineraryId(int itineraryId);
 
-    Itinerary createItinerary(CreateItineraryDTO itinerary, Principal principal);
+    Itinerary createItinerary(CreateItineraryDTO itinerary, Principal principal, String placeId, String address);
 
     void updateItinerary(UpdateItineraryDTO itinerary);
 
