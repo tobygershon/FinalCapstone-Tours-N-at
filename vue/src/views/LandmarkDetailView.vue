@@ -1,6 +1,5 @@
 <template>
   <div class="landmark-container">
-  <div class="landmark-container">
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
     <p>Description: {{ description }}</p>
@@ -21,7 +20,7 @@
 
     <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
 
-      <img :src="retrievePhoto(photo.photo_reference)" alt="landamark photos">
+      <img :src="retrievePhoto(photo.photo_reference)" alt="landmark photos">
 
     </div>
 
@@ -112,6 +111,12 @@ export default {
     retrievePhoto(photoRef) {
 
       const baseURL = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=';
+
+      const apiKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
+
+      return (baseURL + photoRef + apiKey);
+
+    },
 
     addToItinerary() {
       if (!this.validateForm) {
