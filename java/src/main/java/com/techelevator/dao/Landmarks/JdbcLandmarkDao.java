@@ -127,7 +127,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
 
     @Override
     public int createLandmarkStartingPoint(String address, String placeId) {
-        //TODO: write this method
+
         return 0;
     }
 
