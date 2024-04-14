@@ -223,7 +223,7 @@ public class JdbcItineraryDao implements ItineraryDao {
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
             if (results.next()) {
-                return results.getInt("stop_order") + 1;
+                return (results.getInt("stop_order") + 1);
             } else {
                 return 1;
             }

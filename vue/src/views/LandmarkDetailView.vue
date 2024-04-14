@@ -25,7 +25,6 @@ import landmarkService from '../services/LandmarkService.js';
 import itineraryService from '../services/ItineraryService.js';
 import LandmarkRating from '../components/LandmarkRating.vue';
 
-
 export default {
   components: {
     LandmarkRating
@@ -132,13 +131,16 @@ export default {
       }
       itineraryService.updateItinerary(this.editItinerary).then(response => {
         if (response.status < 300 && response.status > 199) {
+          // this.$toasted.success('Location added to your itinerary', {
+          //   duration: 2000
+          // });
           this.$store.commit(
             'SET_NOTIFICATION',
             {
               message: 'A new stop was added to your itinerary.',
               type: 'success'
             }
-          )
+          );
         }
       }).catch(error => {
         if (error.response) {
