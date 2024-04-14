@@ -23,7 +23,7 @@
       <img :src="retrievePhoto(photo.photo_reference)" alt="landamark photos">
 
     </div>
-    
+
   </div>
 </template>
 
@@ -114,5 +114,12 @@ export default {
   },
 };
 </script>
+
+<styles scoped>
+
+
+
+
+</styles>
 
 
