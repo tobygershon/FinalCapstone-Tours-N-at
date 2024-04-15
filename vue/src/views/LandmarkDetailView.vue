@@ -3,6 +3,8 @@
     <h2>{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
     <p>Description: {{ description }}</p>
+    <a :href="website" :target="'_blank'">Website</a>&nbsp;|&nbsp;
+    <a :href="url" :target="'_blank'">Interactive Map</a>
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <p>Ratings: {{ landmark.ratings }}</p>
@@ -61,21 +63,39 @@ export default {
     },
 
     hoursArray() {
-      if (this.placesData.current_opening_hours.hours != null) {
+      if (this.placesData.current_opening_hours != null) {
         return this.placesData.current_opening_hours.hours;
       }
       return '';
     },
 
     description() {
-      if (this.placesData.editorial_summary.overview != null) {
+      if (this.placesData.editorial_summary != null) {
         return this.placesData.editorial_summary.overview;
       }
       return '';
     },
 
     photos() {
+      const emptyArray = [];
+      if (this.placesData.photos == null) {
+        return emptyArray;
+      }
       return this.placesData.photos;
+    },
+
+    website() {
+      if (this.placesData.website != null) {
+      return this.placesData.website;
+      }
+      return '';
+    },
+
+    url() {
+      if (this.placesData.url != null) {
+      return this.placesData.url;
+      }
+      return '';
     },
 
     notification() {
