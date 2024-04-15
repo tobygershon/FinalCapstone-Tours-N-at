@@ -1,5 +1,5 @@
 <template>
-    <div class="rating-card">
+    <div class="rating-container">
         <router-link :to="{ name: 'landmarkDetailsView', params: { id: rating.landmarkId } }"> {{ rating.landmarkName }}
         </router-link>
         <div v-if="rating.isGood"><i class="fas fa-thumbs-up"></i></div>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.rating-card {
+.rating-container {
     align-items: center;
     margin: 20px auto;
     padding: 20px;

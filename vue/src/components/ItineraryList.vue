@@ -1,6 +1,5 @@
 <template>
     <div id="itinerary-list">
-        <h2>Your Itineraries</h2>
         <div class="itineraryList">
 
             <router-link :to="{ name: 'itineraryDetail', params: { itineraryId: itinerary.itineraryId } }"
