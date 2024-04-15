@@ -144,7 +144,7 @@ export default {
     background-color: #2A2E34;
     color: #E9EAEC;
     border: solid #E4B61A 2px;
-    width: 10rem;
+    width: 9.75rem;
     height: 3rem;
     border-radius: 10px;
     font-weight: 600;
