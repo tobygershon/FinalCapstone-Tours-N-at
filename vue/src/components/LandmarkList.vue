@@ -2,7 +2,6 @@
 
 <template>
     <div id="list">
-        <h2>Search Results</h2>
         <div class="landmarkList">
 
             <router-link :to="{ name: 'landmarkDetailsView', params: { id: landmark.landmarkId } }" v-for="landmark in landmarks"

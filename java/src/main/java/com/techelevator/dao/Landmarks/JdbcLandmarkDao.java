@@ -74,7 +74,12 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public List<Landmark> getAllLandmarks() {
         List<Landmark> landmarksList = new ArrayList<>();
-        String sql = "SELECT landmark_id, landmark_name, address, google_place_id FROM landmarks ORDER BY landmark_name;";
+        String sql = "SELECT DISTINCT landmark_id, landmark_name, address, google_place_id " +
+                "FROM landmarks JOIN landmarks_designations USING (landmark_id) " +
+                "JOIN designations USING (designation_id) " +
+                "WHERE designation_name IN " +
+                "('Park', 'Food', 'Museum', 'Scenic Viewpoint', 'Kid-Friendly', 'Sporting Venue', 'Attraction', 'Historic Site') " +
+                "ORDER BY landmark_name;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {

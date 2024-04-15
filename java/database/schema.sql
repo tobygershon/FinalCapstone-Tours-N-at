@@ -12,7 +12,6 @@ CREATE TABLE landmarks (
 	landmark_id SERIAL PRIMARY KEY,
 	landmark_name VARCHAR(100) NOT NULL UNIQUE,
 	address VARCHAR(200) NOT NULL,
-	hours_id INT,
 	google_place_id VARCHAR(200) UNIQUE
 );
 
@@ -21,29 +20,12 @@ CREATE TABLE designations (
     designation_name VARCHAR(50) NOT NULL CHECK (designation_name IN ('Park', 'Food', 'Hotel', 'Museum', 'Scenic Viewpoint', 'Kid-Friendly', 'Sporting Venue', 'Attraction', 'Historic Site', 'Church', 'Starting Point', 'Other'))
 );
 
-CREATE TABLE hours_of_operation (
-	hours_id SERIAL PRIMARY KEY,
-	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
-	day_of_week INT, -- use 1 for Sunday, 2 for Monday, ... 7 for Saturday
-	opening_time TIME,
-	closing_time TIME
-);
-
---CREATE TABLE routes (
---	route_id SERIAL PRIMARY KEY,
---	start_point INT NOT NULL REFERENCES landmarks(landmark_id),
---	end_point INT NOT NULL REFERENCES landmarks(landmark_id),
---	polyline VARCHAR (50)
---);
---
---CREATE TABLE tours (
---	tour_id SERIAL PRIMARY KEY,
---	route_1 INT NOT NULL REFERENCES routes(route_id),
---	route_2 INT REFERENCES routes(route_id),
---	route_3 INT REFERENCES routes(route_id),
---	route_4 INT REFERENCES routes(route_id),
---	route_5 INT REFERENCES routes(route_id),
---	route_6 INT REFERENCES routes(route_id)
+--CREATE TABLE hours_of_operation (
+--	hours_id SERIAL PRIMARY KEY,
+--	landmark_id INT NOT NULL REFERENCES landmarks(landmark_id),
+--	day_of_week INT, -- use 1 for Sunday, 2 for Monday, ... 7 for Saturday
+--	opening_time TIME,
+--	closing_time TIME
 --);
 
 CREATE TABLE itineraries (
@@ -88,9 +70,6 @@ ALTER TABLE itineraries_landmarks ADD CONSTRAINT FK_itineraries_landmarks_landma
 
 ALTER TABLE landmarks_designations ADD CONSTRAINT FK_landmarks_designations_landmark FOREIGN KEY(landmark_id) REFERENCES landmarks(landmark_id);
 ALTER TABLE landmarks_designations ADD CONSTRAINT FK_landmarks_designations_designation FOREIGN KEY(designation_id) REFERENCES designations(designation_id);
-
-
-ALTER TABLE landmarks ADD CONSTRAINT FK_landmarks_hours FOREIGN KEY(hours_id) REFERENCES hours_of_operation(hours_id);
 
 
 COMMIT TRANSACTION;

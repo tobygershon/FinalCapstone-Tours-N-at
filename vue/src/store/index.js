@@ -8,6 +8,11 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {}
     },
+    getters: {
+      isLoggedIn(state) {
+        return state.token != '';
+      }
+    },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
         state.token = token;
