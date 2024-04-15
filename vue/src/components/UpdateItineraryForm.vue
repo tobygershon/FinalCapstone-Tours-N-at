@@ -15,14 +15,11 @@
                 <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
             </div>
         </div>
-
-        <div v-for="landmark in itinerary.listOfStops" :key="landmark.landmarkId">
-
-            <div class="button-container"><button>
-                    {{ landmark.landmarkName }}
-                </button></div>
-            <button @click="deleteLandmarkFromItinerary(landmark.id)">Remove stop</button>
-        </div>
+        <draggable v-model="editItinerary.listOfStops" tag="ul" itemKey="landmarkId">
+            <template #item="{ element: stop }">
+                <div class="button-container"><button><li>{{ stop.landmarkName }}</li></button></div>
+            </template>
+        </draggable>
         <div class="tooling-button-div">
             <div class="tooling-button">
                 <button @click="updateItinerary">Save Itinerary</button>
@@ -42,8 +39,13 @@
   
 <script>
 import itineraryService from '../services/ItineraryService';
+import draggable from 'vuedraggable';
 
 export default {
+
+    components: {
+        draggable,
+    },
 
     props: {
         itinerary: {
@@ -106,11 +108,11 @@ export default {
                         this.$store.commit(
                             'SET_NOTIFICATION',
                             {
-                                message: 'A new itinerary was added.',
+                                message: 'You itinerary was updated.',
                                 type: 'success'
                             }
                         );
-                        this.$router.push({ name: 'itineraryList', params: { id: this.addItinerary.itineraryId } });
+                        this.$router.push({ name: 'itineraryList', params: { id: this.editItinerary.itineraryId } });
                     }
                 })
                 .catch(error => {
@@ -167,7 +169,7 @@ export default {
             if (this.editItinerary.startingLocationName.length === 0) {
                 msg += 'The itinerary must have a starting location.';
             }
-            if (this.editItinerary.date.length === 0) {
+            if (this.editItinerary.tourDate.length === 0) {
                 msg += 'The itinerary must have a date of today or later.';
             }
             if (msg.length > 0) {
@@ -222,5 +224,11 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.tooling-button-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 </style>

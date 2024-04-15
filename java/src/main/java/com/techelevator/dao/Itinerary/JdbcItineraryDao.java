@@ -236,15 +236,15 @@ public class JdbcItineraryDao implements ItineraryDao {
         LocalDate tourDate = itineraryToUpdate.getTourDate();
 
         for (int i = 0; i < listOfItineraryLandmarks.size(); i++) {
-            String insertStatement = "INSERT INTO itineraries_landmarks (itinerary_id, landmark_id, stop_order) " +
+            String insertStatement = " INSERT INTO itineraries_landmarks (itinerary_id, landmark_id, stop_order) " +
                     "VALUES (" + itineraryId + ", " + listOfItineraryLandmarks.get(i).getLandmarkId() + ", " + (i + 1) + ");";
             insertStatementsForLandmarks += insertStatement;
         }
         String sql = "START TRANSACTION; " +
-                "UPDATE itinerary SET itinerary_name = ?, starting_location_id = ?, tour_date = ? WHERE itinerary_id = ?; " +
+                "UPDATE itineraries SET itinerary_name = ?, starting_location_id = ?, tour_date = ? WHERE itinerary_id = ?; " +
                 "DELETE FROM itineraries_landmarks * WHERE itinerary_id = ?; " + insertStatementsForLandmarks + " COMMIT;";
         try {
-            jdbcTemplate.update(sql, itineraryName, startingLocationId, tourDate, itineraryId);
+            jdbcTemplate.update(sql, itineraryName, startingLocationId, tourDate, itineraryId, itineraryId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
