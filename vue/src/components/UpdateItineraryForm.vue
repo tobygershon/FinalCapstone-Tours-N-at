@@ -1,20 +1,26 @@
 <template>
     <div class="landmark-container">
+        <div id="itinerary-form">
+            <div>
+                <label for="itineraryNameText">Itinerary Name:</label>
+                <input type="text" name="itineraryNameText" id="itineraryNameText" v-model="editItinerary.itineraryName">
+            </div>
+            <div>
+                <label for="startingPointText">Starting Location:</label>
+                <input type="text" name="startingPointText" id="startingPointText"
+                    v-model="editItinerary.startingLocationName">
+            </div>
+            <div>
+                <label for="dateSelector">Tour Date:</label>
+                <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
+            </div>
+        </div>
 
-        <div>
-            <label for="itineraryNameText">Itinerary Name:</label>
-            <input type="text" name="itineraryNameText" id="itineraryNameText" v-model="editItinerary.itineraryName">
-        </div>
-        <div>
-            <label for="startingPointText">Starting Location:</label>
-            <input type="text" name="startingPointText" id="startingPointText" v-model="editItinerary.startingLocationName">
-        </div>
-        <div>
-            <label for="dateSelector">Tour Date:</label>
-            <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
-        </div>
-        <div>
+        <div v-for="landmark in itinerary.listOfStops" :key="landmark.landmarkId">
 
+            <div class="button-container"><button>
+                    {{ landmark.landmarkName }}
+                </button></div>
         </div>
         <div class="tooling-button-div">
             <div class="tooling-button">
@@ -82,7 +88,7 @@ export default {
     },
 
     methods: {
-        submitItinerary() {
+        updateItinerary() {
             if (!this.validateForm()) {
                 return;
             }
@@ -169,3 +175,18 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+.landmark-container {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+}
+#itinerary-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+</style>

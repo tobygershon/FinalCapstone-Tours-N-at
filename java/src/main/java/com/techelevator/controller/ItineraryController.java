@@ -72,7 +72,9 @@ public class ItineraryController {
 
     @PutMapping("/itineraries/{itineraryId}")
     public Itinerary updateItinerary(@RequestBody Itinerary itineraryToUpdate, @PathVariable int itineraryId) {
-    return null;
+        itineraryDao.updateItinerary(itineraryToUpdate);
+        Itinerary updatedItinerary = itineraryDao.getItineraryById(itineraryToUpdate.getItineraryId());
+        return updatedItinerary;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
