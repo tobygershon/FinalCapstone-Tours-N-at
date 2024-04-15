@@ -52,14 +52,16 @@ public class ItineraryController {
 
         GeocodeResults result = geocodingService.getGeocodeInfo(newItinerary.getStartingLocation());
         if (result == null) {
-            
-        } else {
-            String placeId = result.getResults()[0].getPlaceId();
-            String placeAddress = result.getResults()[0].getAddress();
-            String placeName = placesService.getPlaceInfoByPlaceId(placeId).getName();
-            newItinerary.setStartingLocation(placeName);
 
-            returnObject = itineraryDao.createItinerary(newItinerary, principal, placeId, placeAddress);
+        } else {
+            if (result.getResults()[0] != null) {
+                String placeId = result.getResults()[0].getPlaceId();
+                String placeAddress = result.getResults()[0].getAddress();
+                String placeName = placesService.getPlaceInfoByPlaceId(placeId).getName();
+                newItinerary.setStartingLocation(placeName);
+
+                returnObject = itineraryDao.createItinerary(newItinerary, principal, placeId, placeAddress);
+            }
         }
         return returnObject;
     }
