@@ -34,6 +34,7 @@
 
 <script>
 import landmarkService from '../services/LandmarkService.js';
+import ratingService from '../services/RatingService.js';
 import itineraryService from '../services/ItineraryService.js';
 import LandmarkRating from '../components/LandmarkRating.vue';
 
@@ -53,6 +54,7 @@ export default {
         itineraryId: '',
         landmarkId: this.$route.params.id
       },
+      rated: {},
     };
   },
 
@@ -137,7 +139,7 @@ export default {
     },
 
     handleRating(ratingData) {
-      landmarkService.createRating(ratingData.landmarkId, ratingData.isGood)
+      ratingService.createOrUpdateRating(ratingData.landmarkId, ratingData.isGood)
         .then(response => {
           console.log('Rating successfully created:', response.data);
           this.retrieveCard();
@@ -148,7 +150,7 @@ export default {
     },
 
     handleUpdateRating(rating) {
-      landmarkService.updateRating(rating.id, rating.isGood)
+      ratingService.updateRating(rating.id, rating.isGood)
         .then(response => {
           console.log('Rating successfully updated:', response.data);
         })
