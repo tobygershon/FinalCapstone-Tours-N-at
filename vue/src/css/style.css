@@ -12,8 +12,13 @@
   min-height: 100vh;
 }
 
+h2 {
+  font-weight: 600;
+}
+
 .landmark-container {
   align-items: center;
+  font-weight: 600;
   margin: 20px auto;
   padding: 20px;
   background-color: rgba(251, 225, 52, 0.7);
