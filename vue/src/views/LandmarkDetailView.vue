@@ -103,10 +103,6 @@ export default {
         return this.placesData.url;
       }
       return '';
-    },
-
-    notification() {
-      return this.$store.state.notification;
     }
   },
 
@@ -135,7 +131,7 @@ export default {
     },
 
     handleRating(ratingData) {
-      ratingService.createRating(ratingData.landmarkId, ratingData.isGood)
+      ratingService.createOrUpdateRating(ratingData.landmarkId, ratingData.isGood)
         .then(response => {
           console.log('Rating successfully created:', response.data);
           this.retrieveCard();

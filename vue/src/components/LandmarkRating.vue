@@ -13,31 +13,31 @@
     <button @click="clearRating" class="clear-button">
       <i class="fas fa-times"></i> Clear
     </button><br>
-    
+
   </div>
 </template>
 
 
-  <script>
-    import RatingService from '../services/RatingService';
+<script>
+import RatingService from '../services/RatingService';
 
-  export default {
-    name: 'RatingComponent',
-    props: {
-      landmarkId: {
-        type: Number,
-        required: true
-      }
-    },
-    data() {
-      return {
-        currentRating: null 
-      };
-    },
-    methods: {
-      rate(isGood) {
+export default {
+  name: 'RatingComponent',
+  props: {
+    landmarkId: {
+      type: Number,
+      required: true
+    }
+  },
+  data() {
+    return {
+      currentRating: null
+    };
+  },
+  methods: {
+    rate(isGood) {
       this.currentRating = isGood;
-      RatingService.createRating(this.landmarkId, isGood)
+      RatingService.createOrUpdateRating(this.landmarkId, isGood)
         .then(response => {
           this.$emit('rated', response.data);
         })
@@ -45,10 +45,10 @@
           console.error('Failed to post rating:', error);
         });
     },
-      clearRating() {
-        this.currentRating = null;
-        this.$emit('ratingCleared', { landmarkId: this.landmarkId });
-      }
+    clearRating() {
+      this.currentRating = null;
+      this.$emit('ratingCleared', { landmarkId: this.landmarkId });
     }
   }
-  </script>
+}
+</script>

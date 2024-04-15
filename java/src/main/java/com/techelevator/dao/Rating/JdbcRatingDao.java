@@ -122,6 +122,17 @@ public class JdbcRatingDao implements RatingDao {
         }
     }
 
+    @Override
+    public Rating findRatingByUserAndLandmark(int userId, int landmarkId) {
+        String sql = "SELECT * FROM ratings WHERE user_id = ? AND landmark_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, landmarkId);
+        if (results.next()) {
+            return mapRowToRating(results);
+        }
+        return null;
+    }
+
+
     private Rating mapRowToRating(SqlRowSet rowSet) {
         Rating rating = new Rating();
         rating.setRatingId(rowSet.getInt("rating_id"));
