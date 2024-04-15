@@ -1,22 +1,24 @@
 <!-- form to create a new itinerary: need name, date, and starting point min -->
 <template>
-    <div>
-        <label for="itineraryName">Name Your Itinerary:</label>
-        <input type="text" name="itineraryName" id="itineraryNameText" placeholder="Itinerary Name"
-            v-model="addItinerary.itineraryName">
-    </div>
-    <div>
-        <label for="startingPoint">Choose Your Starting Location:</label>
-        <input type="text" name="startingPoint" id="startingPointText" placeholder="Starting Location"
-            v-model="addItinerary.startingLocation">
-    </div>
-    <div>
-        <label for="dateSelector">Select a Tour Date:</label>
-        <input type="date" id="dateSelector" v-model="addItinerary.date" :min="minDate">
-    </div>
-    <div>
-        <input type="button" @click="submitItinerary" value="Save">
-        <input type="button" value="Cancel">
+    <div class="landmark-container">
+        <div>
+            <label for="itineraryName">Name Your Itinerary:</label>
+            <input type="text" name="itineraryName" id="itineraryNameText" placeholder="Itinerary Name"
+                v-model="addItinerary.itineraryName">
+        </div>
+        <div>
+            <label for="startingPoint">Choose Your Starting Location:</label>
+            <input type="text" name="startingPoint" id="startingPointText" placeholder="Starting Location"
+                v-model="addItinerary.startingLocation">
+        </div>
+        <div>
+            <label for="dateSelector">Select a Tour Date:</label>
+            <input type="date" id="dateSelector" v-model="addItinerary.date" :min="minDate">
+        </div>
+        <div class="tooling-button-div">
+            <div class="tooling-button"><button @click="submitItinerary">Save</button></div>
+            <div class="tooling-button"><button>Cancel</button></div>
+        </div>
     </div>
 </template>
   
@@ -37,7 +39,7 @@ export default {
                 startingLocation: '',
                 date: '',
             },
-            
+
         }
     },
 
@@ -57,7 +59,7 @@ export default {
     methods: {
 
 
-        
+
         submitItinerary() {
             if (!this.validateForm()) {
                 return;
