@@ -2,12 +2,12 @@
     can click individual itinerary to take to add Itinerary View 
     and ability to create itineraries from here -->
 <template>
-    <router-link :to="{ name: 'addItineraryDetailsView'}">
+    <router-link :to="{ name: 'addItineraryDetailsView' }">
         <div class="addButton">
-           <button>Add Itinerary</button>
+            <button>Add Itinerary</button>
         </div>
     </router-link>
-    
+
     <ItineraryList :itineraries="itineraries" />
 </template>
     
