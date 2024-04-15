@@ -16,7 +16,7 @@
       </select>
       <input type="button" @click="addToItinerary()" value="Go!">
     </div>
-    <div v-if="notification" :class="[notification.type]">
+    <div v-if="notification">
       {{ notification.message }}
     </div>
     <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
@@ -91,14 +91,14 @@ export default {
 
     website() {
       if (this.placesData.website != null) {
-      return this.placesData.website;
+        return this.placesData.website;
       }
       return '';
     },
 
     url() {
       if (this.placesData.url != null) {
-      return this.placesData.url;
+        return this.placesData.url;
       }
       return '';
     },
@@ -243,8 +243,6 @@ export default {
 </script>
 
 <styles scoped>
-
-
 
 
 </styles>
