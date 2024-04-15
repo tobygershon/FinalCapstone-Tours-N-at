@@ -67,24 +67,22 @@ public class JdbcRatingDao implements RatingDao {
     @Override
     public Rating getRatingById(int ratingId) {
         Rating rating = null;
-        String sql = "SELECT user_id, landmark_id, is_good FROM ratings WHERE rating_id = ?;";
+        String sql = "SELECT ratings.rating_id, ratings.user_id, ratings.landmark_id, ratings.is_good, landmarks.landmark_name FROM ratings JOIN landmarks ON ratings.landmark_id = landmarks.landmark_id WHERE ratings.rating_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, ratingId);
             if (results.next()) {
                 rating = mapRowToRating(results);
-                rating.setRatingId(ratingId);
             }
         } catch (Exception e) {
             throw new DaoException("Unable to retrieve rating by rating id.", e);
         }
         return rating;
     }
-
     @Override
     public Rating createRating(Rating rating) {
         String sql = "INSERT INTO ratings (user_id, landmark_id, is_good) VALUES (?, ?, ?) RETURNING rating_id";
         try {
-            Integer generatedId = jdbcTemplate.queryForObject(sql, new Object[]{rating.getUserId(), rating.getLandmarkId(), rating.getIsGood()}, Integer.class);
+            Integer generatedId = jdbcTemplate.queryForObject(sql, Integer.class, rating.getUserId(), rating.getLandmarkId(), rating.getIsGood());
             if (generatedId != null) {
                 rating.setRatingId(generatedId);
                 return rating;
@@ -125,12 +123,23 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     private Rating mapRowToRating(SqlRowSet rowSet) {
-        return new Rating(
-                rowSet.getInt("rating_id"),
-                rowSet.getInt("user_id"),
-                rowSet.getInt("landmark_id"),
-                rowSet.getBoolean("is_good"),
-                rowSet.getString("landmark_name")
-        );
+        Rating rating = new Rating();
+        rating.setRatingId(rowSet.getInt("rating_id"));
+        rating.setUserId(rowSet.getInt("user_id"));
+        rating.setLandmarkId(rowSet.getInt("landmark_id"));
+        rating.setIsGood(rowSet.getBoolean("is_good"));
+
+        try {
+            String landmarkName = rowSet.getString("landmark_name");
+            if (landmarkName != null) {
+                rating.setLandmarkName(landmarkName);
+            } else {
+                rating.setLandmarkName("");
+            }
+        } catch (Exception e) {
+            rating.setLandmarkName("");
+        }
+
+        return rating;
     }
 }

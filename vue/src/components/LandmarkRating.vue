@@ -1,27 +1,26 @@
 <!-- thumbs up/down for landmarks and tracking the data users enter about if they liked it -->
 <template>
-    <div class="button-container">
-      <button
-        :class="{ 'active': currentRating === true }"
-        @click="rate(true)"
-        class="rating-button">
-        <i class="fas fa-thumbs-up"></i> Rate Up
-      </button>
-      <button
-        :class="{ 'active': currentRating === false }"
-        @click="rate(false)">
-        <i class="fas fa-thumbs-down"></i> Rate Down
-      </button><br>
-      <button
-        @click="clearRating"
-        class="clear-button">
-        <i class="fas fa-times"></i> Clear
-      </button><br>
-    </div>
-  </template>
+  <div class="button-container">
+
+    <button :class="{ 'active': currentRating === true }" @click="rate(true)" class="rating-button">
+      <i class="fas fa-thumbs-up"></i> Rate Up
+    </button>
+
+    <button :class="{ 'active': currentRating === false }" @click="rate(false)" class="rating-button">
+      <i class="fas fa-thumbs-down"></i> Rate Down
+    </button><br>
+
+    <button @click="clearRating" class="clear-button">
+      <i class="fas fa-times"></i> Clear
+    </button><br>
+    
+  </div>
+</template>
 
 
   <script>
+    import RatingService from '../services/RatingService';
+
   export default {
     name: 'RatingComponent',
     props: {
@@ -37,9 +36,15 @@
     },
     methods: {
       rate(isGood) {
-        this.currentRating = isGood;
-        this.$emit('rated', { landmarkId: this.landmarkId, isGood });
-      },
+      this.currentRating = isGood;
+      RatingService.createRating(this.landmarkId, isGood)
+        .then(response => {
+          this.$emit('rated', response.data);
+        })
+        .catch(error => {
+          console.error('Failed to post rating:', error);
+        });
+    },
       clearRating() {
         this.currentRating = null;
         this.$emit('ratingCleared', { landmarkId: this.landmarkId });
