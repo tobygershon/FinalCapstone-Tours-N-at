@@ -16,7 +16,7 @@ export default {
     },
 
     addLandmarkToItinerary(landmarkId, itinerary) {
-        return axios.put(`landmarks/${landmarkId}/${itinerary.itineraryId}`, itinerary);
+        return axios.put(`/landmarks/${landmarkId}/${itinerary.itineraryId}`, itinerary);
     },
 
     updateItinerary(itinerary) {
