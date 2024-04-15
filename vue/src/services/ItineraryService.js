@@ -15,6 +15,10 @@ export default {
         return axios.post(`/itineraries`, itinerary);
     },
 
+    addLandmarkFromItinerary(landmarkId, itinerary) {
+        return axios.put(`landmarks/${landmarkId}/${itinerary.itineraryId}`, itinerary);
+    },
+
     updateItinerary(itinerary) {
         return axios.put(`itineraries/${itinerary.itineraryId}`, itinerary);
     },

@@ -188,10 +188,12 @@ public class JdbcItineraryDao implements ItineraryDao {
     @Override
     public int deleteItinerary(int itineraryId) {
         int numOfRows = 0;
-        String sql = "DELETE FROM itineraries WHERE itinerary_id = ?;";
+        String sql = "BEGIN TRANSACTION; DELETE FROM itineraries_landmarks WHERE itinerary_id = ?;" +
+                "DELETE FROM itineraries WHERE itinerary_id = ?; " +
+                "COMMIT;";
 
         try {
-            numOfRows = jdbcTemplate.update(sql, itineraryId);
+            numOfRows = jdbcTemplate.update(sql, itineraryId, itineraryId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {

@@ -1,5 +1,5 @@
 <template>
-    <UpdateItineraryForm :itinerary="itinerary"/>
+    <UpdateItineraryForm v-if="!isLoading" :itinerary="itinerary"/>
 </template>
 
 <script>
@@ -14,6 +14,8 @@ export default {
 
     data() {
         return {
+
+            isLoading: true,
 
             updateItinerary: {
 
@@ -37,6 +39,7 @@ export default {
             const id = this.$route.params.itineraryId;
             itineraryService.getItineraryById(id).then(response => {
                 this.itinerary = response.data;
+                this.isLoading = false;
             }).catch(error => {
                 this.handleErrorResponse(error, 'retrieving');
             });

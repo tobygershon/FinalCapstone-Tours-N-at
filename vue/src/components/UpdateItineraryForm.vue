@@ -1,6 +1,6 @@
 <template>
     <div class="button-container">
-        <button v-if="isLoggedIn" && isLoggedInUsersItinerary @click="deleteItinerary">
+        <button v-if="isLoggedIn && isLoggedInUsersItinerary" @click="deleteItinerary">
             Delete Itinerary
         </button>
     </div>
@@ -14,7 +14,7 @@
     </div>
     <div>
         <label for="dateSelector">Tour Date:</label>
-        <input type="date" id="dateSelector" v-model="editItinerary.date" :min="minDate">
+        <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
     </div>
     <div>
         <input type="button" @click="updateItinerary" value="Save">
@@ -42,7 +42,7 @@ export default {
                 itineraryName: this.itinerary.itineraryName,
                 startingLocationId: this.itinerary.startingLocationId,
                 startingLocationName: this.itinerary.startingLocationName,
-                tourDate: this.itinerary.date,
+                tourDate: this.itinerary.tourDate,
                 listOfStops: this.itinerary.listOfStops
             }
 
@@ -111,13 +111,13 @@ export default {
         deleteItinerary() {
             if (confirm("Are you sure you want to delete the itinerary?")) {
 
-                itineraryService.deleteItinerary(this.itinerary.id)
+                itineraryService.deleteItinerary(this.itinerary.itineraryId)
                     .then(response => {
                         this.$store.commit('SET_NOTIFICATION',
                             {
                                 message: 'Itinerary has been deleted',
                                 type: 'success'
-                            })
+                            });
                         this.$router.push({ name: 'itineraryList' })
                     }).catch(error => {
                         if (error.response) {

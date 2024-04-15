@@ -65,7 +65,7 @@ public class ItineraryController {
 
     @PutMapping("/itineraries/{itineraryId}")
     public Itinerary updateItinerary(@RequestBody Itinerary itineraryToUpdate, @PathVariable int itineraryId) {
-
+    return null;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -73,9 +73,9 @@ public class ItineraryController {
     public void deleteItinerary(@PathVariable int itineraryId) {
         int rowsAffected = itineraryDao.deleteItinerary(itineraryId);
 
-        if (rowsAffected == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Itinerary not found.");
-        }
+//        if (rowsAffected == 0) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Itinerary not found.");
+//        }
 
     }
 
