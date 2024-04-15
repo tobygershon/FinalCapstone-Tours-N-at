@@ -2,7 +2,7 @@ package com.techelevator.dao.Itinerary;
 
 import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
 import com.techelevator.dao.Itinerary.Model.Itinerary;
-import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
+import com.techelevator.dao.Itinerary.Model.AddOrDeleteLandmarkDTO;
 import com.techelevator.dao.Landmarks.LandmarkDao;
 import com.techelevator.dao.Landmarks.Model.Landmark;
 import com.techelevator.dao.User.UserDao;
@@ -164,7 +164,7 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public void updateItinerary(UpdateItineraryDTO itineraryDTO) {
+    public void addOrDeleteLandmark(AddOrDeleteLandmarkDTO itineraryDTO) {
         int itineraryId = itineraryDTO.getItineraryId();
         int landmarkId = itineraryDTO.getLandmarkId();
         int stopNum = getStopNum(itineraryId);
@@ -199,6 +199,17 @@ public class JdbcItineraryDao implements ItineraryDao {
         }
         return numOfRows;
     }
+
+    //TODO figure out how to iterate over landmakrs list for itinerary
+    @Override
+    public Itinerary updateItinerary(Itinerary itineraryToUpdate) {
+        String sql = "START TRANSACTION; " +
+                "UPDATE itinerary SET itinerary_name = ?, starting_location_id = ?, tour_date = ? WHERE itinerary_id = ?; " +
+                "DELETE FROM itineraries_landmarks * WHERE itinerary_id = ?; " +
+                "INSERT INTO itineraries_landmarks (itinerary_id, landmark_id, stop_order) VALUES ";
+        return null;
+    }
+
 
     @Override
     public List<String> retrieveItineraryStops(int itineraryId) {

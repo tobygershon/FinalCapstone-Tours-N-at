@@ -4,6 +4,7 @@ import { createStore } from './store'
 import router from './router'
 import axios from 'axios'
 import 'bulma/css/bulma.css'
+
 // import ToastService from 'vue-toasted'
 
 /* sets the base url for server API communication with axios */

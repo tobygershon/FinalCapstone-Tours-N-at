@@ -3,7 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.Itinerary.ItineraryDao;
 import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
 import com.techelevator.dao.Itinerary.Model.Itinerary;
-import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
+import com.techelevator.dao.Itinerary.Model.AddOrDeleteLandmarkDTO;
 import com.techelevator.dao.User.UserDao;
 import com.techelevator.dao.User.model.User;
 import com.techelevator.service.GeocodingService;
@@ -57,10 +57,15 @@ public class ItineraryController {
         return itineraryDao.createItinerary(newItinerary, principal, placeId, placeAddress);
     }
 
-    @PutMapping("/itineraries/{itineraryId}")
-    public Itinerary updateItinerary(@RequestBody UpdateItineraryDTO itineraryToUpdate, @PathVariable int itineraryId) {
-        itineraryDao.updateItinerary(itineraryToUpdate);
+    @PutMapping("/landmark/{landmarkId}/{itineraryId}")
+    public Itinerary addLandmarkToItinerary(@RequestBody AddOrDeleteLandmarkDTO itineraryToUpdate, @PathVariable int itineraryId) {
+        itineraryDao.addOrDeleteLandmark(itineraryToUpdate);
         return getItineraryById(itineraryId);
+    }
+
+    @PutMapping("/itineraries/{itineraryId}")
+    public Itinerary updateItinerary(@RequestBody Itinerary itineraryToUpdate, @PathVariable int itineraryId) {
+
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

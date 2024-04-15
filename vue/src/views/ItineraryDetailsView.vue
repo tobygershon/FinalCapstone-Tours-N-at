@@ -10,6 +10,11 @@
                 {{ landmark.landmarkName }}
             </button></div>
         </router-link>
+        <router-link  :to="{ name: 'editItineraryDetailsView', params: { itineraryId: this.$route.params.itineraryId } }">
+            <div class="button-container"><button>
+                Edit Itinerary
+            </button></div>
+        </router-link>
     </div>
 </template>
 
@@ -34,7 +39,6 @@ export default {
                 startingLocationId: '',
                 startingLocationName: '',
                 tourDate: '',
-                tourId: '',
                 listOfStops: []
             }
         }

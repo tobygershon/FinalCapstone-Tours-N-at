@@ -1,14 +1,12 @@
 package com.techelevator.dao.Itinerary.Model;
 
-import java.time.LocalDate;
-
-public class UpdateItineraryDTO {
+public class AddOrDeleteLandmarkDTO {
 
     private int itineraryId;
     private int landmarkId;
 
 
-    public UpdateItineraryDTO(int itineraryId, int landmarkId) {
+    public AddOrDeleteLandmarkDTO(int itineraryId, int landmarkId) {
         this.itineraryId = itineraryId;
         this.landmarkId = landmarkId;
     }
