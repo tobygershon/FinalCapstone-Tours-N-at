@@ -81,6 +81,10 @@ export default {
 
     photos() {
       return this.placesData.photos;
+    },
+
+    notification() {
+      return this.$store.state.notification;
     }
   },
 
@@ -173,9 +177,6 @@ export default {
       const landmarkId = this.$route.params.id;
       itineraryService.addLandmarkToItinerary(landmarkId, this.editItinerary).then(response => {
         if (response.status < 300 && response.status > 199) {
-          // this.$toasted.success('Location added to your itinerary', {
-          //   duration: 2000
-          // });
           this.$store.commit(
             'SET_NOTIFICATION',
             {

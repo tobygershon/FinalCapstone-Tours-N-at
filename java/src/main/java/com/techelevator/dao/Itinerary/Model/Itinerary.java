@@ -14,7 +14,6 @@ public class Itinerary {
     private LocalDate tourDate;
     private List<Landmark> listOfStops;
 
-
     public Itinerary() {
 
     }
