@@ -1,22 +1,26 @@
 <template>
   <div class="home">
-    
 
-  </div>   
-   
+
+  </div>
+
   <!-- add nav bar: login logout itineraries 
     want to add map and search components -->
-  <Search />
-  <img id="tour-logo" src="./assets/Tours_Nat.png" alt="">
+  <div id="searchBox">
+    <img id="tour-logo" src="./assets/Tours_Nat.png" alt="">
+    <Search />
+  </div>
+ 
 </template>
 
 <script>
 import Search from '../components/Search.vue';
 
+
 export default {
 
   components: {
-    Search,
+    Search
   },
 
 };
@@ -24,11 +28,14 @@ export default {
 
 <style>
 #tour-logo {
-  height: 100px;
+  height: 75px;
 }
 
-#tour-logo {
-  height: 50px;
+#searchBox {
+  position: relative;
+  top: -85px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 </style>

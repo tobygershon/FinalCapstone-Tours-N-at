@@ -1,34 +1,37 @@
 <!-- search component for searching landmarks. Want filtering ability for types of attractions? -->
 <template>
-    <div>
-        <span>Search Points of Interest by Name:</span>
-        <input v-model="searchTerm" placeholder="Enter landmark name" />
-        <input type="button" @click="searchByName" value="Go!">
-        <div v-if="message" class="alert-message">
-            {{ message }}
+    <div id="searchBars">
+        <div>
+            <span>Search Points of Interest by Name:</span>
+            <input v-model="searchTerm" placeholder="Enter landmark name" />
+            <input type="button" @click="searchByName" value="Go!">
+            <div v-if="message" class="alert-message">
+                {{ message }}
+            </div>
         </div>
-    </div>
 
-    <label for="points-of-interest-category-dropdown">Search Points of Interest by Category:</label>
-    <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
-        <option value=""> </option>
-        <option value="Search All">Search All</option>
-        <option value="Attraction">Attractions</option>
-        <option value="Food">Food</option>
-        <option value="Historic Site">Historic Sites</option>
-        <option value="Kid-Friendly">Kid-Friendly</option>
-        <option value="Museum">Museum</option>
-        <option value="Park">Park</option>
-        <option value="Scenic Viewpoint">Scenic Viewpoint</option>
-        <option value="Sporting Venue">Sporting Venue</option>
-    </select>
-    <input type="button" @click="retrieveLandmarks" value="Go!">
+        <label for="points-of-interest-category-dropdown">Search Points of Interest by Category:</label>
+        <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
+            <option value=""> </option>
+            <option value="Search All">Search All</option>
+            <option value="Attraction">Attractions</option>
+            <option value="Food">Food</option>
+            <option value="Historic Site">Historic Sites</option>
+            <option value="Kid-Friendly">Kid-Friendly</option>
+            <option value="Museum">Museum</option>
+            <option value="Park">Park</option>
+            <option value="Scenic Viewpoint">Scenic Viewpoint</option>
+            <option value="Sporting Venue">Sporting Venue</option>
+        </select>
+        <input type="button" @click="retrieveLandmarks" value="Go!">
+    </div>
     <LandmarkList :landmarks="landmarks" />
 </template>
 
 <script>
 import landmarkService from '../services/LandmarkService.js';
-import LandmarkList from './LandmarkList.vue';
+import LandmarkList from '../components/LandmarkList.vue';
+
 
 export default {
 
@@ -42,12 +45,12 @@ export default {
     },
 
     components: {
-        LandmarkList,
+        LandmarkList
     },
 
     methods: {
         retrieveLandmarks() {
-            if (this.designationSelection === ''|| this.designationSelection === 'Search All' ) {
+            if (this.designationSelection === '' || this.designationSelection === 'Search All') {
                 landmarkService.getAllLandmarks().then(response => {
                     this.landmarks = response.data;
                 }).catch(error => {
@@ -98,8 +101,24 @@ export default {
     },
 
     created() {
-        
+
     }
 }
 
 </script>../services/LandmarkService.js
+
+<style scoped>
+
+#searchBars {
+    background-color: #2A2E34;
+    padding: 10px;
+    border-radius: 20px;
+    /* position: relative;
+    top: -40px;
+    left: auto; */
+    border: 2px solid #FBE134;
+    width: 75vw;
+    color: #FBE134;
+}
+
+</style>

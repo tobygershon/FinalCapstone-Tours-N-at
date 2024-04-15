@@ -2,12 +2,15 @@
 
 <template>
     <div id="directionsBox">
+        <div id="collapseBTN">
+            <button>- collapse</button>
+        </div>
         <div v-for="(step, index) in steps" :key="index" id="directionStep">
             <div id="step">
                 Step {{ index + 1 }}:
             </div>
             <span v-html="step.html_instructions"></span>
-        </div>
+        </div> 
     </div>
 </template>
 
@@ -28,11 +31,22 @@ export default {
 </script>
 
 <style scoped>
+
+#collapseBTN {
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 35px;
+    font-size: 20px;
+    font-weight: 700;
+
+}
 #directionsBox {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 35px 10px 0 5px;
+    margin: 0 10px 0 5px;
 }
 
 #directionStep {
@@ -44,6 +58,4 @@ export default {
     font-weight: 800;
     margin-right: 10px;
 }
-
-
 </style>
