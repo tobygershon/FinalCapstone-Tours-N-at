@@ -6,7 +6,10 @@
             <input type="text" name="itineraryName" id="itineraryNameText" placeholder="Itinerary Name"
                 v-model="addItinerary.itineraryName">
         </div>
-        <div>
+        <div v-if="notification">
+        {{ notification.message }}
+    </div>
+    <div>
             <label for="startingPoint">Choose Your Starting Location:</label>
             <input type="text" name="startingPoint" id="startingPointText" placeholder="Starting Location"
                 v-model="addItinerary.startingLocation">
@@ -54,6 +57,10 @@ export default {
             return `${year}-${month}-${day}`;
         },
 
+        notification() {
+            return this.$store.state.notification;
+        }
+
     },
 
     methods: {
@@ -69,8 +76,13 @@ export default {
                 .createItinerary(this.addItinerary)
                 .then(response => {
                     if (response.data === null) {
-                        alert('Your starting location could not be found.  Please enter a valid address.');
-                    }
+                        this.$store.commit(
+                            'SET_NOTIFICATION',
+                            {
+                                message: 'Please enter a valid starting address.',
+                                type: 'error'
+                            }
+                )}
                     if (response.status === 201) {
                         this.$store.commit(
                             'SET_NOTIFICATION',
