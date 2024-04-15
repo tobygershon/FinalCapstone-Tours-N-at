@@ -14,6 +14,9 @@
       </select>
       <input type="button" @click="addToItinerary()" value="Go!">
     </div>
+    <div v-if="notification" :class="[notification.type]">
+      {{ notification.message }}
+    </div>
     <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
@@ -53,6 +56,11 @@ export default {
 
 
   computed: {
+
+    notification() {
+      return this.$store.state.notification;
+    },
+
     formattedDesignations() {
       return this.designations.map(d => d.designationName).join(', ');
     },
@@ -162,7 +170,8 @@ export default {
       if (!this.validateForm) {
         return;
       }
-      itineraryService.updateItinerary(this.editItinerary).then(response => {
+      const landmarkId = this.$route.params.id;
+      itineraryService.addLandmarkToItinerary(landmarkId, this.editItinerary).then(response => {
         if (response.status < 300 && response.status > 199) {
           // this.$toasted.success('Location added to your itinerary', {
           //   duration: 2000

@@ -58,8 +58,8 @@ public class ItineraryController {
     }
 
     @PutMapping("/landmark/{landmarkId}/{itineraryId}")
-    public Itinerary addLandmarkToItinerary(@RequestBody AddOrDeleteLandmarkDTO itineraryToUpdate, @PathVariable int itineraryId) {
-        itineraryDao.addOrDeleteLandmark(itineraryToUpdate);
+    public Itinerary addLandmarkToItinerary(@RequestBody AddOrDeleteLandmarkDTO itineraryToUpdate, @PathVariable int landmarkId, @PathVariable int itineraryId) {
+        itineraryDao.addLandmarkToItinerary(itineraryToUpdate);
         return getItineraryById(itineraryId);
     }
 

@@ -164,7 +164,7 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public void addOrDeleteLandmark(AddOrDeleteLandmarkDTO itineraryDTO) {
+    public void addLandmarkToItinerary(AddOrDeleteLandmarkDTO itineraryDTO) {
         int itineraryId = itineraryDTO.getItineraryId();
         int landmarkId = itineraryDTO.getLandmarkId();
         int stopNum = getStopNum(itineraryId);

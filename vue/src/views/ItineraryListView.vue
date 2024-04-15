@@ -8,7 +8,7 @@
         </div>
     </router-link>
     
-    <ItineraryList :itineraries="itineraries" />
+    <ItineraryList v-if="!isLoading" :itineraries="itineraries" />
 </template>
     
 <script>
@@ -25,6 +25,8 @@ export default {
     data() {
         return {
             itineraries: [],
+
+            isLoading: true,
         }
     },
 
@@ -32,6 +34,7 @@ export default {
         retrieveItineraries() {
             itineraryService.getItineraries().then(response => {
                 this.itineraries = response.data;
+                this.isLoading = false;
             }).catch(error => {
                 if (error.response) {
                     this.$store.commit('SET_NOTIFICATION',
