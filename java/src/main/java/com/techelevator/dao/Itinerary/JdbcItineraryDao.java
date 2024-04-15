@@ -2,7 +2,7 @@ package com.techelevator.dao.Itinerary;
 
 import com.techelevator.dao.Itinerary.Model.CreateItineraryDTO;
 import com.techelevator.dao.Itinerary.Model.Itinerary;
-import com.techelevator.dao.Itinerary.Model.UpdateItineraryDTO;
+import com.techelevator.dao.Itinerary.Model.AddOrDeleteLandmarkDTO;
 import com.techelevator.dao.Landmarks.LandmarkDao;
 import com.techelevator.dao.Landmarks.Model.Landmark;
 import com.techelevator.dao.User.UserDao;
@@ -63,7 +63,7 @@ public class JdbcItineraryDao implements ItineraryDao {
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, itineraryId);
-            if(results.next()) {
+            if (results.next()) {
                 itinerary = mapRowToItinerary(results);
 
             }
@@ -164,7 +164,7 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public void updateItinerary(UpdateItineraryDTO itineraryDTO) {
+    public void addLandmarkToItinerary(AddOrDeleteLandmarkDTO itineraryDTO) {
         int itineraryId = itineraryDTO.getItineraryId();
         int landmarkId = itineraryDTO.getLandmarkId();
         int stopNum = getStopNum(itineraryId);
@@ -188,10 +188,12 @@ public class JdbcItineraryDao implements ItineraryDao {
     @Override
     public int deleteItinerary(int itineraryId) {
         int numOfRows = 0;
-        String sql = "DELETE FROM itineraries WHERE itinerary_id = ?;";
+        String sql = "BEGIN TRANSACTION; DELETE FROM itineraries_landmarks WHERE itinerary_id = ?;" +
+                "DELETE FROM itineraries WHERE itinerary_id = ?; " +
+                "COMMIT;";
 
         try {
-            numOfRows = jdbcTemplate.update(sql, itineraryId);
+            numOfRows = jdbcTemplate.update(sql, itineraryId, itineraryId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -199,6 +201,35 @@ public class JdbcItineraryDao implements ItineraryDao {
         }
         return numOfRows;
     }
+
+
+    @Override
+    public void updateItinerary(Itinerary itineraryToUpdate) {
+        List<Landmark> listOfItineraryLandmarks = itineraryToUpdate.getListOfStops();
+        String insertStatementsForLandmarks = "";
+        int itineraryId = itineraryToUpdate.getItineraryId();
+        String itineraryName = itineraryToUpdate.getItineraryName();
+        int startingLocationId = itineraryToUpdate.getStartingLocationId();
+        LocalDate tourDate = itineraryToUpdate.getTourDate();
+
+        for (int i = 0; i < listOfItineraryLandmarks.size(); i++) {
+            String insertStatement = "INSERT INTO itineraries_landmarks (itinerary_id, landmark_id, stop_order) " +
+                    "VALUES (" + itineraryId + ", " + listOfItineraryLandmarks.get(i).getLandmarkId() + ", " + (i + 1) + ");";
+            insertStatementsForLandmarks += insertStatement;
+        }
+        String sql = "START TRANSACTION; " +
+                "UPDATE itinerary SET itinerary_name = ?, starting_location_id = ?, tour_date = ? WHERE itinerary_id = ?; " +
+                "DELETE FROM itineraries_landmarks * WHERE itinerary_id = ?; " + insertStatementsForLandmarks + " COMMIT;";
+        try {
+            jdbcTemplate.update(sql, itineraryName, startingLocationId, tourDate, itineraryId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+
+    }
+
 
     @Override
     public List<String> retrieveItineraryStops(int itineraryId) {

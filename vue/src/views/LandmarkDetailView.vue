@@ -16,7 +16,7 @@
       </select>
       <input type="button" @click="addToItinerary()" value="Go!">
     </div>
-    <div v-if="notification" :class="[notification.type]">
+    <div v-if="notification">
       {{ notification.message }}
     </div>
     <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
@@ -60,6 +60,11 @@ export default {
 
 
   computed: {
+
+    notification() {
+      return this.$store.state.notification;
+    },
+
     formattedDesignations() {
       return this.designations.map(d => d.designationName).join(', ');
     },
@@ -88,14 +93,14 @@ export default {
 
     website() {
       if (this.placesData.website != null) {
-      return this.placesData.website;
+        return this.placesData.website;
       }
       return '';
     },
 
     url() {
       if (this.placesData.url != null) {
-      return this.placesData.url;
+        return this.placesData.url;
       }
       return '';
     },
@@ -191,7 +196,8 @@ export default {
       if (!this.validateForm) {
         return;
       }
-      itineraryService.updateItinerary(this.editItinerary).then(response => {
+      const landmarkId = this.$route.params.id;
+      itineraryService.addLandmarkToItinerary(landmarkId, this.editItinerary).then(response => {
         if (response.status < 300 && response.status > 199) {
           this.$store.commit(
             'SET_NOTIFICATION',
@@ -239,8 +245,6 @@ export default {
 </script>
 
 <styles scoped>
-
-
 
 
 </styles>

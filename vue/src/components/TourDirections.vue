@@ -17,7 +17,7 @@
 <script>
 
 export default {
-    props: ['thisRoute'],
+    props: ['thisRoute', 'index'],
 
     data() {
         return {
@@ -29,6 +29,11 @@ export default {
 
         steps() {
             return this.thisRoute.legs[0].steps;
+        }
+    },
+    methods: {
+        collapse() {
+            this.$emit('collapse', this.index);
         }
     }
 }
