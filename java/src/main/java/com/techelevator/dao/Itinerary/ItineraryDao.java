@@ -17,7 +17,9 @@ public interface ItineraryDao {
 
     Itinerary createItinerary(CreateItineraryDTO itinerary, Principal principal, String placeId, String address);
 
-    void addLandmarkToItinerary(AddOrDeleteLandmarkDTO itinerary);
+    void addLandmarkToItinerary(AddOrDeleteLandmarkDTO itineraryDTO);
+
+    void deleteLandmarkFromItinerary(AddOrDeleteLandmarkDTO itineraryDTO);
 
     int deleteItinerary(int itineraryId);
 

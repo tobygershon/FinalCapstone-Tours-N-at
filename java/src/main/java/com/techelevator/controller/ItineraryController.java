@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
+
 @PreAuthorize("isAuthenticated()")
 @RestController
 @CrossOrigin
@@ -79,15 +80,15 @@ public class ItineraryController {
         return updatedItinerary;
     }
 
+    @DeleteMapping("/landmarks/{landmarkId}/{itineraryId}")
+    public void deleteLandmarkFromItinerary(@RequestBody AddOrDeleteLandmarkDTO itineraryDTO, @PathVariable int landmarkId, @PathVariable int itineraryId) {
+        itineraryDao.deleteLandmarkFromItinerary(itineraryDTO);
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/itineraries/{itineraryId}")
     public void deleteItinerary(@PathVariable int itineraryId) {
-        int rowsAffected = itineraryDao.deleteItinerary(itineraryId);
-
-//        if (rowsAffected == 0) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Itinerary not found.");
-//        }
-
+        itineraryDao.deleteItinerary(itineraryId);
     }
 
 }
