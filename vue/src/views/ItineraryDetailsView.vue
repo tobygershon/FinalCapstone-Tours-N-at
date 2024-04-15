@@ -4,17 +4,26 @@
         <div>{{ itinerary.itineraryName }}</div>
         <div>{{ itinerary.startingLocationName }}</div>
         <div>{{ itinerary.tourDate }}</div>
-        <router-link  :to="{ name: 'landmarkDetailsView', params: { id: landmark.landmarkId } }"
+        <router-link :to="{ name: 'landmarkDetailsView', params: { id: landmark.landmarkId } }"
             v-for="landmark in itinerary.listOfStops" :key="landmark.landmarkId">
             <div class="button-container"><button>
-                {{ landmark.landmarkName }}
-            </button></div>
+                    {{ landmark.landmarkName }}
+                </button></div>
         </router-link>
         <router-link  :to="{ name: 'editItineraryDetailsView', params: { itineraryId: this.$route.params.itineraryId } }">
             <div class="button-container"><button>
                 Edit Itinerary
             </button></div>
         </router-link>
+
+        <div id="submitDiv">
+            <router-link :to="{ name: 'tourRoute', params: { itineraryId: this.$route.params.itineraryId } }">
+                <div id="getDirections">
+                <button>Get My Directions</button>
+            </div>
+            </router-link>
+        </div>
+
     </div>
 </template>
 
@@ -109,4 +118,31 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+
+#submitDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+#getDirections {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2A2E34;
+    color: #E9EAEC;
+    border: solid #E4B61A 2px;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+#getDirections:hover {
+    background-color: #0B0C0C;
+}
+
+a {
+    justify-content: center;
+}
+</style>

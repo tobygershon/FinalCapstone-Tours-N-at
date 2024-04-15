@@ -8,6 +8,7 @@ import com.techelevator.dao.User.UserDao;
 import com.techelevator.dao.User.model.User;
 import com.techelevator.service.GeocodingService;
 import com.techelevator.service.PlacesService;
+import com.techelevator.service.models.geocoder.GeocodeResults;
 import com.techelevator.service.models.geocoder.Results;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,15 +47,21 @@ public class ItineraryController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/itineraries")
     public Itinerary createItinerary(@RequestBody CreateItineraryDTO newItinerary, Principal principal) {
+        Itinerary returnObject = null;
         User user = userDao.getUserByUsername(principal.getName()); //is this needed?
 
-        Results result = geocodingService.getGeocodeInfo(newItinerary.getStartingLocation()).getResults()[0];
-        String placeId = result.getPlaceId();
-        String placeAddress = result.getAddress();
-        String placeName = placesService.getPlaceInfoByPlaceId(placeId).getName();
-        newItinerary.setStartingLocation(placeName);
+        GeocodeResults result = geocodingService.getGeocodeInfo(newItinerary.getStartingLocation());
+        if (result == null) {
+            
+        } else {
+            String placeId = result.getResults()[0].getPlaceId();
+            String placeAddress = result.getResults()[0].getAddress();
+            String placeName = placesService.getPlaceInfoByPlaceId(placeId).getName();
+            newItinerary.setStartingLocation(placeName);
 
-        return itineraryDao.createItinerary(newItinerary, principal, placeId, placeAddress);
+            returnObject = itineraryDao.createItinerary(newItinerary, principal, placeId, placeAddress);
+        }
+        return returnObject;
     }
 
     @PutMapping("/landmarks/{landmarkId}/{itineraryId}")
