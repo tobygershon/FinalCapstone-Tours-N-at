@@ -1,24 +1,35 @@
 <template>
-    <div class="button-container">
-        <button v-if="isLoggedIn && isLoggedInUsersItinerary" @click="deleteItinerary">
-            Delete Itinerary
-        </button>
-    </div>
-    <div>
-        <label for="itineraryNameText">Itinerary Name:</label>
-        <input type="text" name="itineraryNameText" id="itineraryNameText" v-model="editItinerary.itineraryName">
-    </div>
-    <div>
-        <label for="startingPointText">Starting Location:</label>
-        <input type="text" name="startingPointText" id="startingPointText" v-model="editItinerary.startingLocationName">
-    </div>
-    <div>
-        <label for="dateSelector">Tour Date:</label>
-        <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
-    </div>
-    <div>
-        <input type="button" @click="updateItinerary" value="Save">
-        <input type="button" value="Cancel">
+    <div class="landmark-container">
+
+        <div>
+            <label for="itineraryNameText">Itinerary Name:</label>
+            <input type="text" name="itineraryNameText" id="itineraryNameText" v-model="editItinerary.itineraryName">
+        </div>
+        <div>
+            <label for="startingPointText">Starting Location:</label>
+            <input type="text" name="startingPointText" id="startingPointText" v-model="editItinerary.startingLocationName">
+        </div>
+        <div>
+            <label for="dateSelector">Tour Date:</label>
+            <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
+        </div>
+        <div>
+
+        </div>
+        <div class="tooling-button-div">
+            <div class="tooling-button">
+                <button @click="updateItinerary">Save Itinerary</button>
+            </div>
+            <div class="tooling-button">
+                <button @click="cancelItineraryForm">Cancel Changes</button>
+            </div>
+            <div class="tooling-button">
+                <button v-if="isLoggedIn && isLoggedInUsersItinerary" @click="deleteItinerary">
+                    Delete Itinerary
+                </button>
+            </div>
+        </div>
+
     </div>
 </template>
   
@@ -79,7 +90,7 @@ export default {
             itineraryService
                 .updateItinerary(this.editItinerary)
                 .then(response => {
-                    if (response.status >= 200 && response.status < 300 ) {
+                    if (response.status >= 200 && response.status < 300) {
                         this.$store.commit(
                             'SET_NOTIFICATION',
                             {
@@ -95,6 +106,10 @@ export default {
                 });
 
 
+        },
+
+        cancelItineraryForm() {
+            this.$router.push({ name: 'itineraryDetail', params: { itineraryId: this.editItinerary.itineraryId } });
         },
 
         handleErrorResponse(error, verb) {
