@@ -227,7 +227,7 @@ public class JdbcItineraryDao implements ItineraryDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-        return numOfRows;
+
     }
 
 
