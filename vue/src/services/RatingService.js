@@ -10,8 +10,8 @@ export default {
         return axios.get(`/landmarks/${landmarkId}/ratings`);
     },
 
-    createRating(landmarkId, isGood) {
-        return axios.post(`/landmarks/${landmarkId}/ratings`, { isGood });
+    createOrUpdateRating(landmarkId, isGood) {
+        return axios.put(`/landmarks/${landmarkId}/ratings`, { isGood });
     },
 
     updateRating(ratingId, isGood) {

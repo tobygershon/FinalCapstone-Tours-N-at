@@ -51,13 +51,6 @@ public class Rating {
         this.isGood = isGood;
     }
 
-    public boolean isGood() {
-        return isGood;
-    }
-
-    public void setGood(boolean good) {
-        isGood = good;
-    }
 
     public String getLandmarkName() {
         return landmarkName;

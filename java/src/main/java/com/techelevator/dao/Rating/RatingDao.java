@@ -19,4 +19,6 @@ public interface RatingDao {
     void updateRating(Rating rating);
 
     void deleteRating(int ratingId);
+
+    Rating findRatingByUserAndLandmark(int userId, int landmarkId);
 }
