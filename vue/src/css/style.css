@@ -28,6 +28,7 @@
 }
 
 .button-container button {
+  width: 15rem;
   margin: 5px;
   padding: 10px 20px;
   background-color: rgba(251, 225, 52, 0.7);
@@ -114,4 +115,31 @@
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: #FBE134;
+}
+
+.tooling-button-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tooling-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2A2E34;
+  color: #E9EAEC;
+  border: solid #E4B61A 2px;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.tooling-button:hover {
+  background-color: #0B0C0C;
+}
+
+a {
+  justify-content: center;
 }

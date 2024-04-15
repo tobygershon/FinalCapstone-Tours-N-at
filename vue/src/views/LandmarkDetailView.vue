@@ -58,6 +58,11 @@ export default {
 
 
   computed: {
+
+    notification() {
+      return this.$store.state.notification;
+    },
+
     formattedDesignations() {
       return this.designations.map(d => d.designationName).join(', ');
     },
@@ -189,7 +194,8 @@ export default {
       if (!this.validateForm) {
         return;
       }
-      itineraryService.updateItinerary(this.editItinerary).then(response => {
+      const landmarkId = this.$route.params.id;
+      itineraryService.addLandmarkToItinerary(landmarkId, this.editItinerary).then(response => {
         if (response.status < 300 && response.status > 199) {
           this.$store.commit(
             'SET_NOTIFICATION',

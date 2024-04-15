@@ -11,11 +11,18 @@
                 </button></div>
         </router-link>
 
-        <div id="submitDiv">
+
+        <div id="submitDiv" class="tooling-button-div">
             <router-link :to="{ name: 'tourRoute', params: { itineraryId: this.$route.params.itineraryId } }">
-                <div id="getDirections">
-                <button>Get My Directions</button>
-            </div>
+                <div id="getDirections" class="tooling-button">
+                    <button>Get My Directions</button>
+                </div>
+            </router-link> &nbsp;&nbsp;
+            <router-link
+                :to="{ name: 'editItineraryDetailsView', params: { itineraryId: this.$route.params.itineraryId } }">
+                <div class="tooling-button"><button>
+                        Edit Itinerary
+                    </button></div>
             </router-link>
         </div>
 
@@ -43,7 +50,6 @@ export default {
                 startingLocationId: '',
                 startingLocationName: '',
                 tourDate: '',
-                tourId: '',
                 listOfStops: []
             }
         }
@@ -115,13 +121,13 @@ export default {
 </script>
 
 <style>
-
-#submitDiv {
+.tooling-button-div {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
-#getDirections {
+
+.tooling-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +140,7 @@ export default {
     font-weight: 600;
 }
 
-#getDirections:hover {
+.tooling-button:hover {
     background-color: #0B0C0C;
 }
 
