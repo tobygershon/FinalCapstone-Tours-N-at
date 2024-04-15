@@ -15,13 +15,11 @@
                 <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
             </div>
         </div>
-
-        <div v-for="landmark in itinerary.listOfStops" :key="landmark.landmarkId">
-
-            <div class="button-container"><button>
-                    {{ landmark.landmarkName }}
-                </button></div>
-        </div>
+        <draggable v-model="editItinerary.listOfStops" tag="ul" itemKey="landmarkId">
+            <template #item="{ element: stop }">
+                <div class="button-container"><button><li>{{ stop.landmarkName }}</li></button></div>
+            </template>
+        </draggable>
         <div class="tooling-button-div">
             <div class="tooling-button">
                 <button @click="updateItinerary">Save Itinerary</button>
@@ -41,8 +39,13 @@
   
 <script>
 import itineraryService from '../services/ItineraryService';
+import draggable from 'vuedraggable';
 
 export default {
+
+    components: {
+        draggable,
+    },
 
     props: {
         itinerary: {
@@ -104,7 +107,7 @@ export default {
                                 type: 'success'
                             }
                         );
-                        this.$router.push({ name: 'itineraryList', params: { id: this.addItinerary.itineraryId } });
+                        this.$router.push({ name: 'itineraryList', params: { id: this.editItinerary.itineraryId } });
                     }
                 })
                 .catch(error => {
@@ -177,12 +180,12 @@ export default {
 </script>
 
 <style scoped>
-
 .landmark-container {
     display: flex;
     flex-direction: column;
     width: 70vw;
 }
+
 #itinerary-form {
     display: flex;
     flex-direction: column;
@@ -194,5 +197,4 @@ export default {
     align-items: center;
     justify-content: space-around;
 }
-
 </style>
