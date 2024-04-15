@@ -17,7 +17,7 @@ export default {
 
     data() {
         return {
-        
+
         }
     },
 
@@ -30,16 +30,20 @@ export default {
         zoomLevel() {
             let zoom = '9';
 
-            if (this.distance.value <1500) {
+            if (this.distance.value < 750) {
+                zoom = '15';
+            } else if (this.distance.value < 2000) {
                 zoom = '14';
-            } else if (this.distance.value < 3000) {
+            } else if (this.distance.value < 4000) {
                 zoom = '13';
-            } else if (this.distance.value < 6000) {
+            } else if (this.distance.value < 8000) {
                 zoom = '12';
-            } else if (this.distance.value < 12000) {
+            } else if (this.distance.value < 15000) {
                 zoom = '11';
-            } else {
+            } else if (this.distance.value < 20000) {
                 zoom = '10';
+            } else {
+                zoom = '9';
             }
             return zoom.toString();
         },
@@ -72,18 +76,7 @@ export default {
     },
 
     methods: {
-        computeMapZoom() {
-            if (this.distance.value < 1500) {
-                this.zoom = '13';
-            } else if (this.distance.value <4500) {
-                this.zoom = '12';
-            } else if (this.distance.value < 10000) {
-                this.zoom = '11';
-            } else {
-                this.zoom = '10';
-            }
-            return this.zoom;
-        }
+
     }
 }
 
