@@ -4,7 +4,6 @@ import { createStore } from './store'
 import router from './router'
 import axios from 'axios'
 import 'bulma/css/bulma.css'
-// import ToastService from 'vue-toasted'
 
 /* sets the base url for server API communication with axios */
 axios.defaults.baseURL = import.meta.env.VITE_REMOTE_API;
@@ -37,5 +36,4 @@ const store = createStore(currentToken, currentUser);
 const app = createApp(CapstoneApp);
 app.use(store);
 app.use(router);
-// app.use(ToastService);
 app.mount('#app');
