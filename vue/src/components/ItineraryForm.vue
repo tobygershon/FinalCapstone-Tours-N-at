@@ -66,6 +66,9 @@ export default {
             itineraryService
                 .createItinerary(this.addItinerary)
                 .then(response => {
+                    if (response.data === null) {
+                        alert('Your starting location could not be found.  Please enter a valid address.');
+                    }
                     if (response.status === 201) {
                         this.$store.commit(
                             'SET_NOTIFICATION',
