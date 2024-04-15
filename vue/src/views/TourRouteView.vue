@@ -1,9 +1,9 @@
 <!-- come here when tour route for an itinerary is generated: displays maps and written directions component -->
 
 <template>
-  <div id="directionsStep" v-for="(route, index) in routes" :key="index">
+  <div id="directionsStep" v-for="(route, index) in routes" :key="index" >
     <Map :thisRoute="route"></Map>
-    <TourDirections :thisRoute="route" />
+    <TourDirections v-if="!isCollapsed.includes(index)" @collapse="collapse" :thisRoute="route" :index="index"/>
   </div>
 </template>
 
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       routes: [],
+      isCollapsed: []
     }
   },
 
@@ -31,6 +32,10 @@ export default {
       DirectionsService.getDirections(this.$route.params.itineraryId).then(response => {
         this.routes = response.data.routes;
       })
+    },
+
+    collapse(index) {
+
     }
 
   },
@@ -48,7 +53,7 @@ export default {
 
 #directionsStep {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin: 20px 0;
   padding: 0 0 10px 0;
   border: solid rgb(42, 46, 52) 5px;
