@@ -21,6 +21,7 @@
             <div class="button-container"><button>
                     {{ landmark.landmarkName }}
                 </button></div>
+            <button @click="deleteLandmarkFromItinerary(landmark.id)">Remove stop</button>
         </div>
         <div class="tooling-button-div">
             <div class="tooling-button">
@@ -61,6 +62,11 @@ export default {
                 startingLocationName: this.itinerary.startingLocationName,
                 tourDate: this.itinerary.tourDate,
                 listOfStops: this.itinerary.listOfStops
+            },
+
+            removeLandmark: {
+                itineraryId: '',
+                landmarkId: ''
             }
 
         }
@@ -171,22 +177,50 @@ export default {
             return true;
         },
 
+        deleteLandmarkFromItinerary(landmarkId) {
+            if (!this.validateForm()) {
+                return;
+            }
+            const itineraryId = this.itinerary.itineraryId;
+            itineraryService.deleteLandmarkFromItinerary(landmarkId, itineraryId)
+                .then(response => {
+                    if (response.status < 300 && response.status > 199) {
+                        this.$store.commit(
+                            'SET_NOTIFICATION',
+                            {
+                                message: `Your stop was removed from your itinerary.`,
+                                type: 'success'
+                            }
+                        );
+                    }
+                })
+                .catch(error => {
+                    if (error.response) {
+                        this.$store.commit('SET_NOTIFICATION',
+                            "Error deleting landmark from itinerary. Response received was '" + error.response.statusText + "'.");
+                    } else if (error.request) {
+                        this.$store.commit('SET_NOTIFICATION', "Error deleting itinerary. Server could not be reached.");
+                    } else {
+                        this.$store.commit('SET_NOTIFICATION', "Error deleting itinerary. Request could not be created.");
+                    }
+                });
+        }
+
     },
 }
 
 </script>
 
 <style scoped>
-
 .landmark-container {
     display: flex;
     flex-direction: column;
     width: 70vw;
 }
+
 #itinerary-form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-
 </style>
