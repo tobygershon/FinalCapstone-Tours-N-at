@@ -18,6 +18,11 @@
                     <button>Get My Directions</button>
                 </div>
             </router-link> &nbsp;&nbsp;
+            <router-link :to="{ name: 'itineraryList' }">
+                <div  class="tooling-button">
+                    <button>Back to Itineraries</button>
+                </div>
+            </router-link> &nbsp;&nbsp;
             <router-link
                 :to="{ name: 'editItineraryDetailsView', params: { itineraryId: this.$route.params.itineraryId } }">
                 <div class="tooling-button"><button>
@@ -120,7 +125,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.landmark-container {
+    width: 70vw;
+    font-weight: 600;
+}
 .tooling-button-div {
     display: flex;
     justify-content: center;
