@@ -18,12 +18,13 @@ export default {
 <style scoped>
 .rating-container {
     align-items: center;
+    background-color: rgba(251, 225, 52, 0.7);
+    border: solid 2px black;
+    border-radius: 0.5rem;
+    font-weight: 500px;
     margin: 20px auto;
     padding: 20px;
-    background-color: rgba(251, 225, 52, 0.7);
     text-align: center;
-    border: solid 2px black;
     width: auto;
-    font-weight: 500px;
 }
 </style>
