@@ -100,7 +100,7 @@ export default {
                         this.$store.commit(
                             'SET_NOTIFICATION',
                             {
-                                message: 'A new itinerary was added.',
+                                message: 'You itinerary was updated.',
                                 type: 'success'
                             }
                         );
@@ -161,7 +161,7 @@ export default {
             if (this.editItinerary.startingLocationName.length === 0) {
                 msg += 'The itinerary must have a starting location.';
             }
-            if (this.editItinerary.date.length === 0) {
+            if (this.editItinerary.tourDate.length === 0) {
                 msg += 'The itinerary must have a date of today or later.';
             }
             if (msg.length > 0) {

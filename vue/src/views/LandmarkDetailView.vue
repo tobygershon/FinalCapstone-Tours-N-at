@@ -7,8 +7,8 @@
     <a :href="url" :target="'_blank'">Interactive Map</a>
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
-    <p>Ratings: {{ landmark.ratings }}</p>
-    <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
+    <!-- <p>Ratings: {{ landmark.ratings }}</p> -->
+    <button v-if="isLoggedIn" @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
     <div v-if="showDropdown">
       <select v-model="editItinerary.itineraryId">
         <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}
@@ -16,10 +16,10 @@
       </select>
       <input type="button" @click="addToItinerary()" value="Go!">
     </div>
-    <div v-if="notification">
+    <div v-if="notification && isLoggedIn">
       {{ notification.message }}
     </div>
-    <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
+    <LandmarkRating v-if="isLoggedIn" :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
 
@@ -103,9 +103,13 @@ export default {
       return '';
     },
 
-    notification() {
-      return this.$store.state.notification;
-    }
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    },
+
+    // notification() {
+    //   return this.$store.state.notification;
+    // }
   },
 
   methods: {
