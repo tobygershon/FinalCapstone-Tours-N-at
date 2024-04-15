@@ -1,8 +1,8 @@
 <!-- search component for searching landmarks. Want filtering ability for types of attractions? -->
 <template>
     <div id="searchBars">
-        <div>
-            <span>Search Points of Interest by Name:</span>
+        <div id="searchInput">
+            <span>Search Points of Interest by Name:&nbsp;</span>
             <input v-model="searchTerm" placeholder="Enter landmark name" />
             <input type="button" @click="searchByName" value="Go!">
             <div v-if="message" class="alert-message">
@@ -10,7 +10,10 @@
             </div>
         </div>
 
-        <label for="points-of-interest-category-dropdown">Search Points of Interest by Category:</label>
+        <img id="tour-logo" src="../assets/Tours_Nat.png" alt="">
+
+        <div id="searchDropDown">
+        <label for="points-of-interest-category-dropdown">Search Points of Interest by Category:&nbsp;</label>
         <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
             <option value=""> </option>
             <option value="Search All">Search All</option>
@@ -24,6 +27,7 @@
             <option value="Sporting Venue">Sporting Venue</option>
         </select>
         <input type="button" @click="retrieveLandmarks" value="Go!">
+    </div>
     </div>
     <LandmarkList :landmarks="landmarks" />
 </template>
@@ -110,15 +114,30 @@ export default {
 <style scoped>
 
 #searchBars {
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
     background-color: #2A2E34;
-    padding: 10px;
+    padding: 0 10px;
     border-radius: 20px;
-    /* position: relative;
-    top: -40px;
-    left: auto; */
     border: 2px solid #FBE134;
-    width: 75vw;
+    width: 85vw;
     color: #FBE134;
+    position: relative;
+    top:5px;
 }
+
+#searchDropDown, #searchInput {
+    display: flex;
+    align-items: center;
+}
+
+#tour-logo {
+  height: 85px;
+  padding: 0;
+  margin: 1px 10px;
+}
+
+
 
 </style>
