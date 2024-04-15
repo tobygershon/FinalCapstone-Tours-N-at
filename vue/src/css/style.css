@@ -29,7 +29,7 @@ h2 {
   min-width: 500px;
   min-height: 10rem;
   border-radius: 0.5rem;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .button-container button {
@@ -135,7 +135,7 @@ h2 {
   background-color: #2A2E34;
   color: #E9EAEC;
   border: solid #E4B61A 2px;
-  width: 10rem;
+  width: 9.75rem;
   height: 3rem;
   border-radius: 10px;
   font-weight: 600;
