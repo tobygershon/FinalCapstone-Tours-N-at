@@ -1,6 +1,9 @@
 package com.techelevator.service;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.service.models.geocoder.GeocodeResults;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 public class GeocodingService {
@@ -15,6 +18,7 @@ public class GeocodingService {
 
         String[] addressArray = addressInput.split(" ");
         String urlInput = "";
+        GeocodeResults results = null;
 
         for (int i = 0; i < addressArray.length - 1; i++) {
             urlInput += (addressArray[i] + "+");
@@ -22,8 +26,12 @@ public class GeocodingService {
         urlInput += addressArray[addressArray.length - 1];
 
         String url = BASE_URL + urlInput + "Pittsburgh" + API_KEY;
-
-        return restTemplate.getForObject(url, GeocodeResults.class);
+        try {
+            results = restTemplate.getForObject(url, GeocodeResults.class);
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            throw new DaoException("Service is unable to return a valid response");
+        }
+        return results;
     }
 
 

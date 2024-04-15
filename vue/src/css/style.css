@@ -3,6 +3,7 @@
   padding-left: 50px;
   padding-right: 50px;
   display: flex;
+  justify-content: center;
   background-image: url('https://cdn.britannica.com/74/65574-050-B1A02E0C/Downtown-Pittsburgh-Pennsylvania-Fort-Pitt-Bridge-Monongahela.jpg');
   background-size: cover;
   background-position: center;
