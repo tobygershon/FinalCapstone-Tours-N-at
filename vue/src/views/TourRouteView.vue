@@ -48,6 +48,7 @@ export default {
 
 #directionsStep {
   display: flex;
+  justify-content: space-evenly;
   margin: 20px 0;
   padding: 0 0 10px 0;
   border: solid rgb(42, 46, 52) 5px;

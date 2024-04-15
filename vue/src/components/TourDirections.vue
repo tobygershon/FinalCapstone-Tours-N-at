@@ -3,7 +3,7 @@
 <template>
     <div id="directionsBox">
         <div id="collapseBTN">
-            <button>- collapse</button>
+            <button>- COLLAPSE</button>
         </div>
         <div v-for="(step, index) in steps" :key="index" id="directionStep">
             <div id="step">
@@ -18,6 +18,12 @@
 
 export default {
     props: ['thisRoute'],
+
+    data() {
+        return {
+            stepIsShowing: true
+        }
+    },
 
     computed: {
 
@@ -38,19 +44,20 @@ export default {
     align-items: center;
     justify-content: flex-end;
     height: 35px;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 900;
 
 }
 #directionsBox {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin: 0 10px 0 5px;
 }
 
 #directionStep {
     display: flex;
+    margin-bottom: 5px;
 }
 
 #step {
