@@ -1,27 +1,30 @@
 <template>
   <div class="landmark-container">
-    <h2>{{ landmark.landmarkName }}</h2>
-    <p>Address: {{ landmark.address }}</p>
-    <p>Description: {{ description }}</p>
-    <a :href="website" :target="'_blank'">Website</a>&nbsp;|&nbsp;
-    <a :href="url" :target="'_blank'">Interactive Map</a>
-    <p>Designation: {{ formattedDesignations }}</p>
-    <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
+    <h2 class="landmark-h2">{{ landmark.landmarkName }}</h2>
+    <p class="landmark-address">Address: {{ landmark.address }}</p>
+    <p class="landmark-description">Description: {{ description }}</p>
+    <div class="web-map">
+      <a class="landmark-website" :href="website" :target="'_blank'">Website</a>&nbsp;|&nbsp;
+      <a class="landmark-map" :href="url" :target="'_blank'">Interactive Map</a>
+    </div>
+    <p class="landmark-designation">Designation: {{ formattedDesignations }}</p>
+    <p class="landmark-working-hours" v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
     <!-- <p>Ratings: {{ landmark.ratings }}</p> -->
-    <button v-if="isLoggedIn" @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
-    <div v-if="showDropdown">
+    <button class="landmark-add-to-itinerary-button" v-if="isLoggedIn" @click="toggleDropdown"><i class="fas fa-plus"></i>
+      Add to Itinerary</button> <br>
+    <div class="landmark-dropdown" v-if="showDropdown">
       <select v-model="editItinerary.itineraryId">
         <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}
         </option>
       </select>
-      <input type="button" @click="addToItinerary()" value="Go!">
+      <input class="landmark-go-button" type="button" @click="addToItinerary()" value="Go!">
     </div>
     <div v-if="notification && isLoggedIn">
       {{ notification.message }}
     </div>
     <LandmarkRating v-if="isLoggedIn" :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
-    <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
+    <router-link class="back-button" to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
 
     <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
 
