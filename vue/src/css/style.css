@@ -16,7 +16,7 @@ h2 {
   font-weight: 600;
 }
 
-.landmark-container {
+.landmark-container, .text-center {
   position: relative;
   align-items: center;
   font-weight: 600;
@@ -265,3 +265,4 @@ a {
   background-color: #2A2E34;
   color: #FBE134;
 }
+
