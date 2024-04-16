@@ -17,27 +17,29 @@
   </div>
 </template>
 
-
 <script>
-import RatingService from '../services/RatingService';
+import ratingService from '../services/RatingService';
 
 export default {
   name: 'RatingComponent',
+
   props: {
     landmarkId: {
       type: Number,
       required: true
     }
   },
+
   data() {
     return {
-      currentRating: null
+      currentRating: null,
+      ratingId: ''
     };
   },
   methods: {
     rate(isGood) {
       this.currentRating = isGood;
-      RatingService.createOrUpdateRating(this.landmarkId, isGood)
+      ratingService.createOrUpdateRating(this.landmarkId, isGood)
         .then(response => {
           this.$emit('rated', response.data);
         })
@@ -45,10 +47,40 @@ export default {
           console.error('Failed to post rating:', error);
         });
     },
+
     clearRating() {
-      this.currentRating = null;
-      this.$emit('ratingCleared', { landmarkId: this.landmarkId });
+      ratingService.deleteRating(this.ratingId).then(response => {
+        this.$store.commit('SET_NOTIFICATION',
+          {
+            message: 'Rating has been deleted',
+            type: 'success'
+          });
+          this.currentRating = null;
+      })
+        .catch(error => {
+          if (error.response) {
+            this.$store.commit('SET_NOTIFICATION',
+              "Error deleting rating. Response received was '" + error.response.statusText + "'.");
+          } else if (error.request) {
+            this.$store.commit('SET_NOTIFICATION', "Error deleting rating. Server could not be reached.");
+          } else {
+            this.$store.commit('SET_NOTIFICATION', "Error deleting rating. Request could not be created.");
+          }
+        });
+    },
+
+    retrieveRating() {
+      ratingService.getRatingByLandmarkIdForLoggedInUser(this.$route.params.id).then(response => {
+        this.currentRating = response.data.isGood;
+        this.ratingId = response.data.ratingId;
+      })
     }
+
+  },
+
+  created() {
+    this.retrieveRating();
   }
+
 }
 </script>
