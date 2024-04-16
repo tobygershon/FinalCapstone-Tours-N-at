@@ -41,9 +41,25 @@ export default {
           console.error('Failed to post rating:', error);
         });
     },
+
     clearRating() {
-      this.currentRating = null;
-      this.$emit('ratingCleared', { landmarkId: this.landmarkId });
+      ratingService.deleteRating(this.currentRating.ratingId).then(response => {
+        this.$store.commit('SET_NOTIFICATION',
+          {
+            message: 'Rating has been deleted',
+            type: 'success'
+          });
+      })
+        .catch(error => {
+          if (error.response) {
+            this.$store.commit('SET_NOTIFICATION',
+              "Error deleting rating. Response received was '" + error.response.statusText + "'.");
+          } else if (error.request) {
+            this.$store.commit('SET_NOTIFICATION', "Error deleting rating. Server could not be reached.");
+          } else {
+            this.$store.commit('SET_NOTIFICATION', "Error deleting rating. Request could not be created.");
+          }
+        });
     },
 
     retrieveRating() {
@@ -51,6 +67,7 @@ export default {
         this.currentRating = response.data.isGood;
       })
     }
+
   },
 
   created() {
