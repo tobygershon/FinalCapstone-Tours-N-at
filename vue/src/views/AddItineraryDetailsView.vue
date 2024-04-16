@@ -1,6 +1,6 @@
 <template>
     <router-link :to="{ name: 'itineraryList'}">
-        <div class="returnButton">
+        <div class="tooling-button">
            <button>Back to Itineraries</button>
         </div>
     </router-link>

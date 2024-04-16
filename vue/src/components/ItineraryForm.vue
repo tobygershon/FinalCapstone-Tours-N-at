@@ -20,7 +20,8 @@
         </div>
         <div class="tooling-button-div">
             <div class="tooling-button"><button @click="submitItinerary">Save</button></div>
-            <div class="tooling-button"><button>Cancel</button></div>
+            <router-link :to="{ name: 'itineraryList'}"><div class="tooling-button"><button>Cancel</button></div></router-link>
+            
         </div>
     </div>
 </template>
