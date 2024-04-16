@@ -138,6 +138,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    justify-content: space-around;
 }
 
 .tooling-button {
@@ -161,7 +162,7 @@ a {
     justify-content: center;
 }
 .itinerary-container {
-    
+
 }
 
 #itinerary-form {
@@ -170,12 +171,7 @@ a {
     align-items: flex-start;
 }
 
-.tooling-button-div {
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
+
 
 .button-container button {
     width: 22rem;
