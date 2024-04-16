@@ -23,12 +23,7 @@ import ratingService from '../services/RatingService';
 
 export default {
   name: 'RatingComponent',
-  props: {
-    landmarkId: {
-      type: Number,
-      required: true
-    }
-  },
+
   data() {
     return {
       currentRating: null,
@@ -58,7 +53,7 @@ export default {
     }
   },
 
-  created(){
+  created() {
     this.retrieveRating();
   }
 }
