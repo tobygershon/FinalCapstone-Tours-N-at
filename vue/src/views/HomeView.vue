@@ -1,36 +1,43 @@
 <template>
-  <div class="home">
-
-
+  <div id="home">
+    <div>
+      <img id="tour-logo" src="../assets/Tours_Nat.png" alt="">
+    </div>
+    <div id="about">
+      <h1>Tours N'at</h1>
+    </div>
   </div>
-
-  <!-- add nav bar: login logout itineraries 
-    want to add map and search components -->
-  <div id="searchBox">
-    
-    <Search />
-  </div>
- 
 </template>
 
 <script>
-import Search from '../components/Search.vue';
+
 
 
 export default {
 
   components: {
-    Search
+
   },
 
 };
 </script>
 
-<style>
-
-#searchBox {
+<style scoped>
+#home {
+  font-weight: 700;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  background-color: #2A2E34;
+  padding: 0 10px;
+  border-radius: 20px;
+  border: 2px solid #FBE134;
+  width: 85vw;
+  height: 45vh;
+  color: #FBE134;
+  top: 5px;
+}
+
+#tour-logo {
+  height: 45vh;
 }
 </style>
