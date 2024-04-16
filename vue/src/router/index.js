@@ -57,7 +57,6 @@ const routes = [
     }
   },
   {
-    // do we want userId in path as well to access through $route?
     path: '/itineraries/:itineraryId',
     name: 'itineraryDetail',
     component: ItineraryDetailsView,

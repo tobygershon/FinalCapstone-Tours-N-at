@@ -3,7 +3,7 @@
 <template>
     <div id="directionsBox">
         <div id="collapseBTN">
-            <span @click="collapse()">- COLLAPSE</span>
+            <span @click="collapse">- COLLAPSE</span>
         </div>
         <div v-for="(step, index) in steps" :key="index" id="directionStep">
             <div id="step">
@@ -21,7 +21,7 @@ export default {
 
     data() {
         return {
-        
+    
         }
     },
 

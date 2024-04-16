@@ -3,7 +3,7 @@
 <template>
   <div id="directionsStep" v-for="(route, index) in routes" :key="index">
     <div v-if="!isCollapsed.includes(index)" class="directionStepDiv">
-      <Map :thisRoute="route"></Map>
+      <Map :thisRoute="route" :url="urlList[index]"></Map>
       <TourDirections @collapse="collapse" :thisRoute="route" :index="index" />
     </div>
     <div v-else class="directionStepDiv" id="collapsedDiv">
@@ -16,6 +16,7 @@
 import Map from '../components/Map.vue';
 import TourDirections from '../components/TourDirections.vue';
 import DirectionsService from '../services/DirectionsService.js';
+import ItineraryService from '../services/ItineraryService';
 
 export default {
 
@@ -27,7 +28,8 @@ export default {
   data() {
     return {
       routes: [],
-      isCollapsed: []
+      isCollapsed: [],
+      urlList: []
     }
   },
 
@@ -36,6 +38,12 @@ export default {
     getRoutes() {
       DirectionsService.getDirections(this.$route.params.itineraryId).then(response => {
         this.routes = response.data.routes;
+      })
+    },
+
+    getURLs() {
+      ItineraryService.getListOfPlaceUrlByItineraryId(this.$route.params.itineraryId).then(response => {
+        this.urlList = response.data;
       })
     },
 
@@ -52,6 +60,7 @@ export default {
 
   created() {
     this.getRoutes();
+    this.getURLs();
   }
 
 }

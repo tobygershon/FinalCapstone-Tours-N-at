@@ -5,16 +5,16 @@
     <div id=mapDiv>
         <div id="distance">Distance: {{ distance.text }}</div>
         <img :src=mapURL alt="map route" id="map">
-        <a href="" :target="'_blank'"></a>
+        <a :href="url" :target="'_blank'">Click to see Interactive Map for your Destination</a>
     </div>
 </template>
 
 <script>
-import 
+
 
 export default {
 
-    props: ['thisRoute'],
+    props: ['thisRoute', 'url'],
 
     data() {
         return {
@@ -102,5 +102,16 @@ export default {
 #map {
     margin: 0 5px 5px 5px;
     border-radius: 3px;
+}
+
+a {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: #2A2E34;
+}
+
+a:hover {
+    color: #E9EAEC;
 }
 </style>
