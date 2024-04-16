@@ -32,6 +32,21 @@ h2 {
   /* overflow: auto; */
 }
 
+.itinerary-container {
+  align-items: center;
+  font-weight: 600;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(251, 225, 52, 0.7);
+  text-align: center;
+  border: solid 2px black;
+  max-width: 80%;
+  min-width: 500px;
+  min-height: 10rem;
+  border-radius: 0.5rem;
+  /* overflow: auto; */
+}
+
 .button-container button {
   width: 15rem;
   margin: 5px;

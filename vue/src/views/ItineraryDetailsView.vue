@@ -1,6 +1,6 @@
 <!-- individual itinerary form to edit and delete the itinerary -->
 <template>
-    <div :="itinerary" class="landmark-container">
+    <div :="itinerary" class="itinerary-container">
         <div>{{ itinerary.itineraryName }}</div>
         <div>{{ itinerary.startingLocationName }}</div>
         <div>{{ itinerary.tourDate }}</div>
@@ -126,10 +126,13 @@ export default {
 </script>
 
 <style scoped>
-
-.landmark-container {
-    width: 70vw;
+.itinerary-container {
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 70vw;
+    height: auto;
 }
 .tooling-button-div {
     display: flex;
@@ -157,4 +160,31 @@ export default {
 a {
     justify-content: center;
 }
+.itinerary-container {
+    
+}
+
+#itinerary-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tooling-button-div {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button-container button {
+    width: 22rem;
+    display: flex;
+    flex-grow: 1;
+    justify-self: center;
+    text-align: center;
+    justify-content: center;
+
+}
+
 </style>
