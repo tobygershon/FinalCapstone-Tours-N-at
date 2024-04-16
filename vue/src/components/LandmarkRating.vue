@@ -17,7 +17,6 @@
   </div>
 </template>
 
-
 <script>
 import ratingService from '../services/RatingService';
 
