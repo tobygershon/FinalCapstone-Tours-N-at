@@ -29,7 +29,7 @@ h2 {
   min-width: 500px;
   min-height: 10rem;
   border-radius: 0.5rem;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .button-container button {
@@ -106,6 +106,15 @@ h2 {
   font-weight: 500;
 }
 
+.button-container .clear-button {
+  background-color: rgba(251, 225, 52, 0.0);
+  border: none;
+}
+
+.button-container .clear-button:hover{
+  background-color: rgba(251, 225, 52, 0.0);
+
+}
 #nav {
   display: flex;
   align-items: center;
@@ -135,7 +144,7 @@ h2 {
   background-color: #2A2E34;
   color: #E9EAEC;
   border: solid #E4B61A 2px;
-  width: 10rem;
+  width: 9.75rem;
   height: 3rem;
   border-radius: 10px;
   font-weight: 600;
@@ -147,4 +156,13 @@ h2 {
 
 a {
   justify-content: center;
+}
+
+.button-container .clear-button {
+  background-color: rgba(251, 225, 52, 0.0);
+  border: none;
+}
+
+.button-container .clear-button:hover{
+  background-color: rgba(251, 225, 52, 0.0);
 }

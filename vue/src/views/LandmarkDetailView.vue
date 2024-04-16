@@ -7,8 +7,8 @@
     <a :href="url" :target="'_blank'">Interactive Map</a>
     <p>Designation: {{ formattedDesignations }}</p>
     <p v-for="(day, index) in hoursArray" :key="index">Hours: {{ day }}</p>
-    <p>Ratings: {{ landmark.ratings }}</p>
-    <button @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
+    <!-- <p>Ratings: {{ landmark.ratings }}</p> -->
+    <button v-if="isLoggedIn" @click="toggleDropdown"><i class="fas fa-plus"></i> Add to Itinerary</button> <br>
     <div v-if="showDropdown">
       <select v-model="editItinerary.itineraryId">
         <option v-for="itin in userItineraries" :key="itin.itineraryId" :value="itin.itineraryId">{{ itin.itineraryName }}
@@ -16,10 +16,10 @@
       </select>
       <input type="button" @click="addToItinerary()" value="Go!">
     </div>
-    <div v-if="notification">
+    <div v-if="notification && isLoggedIn">
       {{ notification.message }}
     </div>
-    <LandmarkRating :landmark-id="landmark.landmarkId" @rated="handleRating" />
+    <LandmarkRating v-if="isLoggedIn" :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
     <router-link to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
 
@@ -34,6 +34,7 @@
 
 <script>
 import landmarkService from '../services/LandmarkService.js';
+import ratingService from '../services/RatingService.js';
 import itineraryService from '../services/ItineraryService.js';
 import LandmarkRating from '../components/LandmarkRating.vue';
 
@@ -53,6 +54,7 @@ export default {
         itineraryId: '',
         landmarkId: this.$route.params.id
       },
+      rated: {},
     };
   },
 
@@ -103,9 +105,13 @@ export default {
       return '';
     },
 
-    notification() {
-      return this.$store.state.notification;
-    }
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    },
+
+    // notification() {
+    //   return this.$store.state.notification;
+    // }
   },
 
   methods: {
@@ -133,7 +139,7 @@ export default {
     },
 
     handleRating(ratingData) {
-      landmarkService.createRating(ratingData.landmarkId, ratingData.isGood)
+      ratingService.createOrUpdateRating(ratingData.landmarkId, ratingData.isGood)
         .then(response => {
           console.log('Rating successfully created:', response.data);
           this.retrieveCard();
@@ -144,7 +150,7 @@ export default {
     },
 
     handleUpdateRating(rating) {
-      landmarkService.updateRating(rating.id, rating.isGood)
+      ratingService.updateRating(rating.id, rating.isGood)
         .then(response => {
           console.log('Rating successfully updated:', response.data);
         })
