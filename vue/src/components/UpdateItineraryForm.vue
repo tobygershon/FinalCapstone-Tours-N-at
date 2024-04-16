@@ -8,18 +8,22 @@
             <div>
                 <label for="startingPointText">Starting Location:</label>
                 <input type="text" name="startingPointText" id="startingPointText"
-                    v-model="editItinerary.listOfStops[0].landmarkName">
+                    @change="updateStartingLandmark($event.currentTarget.value)"
+                    :value="editItinerary.listOfStops[0].landmarkName">
             </div>
             <div>
                 <label for="dateSelector">Tour Date:</label>
                 <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
             </div>
         </div>
-        <div><p>Drag and drop to reorder stops:</p></div>
+        <div>
+            <p>Drag and drop to reorder stops:</p>
+        </div>
         <draggable v-model="editItinerary.listOfStops" tag="ul" itemKey="landmarkId">
             <template #item="{ element: stop }">
                 <div class="button-container"><button>
-                        <li>{{ stop.landmarkName }}</li><i class="fas fa-trash-alt" @click="removeLandmark(stop.landmarkId)"></i>
+                        <li>{{ stop.landmarkName }}</li><i class="fas fa-trash-alt"
+                            @click="removeLandmark(stop.landmarkId)"></i>
                     </button></div>
             </template>
 
@@ -44,6 +48,7 @@
 <script>
 import itineraryService from '../services/ItineraryService';
 import draggable from 'vuedraggable';
+import landmarkService from '../services/LandmarkService';
 
 export default {
 
@@ -180,12 +185,23 @@ export default {
 
         removeLandmark(landmarkId) {
             if (confirm("Are you sure you want to delete this stop?")) {
-                for (let stop in this.editItinerary.listOfStops) {
-                    if (stop.landmarkId != landmarkId) {
-                        
-                    }
-                }
+                this.editItinerary.listOfStops = this.editItinerary.listOfStops.filter(stop => stop.landmarkId != landmarkId);
+
             }
+        },
+
+        updateStartingLandmark(landmarkName) {
+            this.editItinerary.startingLocationName = landmarkName;
+            landmarkService.getLandmarksByName(landmarkName).then(response => {
+                const landmark = response.data[0];
+                this.editItinerary.startingLocationId = landmark.landmarkId;
+                if (this.editItinerary.listOfStops[0].landmarkId != this.editItinerary.startingLocationId) {
+                    this.editItinerary.listOfStops[0] = landmark;
+                }
+            }).catch
+
+
+
         }
 
     },
@@ -220,6 +236,7 @@ draggable {
     width: 90%;
     flex-grow: 1;
 }
+
 .button-container button {
     width: 22rem;
     display: flex;
@@ -229,5 +246,4 @@ draggable {
 li {
     flex-grow: 1;
     justify-content: space-between;
-}
-</style>
+}</style>
