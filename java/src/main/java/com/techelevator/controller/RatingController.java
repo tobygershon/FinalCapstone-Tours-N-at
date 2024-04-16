@@ -36,6 +36,14 @@ public class RatingController {
         return ratingDao.getRatingsByUserId(userId);
     }
 
+    @GetMapping("/landmarks/{landmarkId}/ratings/rated")
+    public Rating getRatingByLandmarkIdAndPrincipal(@PathVariable int landmarkId, Principal principal) {
+        User loggedInUser = userDao.getLoggedInUserByPrinciple(principal);
+        int userId = loggedInUser.getId();
+        return ratingDao.findRatingByUserAndLandmark(userId, landmarkId);
+
+    }
+
     @PreAuthorize("permitAll()")
     @GetMapping("/landmarks/{landmarkId}/ratings")
     public List<Rating> getRatingsByLandmarkId(@PathVariable int landmarkId) {
