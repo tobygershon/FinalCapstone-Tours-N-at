@@ -1,6 +1,6 @@
 <template>
   <div class="landmark-container">
-    <h2>{{ landmark.landmarkName }}</h2>
+    <h2 id="title">{{ landmark.landmarkName }}</h2>
     <p>Address: {{ landmark.address }}</p>
     <p>Description: {{ description }}</p>
     <a :href="website" :target="'_blank'">Website</a>&nbsp;|&nbsp;
@@ -248,9 +248,13 @@ export default {
 };
 </script>
 
-<styles scoped>
+<style scoped>
 
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 
-</styles>
+</style>
 
 
