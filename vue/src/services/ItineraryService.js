@@ -23,10 +23,6 @@ export default {
         return axios.put(`/landmarks/${landmarkId}/${itinerary.itineraryId}`, itinerary);
     },
 
-    deleteLandmarkFromItinerary(landmarkId, itinerary) {
-        return axios.delete(`/landmarks/${landmarkId}/${itinerary.itineraryId}`, itinerary);
-    },
-
     updateItinerary(itinerary) {
         return axios.put(`itineraries/${itinerary.itineraryId}`, itinerary);
     },

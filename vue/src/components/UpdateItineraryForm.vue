@@ -17,7 +17,9 @@
         </div>
         <draggable v-model="editItinerary.listOfStops" tag="ul" itemKey="landmarkId">
             <template #item="{ element: stop }">
-                <div class="button-container"><button><li>{{ stop.landmarkName }}</li></button></div>
+                <div class="button-container"><button>
+                        <li>{{ stop.landmarkName }}</li>
+                    </button></div>
             </template>
         </draggable>
         <div class="tooling-button-div">
@@ -65,11 +67,6 @@ export default {
                 tourDate: this.itinerary.tourDate,
                 listOfStops: this.itinerary.listOfStops
             },
-
-            removeLandmark: {
-                itineraryId: '',
-                landmarkId: ''
-            }
 
         }
     },
@@ -178,35 +175,6 @@ export default {
             }
             return true;
         },
-
-        deleteLandmarkFromItinerary(landmarkId) {
-            if (!this.validateForm()) {
-                return;
-            }
-            const itineraryId = this.itinerary.itineraryId;
-            itineraryService.deleteLandmarkFromItinerary(landmarkId, itineraryId)
-                .then(response => {
-                    if (response.status < 300 && response.status > 199) {
-                        this.$store.commit(
-                            'SET_NOTIFICATION',
-                            {
-                                message: `Your stop was removed from your itinerary.`,
-                                type: 'success'
-                            }
-                        );
-                    }
-                })
-                .catch(error => {
-                    if (error.response) {
-                        this.$store.commit('SET_NOTIFICATION',
-                            "Error deleting landmark from itinerary. Response received was '" + error.response.statusText + "'.");
-                    } else if (error.request) {
-                        this.$store.commit('SET_NOTIFICATION', "Error deleting itinerary. Server could not be reached.");
-                    } else {
-                        this.$store.commit('SET_NOTIFICATION', "Error deleting itinerary. Request could not be created.");
-                    }
-                });
-        }
 
     },
 }

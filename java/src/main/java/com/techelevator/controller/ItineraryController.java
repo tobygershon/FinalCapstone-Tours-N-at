@@ -80,11 +80,6 @@ public class ItineraryController {
         return updatedItinerary;
     }
 
-    @DeleteMapping("/landmarks/{landmarkId}/{itineraryId}")
-    public void deleteLandmarkFromItinerary(@RequestBody AddOrDeleteLandmarkDTO itineraryDTO, @PathVariable int landmarkId, @PathVariable int itineraryId) {
-        itineraryDao.deleteLandmarkFromItinerary(itineraryDTO);
-    }
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/itineraries/{itineraryId}")
     public void deleteItinerary(@PathVariable int itineraryId) {

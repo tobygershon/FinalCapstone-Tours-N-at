@@ -186,29 +186,6 @@ public class JdbcItineraryDao implements ItineraryDao {
     }
 
     @Override
-    public void deleteLandmarkFromItinerary(AddOrDeleteLandmarkDTO itineraryDTO) {
-        int itineraryId = itineraryDTO.getItineraryId();
-        int landmarkId = itineraryDTO.getLandmarkId();
-
-        String sql = "DELETE from itineraries_landmarks WHERE itinerary_id = ? and landmark_id = ?;";
-
-        try {
-            int numOfRows = jdbcTemplate.update(sql, itineraryId, landmarkId);
-
-            if (numOfRows == 0) {
-                throw new DaoException("Zero rows affected, expected at least one");
-            }
-
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
-        }
-
-    }
-
-
-    @Override
     public int deleteItinerary(int itineraryId) {
         int numOfRows = 0;
         String sql = "BEGIN TRANSACTION; DELETE FROM itineraries_landmarks WHERE itinerary_id = ?;" +
@@ -252,7 +229,6 @@ public class JdbcItineraryDao implements ItineraryDao {
         }
 
     }
-
 
     @Override
     public List<String> retrieveItineraryStops(int itineraryId) {
