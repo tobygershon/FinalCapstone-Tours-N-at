@@ -1,7 +1,9 @@
 <template>
-    <button @click="retrieveRatingsByUser">See All Reviews</button>&nbsp;|&nbsp;
-    <button @click="showThumbsUp">See Thumbs Up Reviews</button>&nbsp;|&nbsp;
-    <button @click="showThumbsDown">See Thumbs Down Reviews</button>
+    <div class="tooling-button-div">
+        <button class="tooling-button" @click="retrieveRatingsByUser">See All Reviews</button>&nbsp;&nbsp;
+        <button class="tooling-button" @click="showThumbsUp">See Thumbs Up Reviews</button>&nbsp;&nbsp;
+        <button class="tooling-button" @click="showThumbsDown">See Thumbs Down Reviews</button>
+    </div>
     <div v-for="rating in userRatings" :key="rating.id">
         <Rating :rating="rating" />
     </div>
@@ -19,7 +21,7 @@ export default {
     data() {
         return {
             userRatings: [],
-            constantRatings:[]
+            constantRatings: []
         }
     },
 
