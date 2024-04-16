@@ -1,11 +1,28 @@
 <template>
   <div id="home">
-    <div>
+
+    <div id="logo-div">
       <img id="tour-logo" src="../assets/Tours_Nat.png" alt="">
     </div>
+
     <div id="about">
-      <h1>Tours N'at</h1>
+
+      <h1>Welcome to Tours N'at</h1>
+      <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
+        N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
+      <h3>Search Pittsburgh Landmarks and Create Daily Itineraries to Explore the Sites!</h3>
+      <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restuarants
+        and more throughout the city. Login to build daily itineraries and get directions.</p>
+
     </div>
+  </div>
+
+  <div >
+    <h3>Curated Tours</h3>
+    <div>"Dantan" (aka: Downtown) Pittsburgh</div>
+    <div>Steel City Historical Tour</div>
+    <div>Off the Beaten Path</div>
+    <div>Kid'sburgh</div>
   </div>
 </template>
 
@@ -27,17 +44,52 @@ export default {
   font-weight: 700;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #2A2E34;
-  padding: 0 10px;
   border-radius: 20px;
   border: 2px solid #FBE134;
   width: 85vw;
-  height: 45vh;
   color: #FBE134;
-  top: 5px;
+  margin-bottom: 20px;
+}
+
+#about {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 250px;
+  padding-bottom: 5px;
+}
+
+#logo-div {
+  min-width: 250px;
 }
 
 #tour-logo {
-  height: 45vh;
+  height: 250px;
+  width: 250px;
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+h3 {
+  font-size:1.25rem;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+p {
+  font-size: .75rem;
+  padding-bottom: 5px;
 }
 </style>
