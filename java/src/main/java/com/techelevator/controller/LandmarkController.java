@@ -44,4 +44,6 @@ public class LandmarkController {
     public List<Landmark> searchLandmarksByName(@PathVariable String landmarkName) {
         return landmarkDao.getLandmarkByName(landmarkName);
     }
+    // getting designation by landmarks
 }
+

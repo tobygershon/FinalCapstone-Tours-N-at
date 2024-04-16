@@ -1,5 +1,5 @@
 <template>
-    <div class="landmark-container">
+    <div class="itinerary-container">
         <div id="itinerary-form">
             <div>
                 <label for="itineraryNameText">Itinerary Name:</label>
@@ -8,19 +8,25 @@
             <div>
                 <label for="startingPointText">Starting Location:</label>
                 <input type="text" name="startingPointText" id="startingPointText"
-                    v-model="editItinerary.startingLocationName">
+                    @change="updateStartingLandmark($event.currentTarget.value)"
+                    :value="editItinerary.listOfStops[0].landmarkName">
             </div>
             <div>
                 <label for="dateSelector">Tour Date:</label>
                 <input type="date" id="dateSelector" v-model="editItinerary.tourDate" :min="minDate">
             </div>
         </div>
+        <div>
+            <p>Drag and drop to reorder stops:</p>
+        </div>
         <draggable v-model="editItinerary.listOfStops" tag="ul" itemKey="landmarkId">
             <template #item="{ element: stop }">
                 <div class="button-container"><button>
-                        <li>{{ stop.landmarkName }}</li>
+                        <li>{{ stop.landmarkName }}</li><i class="fas fa-trash-alt"
+                            @click="removeLandmark(stop.landmarkId)"></i>
                     </button></div>
             </template>
+
         </draggable>
         <div class="tooling-button-div">
             <div class="tooling-button">
@@ -42,6 +48,7 @@
 <script>
 import itineraryService from '../services/ItineraryService';
 import draggable from 'vuedraggable';
+import landmarkService from '../services/LandmarkService';
 
 export default {
 
@@ -109,7 +116,7 @@ export default {
                                 type: 'success'
                             }
                         );
-                        this.$router.push({ name: 'itineraryList', params: { id: this.editItinerary.itineraryId } });
+                        this.$router.push({ name: 'itineraryDetail', params: { itineraryId: this.editItinerary.itineraryId } });
                     }
                 })
                 .catch(error => {
@@ -176,16 +183,40 @@ export default {
             return true;
         },
 
+        removeLandmark(landmarkId) {
+            if (confirm("Are you sure you want to delete this stop?")) {
+                this.editItinerary.listOfStops = this.editItinerary.listOfStops.filter(stop => stop.landmarkId != landmarkId);
+
+            }
+        },
+
+        updateStartingLandmark(landmarkName) {
+            this.editItinerary.startingLocationName = landmarkName;
+            landmarkService.getLandmarksByName(landmarkName).then(response => {
+                const landmark = response.data[0];
+                
+                this.editItinerary.startingLocationId = landmark.landmarkId;
+                if (this.editItinerary.listOfStops[0].landmarkId != this.editItinerary.startingLocationId) {
+                    this.editItinerary.listOfStops[0] = landmark;
+                }
+            }).catch
+
+
+
+        }
+
     },
 }
 
 </script>
 
 <style scoped>
-.landmark-container {
+.itinerary-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     width: 70vw;
+    height: auto;
 }
 
 #itinerary-form {
@@ -195,8 +226,25 @@ export default {
 }
 
 .tooling-button-div {
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-</style>
+
+draggable {
+    display: flex;
+    width: 90%;
+    flex-grow: 1;
+}
+
+.button-container button {
+    width: 22rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+li {
+    flex-grow: 1;
+    justify-content: space-between;
+}</style>
