@@ -1,4 +1,7 @@
 <template>
+    <button @click="retrieveRatingsByUser">See All Reviews</button>&nbsp;|&nbsp;
+    <button @click="showThumbsUp">See Thumbs Up Reviews</button>&nbsp;|&nbsp;
+    <button @click="showThumbsDown">See Thumbs Down Reviews</button>
     <div v-for="rating in userRatings" :key="rating.id">
         <Rating :rating="rating" />
     </div>
@@ -34,7 +37,17 @@ export default {
                 }
             });
         },
+
+        showThumbsUp() {
+            this.userRatings = this.userRatings.filter(rating => rating.isGood === true);
+        },
+
+        showThumbsDown() {
+            this.userRatings = this.userRatings.filter(rating => rating.isGood === false);
+        },
     },
+
+
 
     created() {
         this.retrieveRatingsByUser();
