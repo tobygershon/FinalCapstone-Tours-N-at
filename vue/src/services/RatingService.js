@@ -10,6 +10,10 @@ export default {
         return axios.get(`/landmarks/${landmarkId}/ratings`);
     },
 
+    getRatingByLandmarkIdForLoggedInUser(landmarkId) {
+        return axios.get(`/landmarks/${landmarkId}/ratings/rated`)
+    },
+
     createOrUpdateRating(landmarkId, isGood) {
         return axios.put(`/landmarks/${landmarkId}/ratings`, { isGood });
     },
