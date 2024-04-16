@@ -23,7 +23,7 @@ public class LandmarkController {
     }
 
     @GetMapping("/landmarks/{landmarkId}/designation")
-    public List<Designations> getDesignationsForLandmark(@PathVariable Integer landmarkId){
+    public List<Designations> getDesignationsForLandmark(@PathVariable Integer landmarkId) {
         if (landmarkId == null) {
             throw new IllegalArgumentException("Landmark ID must not be null");
         }
@@ -44,5 +44,4 @@ public class LandmarkController {
     public List<Landmark> searchLandmarksByName(@PathVariable String landmarkName) {
         return landmarkDao.getLandmarkByName(landmarkName);
     }
-    // getting designation by landmarks
 }
