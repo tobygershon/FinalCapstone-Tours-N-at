@@ -73,7 +73,7 @@ export default {
                 startingLocationName: this.itinerary.startingLocationName,
                 tourDate: this.itinerary.tourDate,
                 listOfStops: this.itinerary.listOfStops
-            }
+            },
 
         }
     },
