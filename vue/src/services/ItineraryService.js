@@ -11,6 +11,10 @@ export default {
         return axios.get(`/itineraries/${itineraryId}`);
     },
 
+    getListOfPlaceUrlByItineraryId(itineraryId) {
+        return axios.get(`/places/itineraries/${itineraryId}`)
+    },
+
     createItinerary(itinerary) {
         return axios.post(`/itineraries`, itinerary);
     },
