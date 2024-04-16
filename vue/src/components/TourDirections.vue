@@ -3,7 +3,7 @@
 <template>
     <div id="directionsBox">
         <div id="collapseBTN">
-            <button>- COLLAPSE</button>
+            <span @click="collapse()">- COLLAPSE</span>
         </div>
         <div v-for="(step, index) in steps" :key="index" id="directionStep">
             <div id="step">
@@ -21,7 +21,7 @@ export default {
 
     data() {
         return {
-            stepIsShowing: true
+        
         }
     },
 
@@ -50,9 +50,10 @@ export default {
     justify-content: flex-end;
     height: 35px;
     font-size: 1.25rem;
-    font-weight: 900;
-
+    font-weight: 700;
+    cursor: pointer;
 }
+
 #directionsBox {
     display: flex;
     flex-direction: column;

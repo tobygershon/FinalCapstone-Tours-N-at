@@ -5,11 +5,12 @@
     <div id=mapDiv>
         <div id="distance">Distance: {{ distance.text }}</div>
         <img :src=mapURL alt="map route" id="map">
+        <a href="" :target="'_blank'"></a>
     </div>
 </template>
 
 <script>
-
+import 
 
 export default {
 
@@ -75,7 +76,7 @@ export default {
         }
     },
 
-    methods: {
+    created() {
 
     }
 }

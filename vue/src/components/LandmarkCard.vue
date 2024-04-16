@@ -3,6 +3,7 @@
 <template>
     <div>
         <p>{{ landmark.landmarkName }}</p>
+        <p>{{ landmark.description }}</p>
     </div>
 </template>
 
