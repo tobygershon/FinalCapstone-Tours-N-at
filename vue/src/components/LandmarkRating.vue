@@ -19,25 +19,21 @@
 
 
 <script>
-import RatingService from '../services/RatingService';
+import ratingService from '../services/RatingService';
 
 export default {
   name: 'RatingComponent',
-  props: {
-    landmarkId: {
-      type: Number,
-      required: true
-    }
-  },
+
   data() {
     return {
-      currentRating: null
+      currentRating: null,
+      previousRating: null
     };
   },
   methods: {
     rate(isGood) {
       this.currentRating = isGood;
-      RatingService.createOrUpdateRating(this.landmarkId, isGood)
+      ratingService.createOrUpdateRating(this.landmarkId, isGood)
         .then(response => {
           this.$emit('rated', response.data);
         })
@@ -48,7 +44,17 @@ export default {
     clearRating() {
       this.currentRating = null;
       this.$emit('ratingCleared', { landmarkId: this.landmarkId });
+    },
+
+    retrieveRating() {
+      ratingService.getRatingByLandmarkIdForLoggedInUser(this.$route.params.id).then(response => {
+        this.currentRating = response.data.isGood;
+      })
     }
+  },
+
+  created() {
+    this.retrieveRating();
   }
 }
 </script>
