@@ -194,6 +194,7 @@ export default {
             this.editItinerary.startingLocationName = landmarkName;
             landmarkService.getLandmarksByName(landmarkName).then(response => {
                 const landmark = response.data[0];
+                
                 this.editItinerary.startingLocationId = landmark.landmarkId;
                 if (this.editItinerary.listOfStops[0].landmarkId != this.editItinerary.startingLocationId) {
                     this.editItinerary.listOfStops[0] = landmark;
