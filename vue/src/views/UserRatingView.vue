@@ -1,4 +1,7 @@
 <template>
+    <button @click="retrieveRatingsByUser">See All Reviews</button>&nbsp;|&nbsp;
+    <button @click="showThumbsUp">See Thumbs Up Reviews</button>&nbsp;|&nbsp;
+    <button @click="showThumbsDown">See Thumbs Down Reviews</button>
     <div v-for="rating in userRatings" :key="rating.id">
         <Rating :rating="rating" />
     </div>
@@ -16,6 +19,7 @@ export default {
     data() {
         return {
             userRatings: [],
+            constantRatings:[]
         }
     },
 
@@ -23,6 +27,7 @@ export default {
         retrieveRatingsByUser() {
             ratingService.getRatingsByUser().then(response => {
                 this.userRatings = response.data;
+                this.constantRatings = response.data;
             }).catch(error => {
                 if (error.response) {
                     this.$store.commit('SET_NOTIFICATION',
@@ -33,6 +38,14 @@ export default {
                     this.$store.commit('SET_NOTIFICATION', "Error getting ratings. Request could not be created.");
                 }
             });
+        },
+
+        showThumbsUp() {
+            this.userRatings = this.constantRatings.filter(rating => rating.isGood === true);
+        },
+
+        showThumbsDown() {
+            this.userRatings = this.constantRatings.filter(rating => rating.isGood === false);
         },
     },
 

@@ -230,7 +230,6 @@ public class JdbcItineraryDao implements ItineraryDao {
 
     }
 
-
     @Override
     public List<String> retrieveItineraryStops(int itineraryId) {
         List<String> listOfItineraryLandmarkGooglePlaceIds = new ArrayList<>();
