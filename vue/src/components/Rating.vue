@@ -18,7 +18,7 @@ export default {
 <style scoped>
 .rating-container {
     align-items: center;
-    background-color: rgba(251, 225, 52, 0.7);
+    background-color: rgba(251, 225, 52, 0.9);
     border: solid 2px black;
     border-radius: 0.5rem;
     font-weight: 500px;
