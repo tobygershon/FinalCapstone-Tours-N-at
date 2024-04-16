@@ -19,6 +19,7 @@ export default {
     data() {
         return {
             userRatings: [],
+            constantRatings:[]
         }
     },
 
@@ -26,6 +27,7 @@ export default {
         retrieveRatingsByUser() {
             ratingService.getRatingsByUser().then(response => {
                 this.userRatings = response.data;
+                this.constantRatings = response.data;
             }).catch(error => {
                 if (error.response) {
                     this.$store.commit('SET_NOTIFICATION',
@@ -39,15 +41,13 @@ export default {
         },
 
         showThumbsUp() {
-            this.userRatings = this.userRatings.filter(rating => rating.isGood === true);
+            this.userRatings = this.constantRatings.filter(rating => rating.isGood === true);
         },
 
         showThumbsDown() {
-            this.userRatings = this.userRatings.filter(rating => rating.isGood === false);
+            this.userRatings = this.constantRatings.filter(rating => rating.isGood === false);
         },
     },
-
-
 
     created() {
         this.retrieveRatingsByUser();
