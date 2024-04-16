@@ -17,7 +17,6 @@
   </div>
 </template>
 
-
 <script>
 import ratingService from '../services/RatingService';
 
@@ -34,7 +33,7 @@ export default {
   data() {
     return {
       currentRating: null,
-      previousRating: null
+      ratingId: ''
     };
   },
   methods: {
@@ -50,12 +49,13 @@ export default {
     },
 
     clearRating() {
-      ratingService.deleteRating(this.currentRating.ratingId).then(response => {
+      ratingService.deleteRating(this.ratingId).then(response => {
         this.$store.commit('SET_NOTIFICATION',
           {
             message: 'Rating has been deleted',
             type: 'success'
           });
+          this.currentRating = null;
       })
         .catch(error => {
           if (error.response) {
@@ -72,6 +72,7 @@ export default {
     retrieveRating() {
       ratingService.getRatingByLandmarkIdForLoggedInUser(this.$route.params.id).then(response => {
         this.currentRating = response.data.isGood;
+        this.ratingId = response.data.ratingId;
       })
     }
 
@@ -80,6 +81,6 @@ export default {
   created() {
     this.retrieveRating();
   }
-  
+
 }
 </script>
