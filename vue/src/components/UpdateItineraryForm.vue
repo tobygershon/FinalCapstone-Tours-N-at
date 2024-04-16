@@ -17,7 +17,9 @@
         </div>
         <draggable v-model="editItinerary.listOfStops" tag="ul" itemKey="landmarkId">
             <template #item="{ element: stop }">
-                <div class="button-container"><button><li>{{ stop.landmarkName }}</li></button></div>
+                <div class="button-container"><button>
+                        <li>{{ stop.landmarkName }}</li>
+                    </button></div>
             </template>
         </draggable>
         <div class="tooling-button-div">
@@ -64,7 +66,7 @@ export default {
                 startingLocationName: this.itinerary.startingLocationName,
                 tourDate: this.itinerary.tourDate,
                 listOfStops: this.itinerary.listOfStops
-            }
+            },
 
         }
     },

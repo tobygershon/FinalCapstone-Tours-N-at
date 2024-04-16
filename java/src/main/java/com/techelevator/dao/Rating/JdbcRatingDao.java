@@ -37,7 +37,9 @@ public class JdbcRatingDao implements RatingDao {
     @Override
     public List<Rating> getRatingsByUserId(int userId) {
         List<Rating> ratings = new ArrayList<>();
-        String sql = "SELECT rating_id, user_id, ratings.landmark_id, is_good, landmark_name FROM ratings JOIN landmarks USING (landmark_id) WHERE user_id = ?;";
+        String sql = "SELECT rating_id, user_id, ratings.landmark_id, is_good, landmark_name " +
+                "FROM ratings JOIN landmarks USING (landmark_id) " +
+                "WHERE user_id = ? ORDER BY landmark_name;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while (results.next()) {
@@ -78,6 +80,7 @@ public class JdbcRatingDao implements RatingDao {
         }
         return rating;
     }
+
     @Override
     public Rating createRating(Rating rating) {
         String sql = "INSERT INTO ratings (user_id, landmark_id, is_good) VALUES (?, ?, ?) RETURNING rating_id";
