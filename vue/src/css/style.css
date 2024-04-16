@@ -16,7 +16,8 @@ h2 {
   font-weight: 600;
 }
 
-.landmark-container {
+.landmark-container, .text-center {
+  position: relative;
   align-items: center;
   font-weight: 600;
   margin: 20px auto;
@@ -181,3 +182,102 @@ a {
 .button-container .clear-button:hover{
   background-color: rgba(251, 225, 52, 0.0);
 }
+
+.back-button {
+  position: absolute; 
+  top: 10px; 
+  left: 10px; 
+  padding: 5px 10px; 
+  cursor: pointer; 
+  text-decoration: none; 
+  color: black; 
+}
+
+.back-button i {
+  margin-right: 5px; 
+}
+
+.landmark-h2 {
+  font-size: 32px; 
+  font-weight: 600;
+  color: #2A2E34;
+  padding: 10px 20px; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  text-align: center; 
+  margin: 20px auto; 
+}
+
+.landmark-address {
+  color: #2A2E34;
+  margin-bottom: 10px;
+}
+
+.landmark-description {
+  color: #2A2E34;
+  margin-bottom: 15px;
+}
+
+.landmark-website {
+  text-decoration: none;
+  color: gray;
+  margin-right: 5px;
+}
+
+.web-map{
+  margin-bottom: 15px;
+}
+
+.landmark-map {
+  text-decoration: none;
+  color: gray;
+  margin-right: 5px;
+}
+
+.landmark-designation {
+  color: #2A2E34;
+  margin-bottom: 15px;
+}
+
+.landmark-working-hours {
+  color: #2A2E34;
+  margin-bottom: 5px; 
+}
+
+.landmark-add-to-itinerary-button {
+  width: 15rem;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: rgba(251, 225, 52, 0.9);
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.landmark-dropdown select {
+  background-color: #e9eaec;
+  margin-top: 10px;
+  width: 50%;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+.landmark-go-button {
+  width: 5rem;
+  margin-left: 5px;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: rgba(251, 225, 52, 0.9);
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.landmark-go-button:active {
+  background-color: #2A2E34;
+  color: #FBE134;
+}
+

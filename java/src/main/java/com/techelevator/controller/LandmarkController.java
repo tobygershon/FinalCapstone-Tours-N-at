@@ -23,7 +23,7 @@ public class LandmarkController {
     }
 
     @GetMapping("/landmarks/{landmarkId}/designation")
-    public List<Designations> getDesignationsForLandmark(@PathVariable Integer landmarkId){
+    public List<Designations> getDesignationsForLandmark(@PathVariable Integer landmarkId) {
         if (landmarkId == null) {
             throw new IllegalArgumentException("Landmark ID must not be null");
         }
@@ -45,34 +45,5 @@ public class LandmarkController {
         return landmarkDao.getLandmarkByName(landmarkName);
     }
     // getting designation by landmarks
-
-//    List<Landmark> listOfLandmarks = landmarkDao.getLandmarkByName(landmarkName);
-//
-//        if (listOfLandmarks != null && listOfLandmarks.get(0).getLandmarkId() >0) {
-//        return listOfLandmarks;
-//    } else {
-//        GeocodeResults result = geocodingService.getGeocodeInfo(landmarkName + "Pittsburgh");
-//        if (result == null) {
-//
-//        } else {
-//            Landmark landmark = new Landmark();
-//            if (result.getResults()[0] != null) {
-//                String placeId = result.getResults()[0].getPlaceId();
-//                String placeAddress = result.getResults()[0].getAddress();
-//                String placeName = placesService.getPlaceInfoByPlaceId(placeId).getName();
-//                landmark.setLandmarkName(placeName);
-//                landmark.setLandmarkId(placeId);
-//                landmark.setAddress(placeAddress);
-//
-//            }
-//        }
-//        return returnObject;
-//    }
-//
-//        return
-//}
-//// getting designation by landmarks
-
-
 }
 
