@@ -21,7 +21,7 @@
   </div>
 
   <div id="curated">
-    <router-link :to="{name: 'landmarkList'}" class="link"><h2>Click Here to Search Landmarks</h2></router-link>
+    <router-link :to="{name: 'landmarkList'}" ><h2>Click Here to Search Landmarks</h2></router-link>
     <h2>See our Curated Tours Below!</h2>
     <div id="curatedTours">
       <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
@@ -144,7 +144,7 @@ h2 {
 
 }
 
-#curated.link {
+h2 {
   text-decoration: none;
   text-decoration-color:#2A2E34;
 }
