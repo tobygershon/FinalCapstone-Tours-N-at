@@ -3,7 +3,7 @@
     and ability to create itineraries from here -->
 <template>
     <router-link :to="{ name: 'addItineraryDetailsView' }">
-        <div class="button-container">
+        <div class="tooling-button">
             <button>Add Itinerary</button>
         </div>
     </router-link>
