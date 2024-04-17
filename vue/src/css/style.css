@@ -197,7 +197,7 @@ a {
   margin-right: 5px; 
 }
 
-.landmark-h2 {
+.landmark-h2{
   font-size: 32px; 
   font-weight: 600;
   color: #2A2E34;
@@ -281,3 +281,30 @@ a {
   color: #FBE134;
 }
 
+.text-center-paragraph {
+  margin-bottom: 20px; 
+  font-size: 20px;
+}
+
+.text-center-paragraph a {
+  font-size: 30px;
+  color: #2A2E34; 
+  text-decoration: none; 
+  font-weight: 900;
+}
+
+.text-center-paragraph h2{
+  font-size: 24px; 
+  font-weight: 600;
+  color: #2A2E34;
+  padding: 10px 20px; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  text-align: center; 
+  margin: 20px auto;
+}
+
+.cardsList a{
+  text-decoration: none;
+  color: #2A2E34;
+  font-size: 24px;
+}
