@@ -8,12 +8,14 @@
     <div id="about">
       <div>
       <h1 class="permanent-marker-regular">Tours N'at</h1>
+      <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
+      <br>
       <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
         N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
       </div>
       
-      <h3>Search Pittsburgh Landmarks and Create Daily Itineraries to Explore the Sites!</h3>
-      <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restuarants
+      
+      <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restaurants
         and more throughout the city. Login to build daily itineraries and get directions.</p>
       
     </div>
@@ -22,7 +24,7 @@
   <div id="curated">
     <h2>Curated Tours</h2>
     <div id="curatedTours">
-      <div class="cardsList">"Dantan" (aka: Downtown) Pittsburgh</div>
+      <div class="cardsList">"Dahntahn" (aka: Downtown) Pittsburgh</div>
       <div class="cardsList">Steel City Historical Tour</div>
       <div class="cardsList">Off the Beaten Path</div>
       <div class="cardsList">Kid'sburgh</div>
@@ -63,6 +65,8 @@ export default {
   justify-content: space-around;
   height: 250px;
   padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 10px;
 }
 
 #logo-div {
@@ -72,6 +76,8 @@ export default {
 #tour-logo {
   height: 250px;
   width: 250px;
+  margin: 10px;
+  padding: 5px;
 }
 
 h1 {
@@ -96,6 +102,7 @@ p {
   font-weight: 400;
   font-size: .9rem;
   padding-bottom: 5px;
+  padding-right: 5px;
 }
 
 #curated {

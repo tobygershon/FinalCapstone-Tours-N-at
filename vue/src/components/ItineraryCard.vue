@@ -20,6 +20,13 @@ export default {
 #itinerary-card {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cardsList {
+    display: flex;
+    
+
 }
 
 </style>
