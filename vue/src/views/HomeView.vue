@@ -17,12 +17,14 @@
     </div>
   </div>
 
-  <div >
-    <h3>Curated Tours</h3>
-    <div>"Dantan" (aka: Downtown) Pittsburgh</div>
-    <div>Steel City Historical Tour</div>
-    <div>Off the Beaten Path</div>
-    <div>Kid'sburgh</div>
+  <div id="curated">
+    <h2>Curated Tours</h2>
+    <div id="curatedTours">
+      <div class="cardsList">"Dantan" (aka: Downtown) Pittsburgh</div>
+      <div class="cardsList">Steel City Historical Tour</div>
+      <div class="cardsList">Off the Beaten Path</div>
+      <div class="cardsList">Kid'sburgh</div>
+    </div>
   </div>
 </template>
 
@@ -50,7 +52,7 @@ export default {
   border: 2px solid #FBE134;
   width: 85vw;
   color: #FBE134;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 #about {
@@ -79,7 +81,7 @@ h1 {
 }
 
 h3 {
-  font-size:1.25rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
@@ -91,5 +93,36 @@ h6 {
 p {
   font-size: .75rem;
   padding-bottom: 5px;
+}
+
+#curated {
+  display: flex;
+  flex-direction: column;
+  max-width: 85vw;
+}
+
+#curatedTours {
+  display: flex;
+}
+
+h2 {
+  background-color: #FBE134;
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 15rem;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  border: solid #2A2E34 2px;
+}
+
+.cardsList {
+
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 700;
+font-size: 1.25rem;
+
 }
 </style>

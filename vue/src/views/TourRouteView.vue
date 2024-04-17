@@ -10,6 +10,8 @@
       <span>Step {{ index + 1 }}</span><span id="expandBTN" @click="expand(index)">+ EXPAND</span>
     </div>
   </div>
+  <router-link class="back-button" :to="{ name: 'itineraryDetail', params: { itineraryId :this.$route.params.itineraryId} }"><i class="fas fa-arrow-left">Back</i></router-link>
+
 </template>
 
 <script>
@@ -96,5 +98,15 @@ export default {
 
 span {
   padding: 5px 20px 5px 10px;
+}
+
+.back-button {
+  position: absolute; 
+  top: 35px; 
+  left: 45px; 
+  padding: 5px 10px; 
+  cursor: pointer; 
+  text-decoration: none; 
+  color: black; 
 }
 </style>
