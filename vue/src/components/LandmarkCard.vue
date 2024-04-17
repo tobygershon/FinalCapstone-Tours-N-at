@@ -77,6 +77,15 @@ export default {
     width: 100%;
 }
 
+/* #card {
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "header header header"
+                         "menu main events"
+                         "footer footer footer";
+} */
+
 #name {
     font-size: .9rem;
     font-weight: 800;
