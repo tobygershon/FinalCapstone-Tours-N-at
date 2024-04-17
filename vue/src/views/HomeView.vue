@@ -6,15 +6,14 @@
     </div>
 
     <div id="about">
-      <div>
+  
       <h1 class="permanent-marker-regular">Tours N'at</h1>
+
       <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
-      <br>
+
       <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
         N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
-      </div>
       
-      <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
       <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restuarants
         and more throughout the city. Login to build daily itineraries and get directions.</p>
 
@@ -22,8 +21,8 @@
   </div>
 
   <div id="curated">
-    <router-link :to="{name: 'landmarkList'}"><h2>Click Here to Search Landmarks!</h2></router-link>
-    <h2>See our Curated Tours Below</h2>
+    <router-link :to="{name: 'landmarkList'}"><h2 class="link">Click Here to Search Landmarks</h2></router-link>
+    <h2>See our Curated Tours Below!</h2>
     <div id="curatedTours">
       <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/steelcity">Steel City Historical Tour</a></div>
@@ -87,16 +86,20 @@ h1 {
   justify-content: flex-start;
   font-size: 3rem;
   font-weight: 800;
+  margin-bottom: 3px;
 }
 
 h3 {
   font-size: 1.35rem;
   font-weight: 600;
+  margin-bottom: 5px;
 }
 
 h6 {
-  font-size: .9rem;
+  font-size: 1rem;
   font-style: italic;
+  margin-bottom: 5px;
+  margin-left: 10px;
 }
 
 p {
@@ -104,6 +107,8 @@ p {
   font-size: .9rem;
   padding-bottom: 5px;
   padding-right: 5px;
+  margin-bottom: 3px;
+  margin-left: 20px;
 }
 
 #curated {
@@ -115,8 +120,6 @@ p {
 #curatedTours {
   display: flex;
   max-height: 35vh;
-  text-decoration: none;
-  color:#2A2E34;
 }
 
 h2 {
@@ -137,6 +140,11 @@ h2 {
   font-weight: 700;
   font-size: 1.25rem;
 
+}
+
+#curated.a {
+  text-decoration: none;
+  color:#2A2E34;
 }
 
 .permanent-marker-regular {
