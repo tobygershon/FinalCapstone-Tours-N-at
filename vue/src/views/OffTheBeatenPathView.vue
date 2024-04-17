@@ -1,7 +1,7 @@
 <template>
     <div class="text-center">
         <div class="text-center-paragraph">
-            <h2>Something something about this tour</h2>
+            <h2>Come see the Burgh like a local. Here are some hidden gems in the walkable East End.</h2>
         </div>
         <div class="text-center-paragraph">Take a class at <a href="http://127.0.0.1:5173/landmarks/29"></a> Pittsburgh
             Glass Center and make your own
