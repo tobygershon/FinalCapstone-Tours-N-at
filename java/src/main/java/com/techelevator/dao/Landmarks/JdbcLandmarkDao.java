@@ -3,6 +3,7 @@ package com.techelevator.dao.Landmarks;
 import com.techelevator.dao.Landmarks.Model.Designations;
 import com.techelevator.dao.Landmarks.Model.Landmark;
 import com.techelevator.exception.DaoException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -134,6 +135,23 @@ public class JdbcLandmarkDao implements LandmarkDao {
     public int createLandmarkStartingPoint(String address, String placeId) {
 
         return 0;
+    }
+
+    public int createNewLandmark(Landmark landmark) {
+        String sql = "INSERT into landmarks(landmark_name, address, google_place_id) VALUES (?, ?, ?) returning landmark_id";
+
+        try {
+            Integer landmarkId = jdbcTemplate.queryForObject(sql, Integer.class, landmark.getLandmarkName(), landmark.getAddress(), landmark.getGooglePlaceId());
+            if (landmarkId == null) {
+                throw new DaoException("Could not add landmark.");
+            }
+            return landmarkId;
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
     }
 
 

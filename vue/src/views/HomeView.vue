@@ -7,9 +7,11 @@
 
     <div id="about">
       <div>
-        <h1 class="permanent-marker-regular">Tours N'at</h1>
-        <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
-          N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
+      <h1 class="permanent-marker-regular">Tours N'at</h1>
+      <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
+      <br>
+      <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
+        N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
       </div>
       
       <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
@@ -23,6 +25,7 @@
     <h2>Go to Search Landmarks!</h2>
     <h2>See our Curated Tours Below</h2>
     <div id="curatedTours">
+      <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/steelcity">Steel City Historical Tour</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/offthebeatenpath">Off the Beaten Path</a></div>
@@ -101,6 +104,7 @@ p {
   font-weight: 400;
   font-size: .9rem;
   padding-bottom: 5px;
+  padding-right: 5px;
 }
 
 #curated {
