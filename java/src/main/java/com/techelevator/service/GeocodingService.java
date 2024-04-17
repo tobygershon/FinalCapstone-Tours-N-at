@@ -25,7 +25,7 @@ public class GeocodingService {
         }
         urlInput += addressArray[addressArray.length - 1];
 
-        String url = BASE_URL + urlInput + "Pittsburgh" + API_KEY;
+        String url = BASE_URL + urlInput + "+ Pittsburgh" + API_KEY;
         try {
             results = restTemplate.getForObject(url, GeocodeResults.class);
         } catch (RestClientResponseException | ResourceAccessException e) {
