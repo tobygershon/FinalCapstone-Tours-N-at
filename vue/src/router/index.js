@@ -18,6 +18,7 @@ import Downtown from '../views/DowntownView.vue';
 import Kidsburgh from '../views/KidsburghView.vue';
 import OffTheBeatenPath from '../views/OffTheBeatenPathView.vue';
 import SteelCity from '../views/SteelCityHistoryView.vue';
+import mapTestView from '../views/mapTestView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -28,6 +29,11 @@ import SteelCity from '../views/SteelCityHistoryView.vue';
  * If they have (or don't need to) they're allowed to go about their way.
  */
 const routes = [
+  {
+    path: '/maptest',
+    component: mapTestView
+  },
+
   {
     path: '/',
     name: 'home',
