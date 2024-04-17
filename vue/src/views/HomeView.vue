@@ -6,14 +6,16 @@
     </div>
 
     <div id="about">
-
-      <h1>Welcome to Tours N'at</h1>
+      <div>
+      <h1 class="permanent-marker-regular">Tours N'at</h1>
       <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
         N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
+      </div>
+      
       <h3>Search Pittsburgh Landmarks and Create Daily Itineraries to Explore the Sites!</h3>
       <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restuarants
         and more throughout the city. Login to build daily itineraries and get directions.</p>
-
+      
     </div>
   </div>
 
@@ -81,17 +83,18 @@ h1 {
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 600;
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: .9rem;
   font-style: italic;
 }
 
 p {
-  font-size: .75rem;
+  font-weight: 400;
+  font-size: .9rem;
   padding-bottom: 5px;
 }
 
@@ -125,4 +128,11 @@ font-weight: 700;
 font-size: 1.25rem;
 
 }
+
+.permanent-marker-regular {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 100;
+  font-style: normal;
+}
+
 </style>
