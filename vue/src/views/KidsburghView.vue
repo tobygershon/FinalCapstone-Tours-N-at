@@ -1,4 +1,3 @@
-<!-- North shore: Randyland, Aviary, Children's museum -->
 <template>
     <div class="text-center">
         <div>Embark on a family-friendly adventure through Pittsburgh with our "Kid'sburgh" tour,
