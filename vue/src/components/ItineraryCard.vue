@@ -23,10 +23,10 @@ export default {
     align-items: center;
     justify-content: center;
 }
-.cardsList {
+/* .cardsList {
     display: flex;
     
 
-}
+} */
 
 </style>
