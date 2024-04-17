@@ -7,25 +7,25 @@
 
     <div id="about">
       <div>
-      <h1 class="permanent-marker-regular">Tours N'at</h1>
-      <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
-        N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
+        <h1 class="permanent-marker-regular">Tours N'at</h1>
+        <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
+          N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
       </div>
       
       <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
       <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restuarants
         and more throughout the city. Login to build daily itineraries and get directions.</p>
-      
+
     </div>
   </div>
 
   <div id="curated">
     <h2>Curated Tours</h2>
     <div id="curatedTours">
-      <div class="cardsList">"Dahntahn" (aka: Downtown) Pittsburgh</div>
-      <div class="cardsList">Steel City Historical Tour</div>
-      <div class="cardsList">Off the Beaten Path</div>
-      <div class="cardsList">Kid'sburgh</div>
+      <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dantan" (aka: Downtown) Pittsburgh</a></div>
+      <div class="cardsList"><a href="http://127.0.0.1:5173/steelcity">Steel City Historical Tour</a></div>
+      <div class="cardsList"><a href="http://127.0.0.1:5173/offthebeatenpath">Off the Beaten Path</a></div>
+      <div class="cardsList"><a href="http://127.0.0.1:5173/kidsburgh">Kid'sburgh</a></div>
     </div>
   </div>
 </template>
@@ -127,11 +127,11 @@ h2 {
 
 .cardsList {
 
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: 700;
-font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
 
 }
 
@@ -140,5 +140,4 @@ font-size: 1.25rem;
   font-weight: 100;
   font-style: normal;
 }
-
 </style>
