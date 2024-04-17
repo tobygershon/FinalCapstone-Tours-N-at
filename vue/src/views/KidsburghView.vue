@@ -2,7 +2,7 @@
     <div class="text-center">
         <div class="text-center-paragraph">
             <h2>Embark on a family-friendly adventure through Pittsburgh's Northside with our "Kid'sburgh" tour,
-                designed with fun and learning in mind. 
+                designed with fun and learning in mind.
             </h2>
         </div>
         <div class="text-center-paragraph">Start your day at
@@ -20,11 +20,8 @@
                 of Pittsburgh</a>. This museum offers interactive exhibits like the Waterplay, MAKESHOP,
             and Art Studio, perfect for hands-on learning and fun.
         </div>
-        <div class="text-center-paragraph">Pick as many of these stops as you want and maybe stop at the nearby 
-            <a href="">Federal Galley</a> for a bite to eat.  </div>
-
-
-
-
+        <div class="text-center-paragraph">Pick as many of these stops as you want and maybe stop at the nearby
+            <a href="http://127.0.0.1:5173/landmarks/48">Federal Galley</a> for a bite to eat.
+        </div>
     </div>
 </template>
