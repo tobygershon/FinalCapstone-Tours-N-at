@@ -30,7 +30,7 @@
         </draggable>
         <div class="tooling-button-div">
             <div class="tooling-button">
-                <button @click="updateItinerary">Save Itinerary</button>
+                <button @click="updateItinerary" :disabled="!canSave">Save Itinerary</button>
             </div>
             <div class="tooling-button">
                 <button @click="cancelItineraryForm">Cancel Changes</button>
@@ -74,6 +74,8 @@ export default {
                 tourDate: this.itinerary.tourDate,
                 listOfStops: this.itinerary.listOfStops
             },
+
+            canSave: true,
 
         }
     },
@@ -191,14 +193,17 @@ export default {
         },
 
         updateStartingLandmark(landmarkName) {
+            this.canSave = false;
             this.editItinerary.startingLocationName = landmarkName;
             landmarkService.getLandmarksByName(landmarkName).then(response => {
                 const landmark = response.data[0];
+
                 
                 this.editItinerary.startingLocationId = landmark.landmarkId;
                 if (this.editItinerary.listOfStops[0].landmarkId != this.editItinerary.startingLocationId) {
                     this.editItinerary.listOfStops[0] = landmark;
                 }
+                this.canSave = true;
             }).catch
 
 

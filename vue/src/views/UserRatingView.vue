@@ -1,8 +1,8 @@
 <template>
     <div class="tooling-button-div">
-        <button class="tooling-button" @click="retrieveRatingsByUser">See All Reviews</button>&nbsp;&nbsp;
-        <button class="tooling-button" @click="showThumbsUp">See Thumbs Up Reviews</button>&nbsp;&nbsp;
-        <button class="tooling-button" @click="showThumbsDown">See Thumbs Down Reviews</button>
+        <button class="tooling-button" @click="retrieveRatingsByUser">See All Ratings</button>&nbsp;&nbsp;
+        <button class="tooling-button" @click="showThumbsUp"><i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;Ratings</button>&nbsp;&nbsp;
+        <button class="tooling-button" @click="showThumbsDown"><i class="fas fa-thumbs-down"></i>&nbsp;&nbsp; Ratings</button>
     </div>
     <div v-for="rating in userRatings" :key="rating.id">
         <Rating :rating="rating" />
