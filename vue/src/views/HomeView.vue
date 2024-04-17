@@ -20,9 +20,10 @@
   </div>
 
   <div id="curated">
-    <h2>Curated Tours</h2>
+    <h2>Go to Search Landmarks!</h2>
+    <h2>See our Curated Tours Below</h2>
     <div id="curatedTours">
-      <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dantan" (aka: Downtown) Pittsburgh</a></div>
+      <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/steelcity">Steel City Historical Tour</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/offthebeatenpath">Off the Beaten Path</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/kidsburgh">Kid'sburgh</a></div>
@@ -116,8 +117,8 @@ p {
 
 h2 {
   background-color: #FBE134;
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-size: 1rem;
+  font-weight: 700;
   width: 15rem;
   margin: 0 auto;
   text-align: center;
