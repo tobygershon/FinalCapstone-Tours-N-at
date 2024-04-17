@@ -13,7 +13,7 @@
         <div class="text-center-paragraph">Take a walk in historic, Allegheny Cemetery and see where past rich and famous
             Pittsburghers were interred,
             including <a href="http://127.0.0.1:5173/landmarks/16">The
-                Winter Mausolueum</a>.</div>
+                Winter Mausoleum</a>.</div>
         <div class="text-center-paragraph">Finish up at <a href="http://127.0.0.1:5173/landmarks/15">Apteka</a> for vegan
             bites and cocktails.</div>
     </div>
