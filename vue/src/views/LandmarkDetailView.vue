@@ -251,9 +251,13 @@ export default {
 };
 </script>
 
-<styles scoped>
+<style scoped>
 
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 
-</styles>
+</style>
 
 
