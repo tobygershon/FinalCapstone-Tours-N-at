@@ -22,7 +22,7 @@
 
   <div id="curated">
     <router-link :to="{name: 'landmarkList'}" ><h2>Click Here to Search Landmarks</h2></router-link>
-    <h2>See our Curated Tours Below!</h2>
+    <h2 id="banner">See our Curated Tours Below!</h2>
     <div id="curatedTours">
       <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/steelcity">Steel City Historical Tour</a></div>
@@ -57,7 +57,7 @@ export default {
   width: 85vw;
   min-height: 40vh;
   color: #FBE134;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-right: 20px;
 }
 
@@ -122,16 +122,17 @@ p {
 #curatedTours {
   display: flex;
   max-height: 35vh;
+  margin-left: 8px;
 }
 
 h2 {
   background-color: #FBE134;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  width: 20rem;
+  width: 14rem;
   margin: 3px auto;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 5px;
   border: solid #2A2E34 2px;
 }
 
@@ -147,6 +148,15 @@ h2 {
 h2 {
   text-decoration: none;
   text-decoration-color:#2A2E34;
+}
+
+#banner {
+  min-width: 85vw;
+  border-radius: 10px;
+  margin-top: 5px;
+  background-color: #2A2E34;
+  color: #FBE134;
+  border: solid 2px #FBE134;
 }
 
 .permanent-marker-regular {
