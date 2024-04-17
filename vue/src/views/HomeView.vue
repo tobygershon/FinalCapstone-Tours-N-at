@@ -6,23 +6,23 @@
     </div>
 
     <div id="about">
-      <div>
+  
       <h1 class="permanent-marker-regular">Tours N'at</h1>
+
       <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
-      <br>
+
       <h6>Welcome to the burgh! <br> First, yinz need to learn a little Pittsburgh'ese.
         N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
-      </div>
       
-      
-      <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restaurants
+      <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restuarants
         and more throughout the city. Login to build daily itineraries and get directions.</p>
 
     </div>
   </div>
 
   <div id="curated">
-    <h2>Curated Tours</h2>
+    <router-link :to="{name: 'landmarkList'}" ><h2>Click Here to Search Landmarks</h2></router-link>
+    <h2 id="banner">See our Curated Tours Below!</h2>
     <div id="curatedTours">
       <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/steelcity">Steel City Historical Tour</a></div>
@@ -49,24 +49,25 @@ export default {
 #home {
   font-weight: 700;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #2A2E34;
   border-radius: 20px;
   border: 2px solid #FBE134;
   width: 85vw;
+  min-height: 40vh;
   color: #FBE134;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  margin-right: 20px;
 }
 
 #about {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 250px;
+  justify-content: space-between;
+  min-height: 40vh;
   padding-bottom: 5px;
-  padding-left: 20px;
-  padding-right: 10px;
+  margin: 0 5px 0 0px;
 }
 
 #logo-div {
@@ -74,10 +75,10 @@ export default {
 }
 
 #tour-logo {
-  height: 250px;
-  width: 250px;
-  margin: 10px;
-  padding: 5px;
+  min-height: 225px;
+  min-width: 225px;
+  max-height: 35vh;
+  max-width: 35vw;
 }
 
 h1 {
@@ -86,16 +87,21 @@ h1 {
   justify-content: flex-start;
   font-size: 3rem;
   font-weight: 800;
+  margin-bottom: 3px;
 }
 
 h3 {
   font-size: 1.35rem;
   font-weight: 600;
+  margin-bottom: 5px;
+  margin-left: 10px;
 }
 
 h6 {
-  font-size: .9rem;
+  font-size: 1rem;
   font-style: italic;
+  margin-bottom: 5px;
+  margin-left: 20px;
 }
 
 p {
@@ -103,39 +109,54 @@ p {
   font-size: .9rem;
   padding-bottom: 5px;
   padding-right: 5px;
+  margin-bottom: 3px;
+  margin-left: 30px;
 }
 
 #curated {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   max-width: 85vw;
 }
 
 #curatedTours {
-  margin-top: 30px;
   display: flex;
+  max-height: 35vh;
+  margin-left: 8px;
 }
 
 h2 {
   background-color: #FBE134;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  width: 15rem;
-  margin: 0 auto;
+  width: 14rem;
+  margin: 3px auto;
   text-align: center;
   border-radius: 5px;
   border: solid #2A2E34 2px;
 }
 
 .cardsList {
-
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 1.25rem;
 
+}
+
+h2 {
+  text-decoration: none;
+  text-decoration-color:#2A2E34;
+}
+
+#banner {
+  min-width: 85vw;
+  border-radius: 10px;
+  margin-top: 5px;
+  background-color: #2A2E34;
+  color: #FBE134;
+  border: solid 2px #FBE134;
 }
 
 .permanent-marker-regular {

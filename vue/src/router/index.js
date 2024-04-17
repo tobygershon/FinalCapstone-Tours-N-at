@@ -28,6 +28,7 @@ import SteelCity from '../views/SteelCityHistoryView.vue';
  * If they have (or don't need to) they're allowed to go about their way.
  */
 const routes = [
+
   {
     path: '/',
     name: 'home',

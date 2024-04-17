@@ -13,21 +13,21 @@
         <img id="tour-logo" src="../assets/Tours_Nat.png" alt="">
 
         <div id="searchDropDown">
-        <label for="points-of-interest-category-dropdown">Search Points of Interest by Category:&nbsp;</label>
-        <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
-            <option value=""> </option>
-            <option value="Search All">Search All</option>
-            <option value="Attraction">Attractions</option>
-            <option value="Food">Food</option>
-            <option value="Historic Site">Historic Sites</option>
-            <option value="Kid-Friendly">Kid-Friendly</option>
-            <option value="Museum">Museum</option>
-            <option value="Park">Park</option>
-            <option value="Scenic Viewpoint">Scenic Viewpoint</option>
-            <option value="Sporting Venue">Sporting Venue</option>
-        </select>
-        <input type="button" @click="retrieveLandmarks" value="Go!">
-    </div>
+            <label for="points-of-interest-category-dropdown">Search Points of Interest by Category:&nbsp;</label>
+            <select v-model="designationSelection" id="category-dropdown" name="categoryDropdown">
+                <option value=""> </option>
+                <option value="Search All">Search All</option>
+                <option value="Attraction">Attractions</option>
+                <option value="Food">Food</option>
+                <option value="Historic Site">Historic Sites</option>
+                <option value="Kid-Friendly">Kid-Friendly</option>
+                <option value="Museum">Museum</option>
+                <option value="Park">Park</option>
+                <option value="Scenic Viewpoint">Scenic Viewpoint</option>
+                <option value="Sporting Venue">Sporting Venue</option>
+            </select>
+            <input type="button" @click="retrieveLandmarks" value="Go!">
+        </div>
     </div>
     <LandmarkList :landmarks="landmarks" />
 </template>
@@ -119,7 +119,6 @@ export default {
 </script>../services/LandmarkService.js
 
 <style scoped>
-
 #searchBars {
     font-weight: 700;
     display: flex;
@@ -131,20 +130,19 @@ export default {
     width: 85vw;
     color: #FBE134;
     position: relative;
-    top:5px;
+    top: -5px;
+    margin-bottom: 5px;
 }
 
-#searchDropDown, #searchInput {
+#searchDropDown,
+#searchInput {
     display: flex;
     align-items: center;
 }
 
 #tour-logo {
-  height: 85px;
-  padding: 0;
-  margin: 1px 10px;
+    height: 85px;
+    padding: 0;
+    margin: 1px 10px;
 }
-
-
-
 </style>
