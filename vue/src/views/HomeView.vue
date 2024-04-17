@@ -58,6 +58,7 @@ export default {
   min-height: 40vh;
   color: #FBE134;
   margin-bottom: 10px;
+  margin-right: 20px;
 }
 
 #about {
