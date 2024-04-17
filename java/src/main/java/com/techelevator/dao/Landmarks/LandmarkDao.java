@@ -22,6 +22,8 @@ public interface LandmarkDao {
 
     String getPlaceIdByLandmarkId(int landmarkId);
 
+    int createNewLandmark(Landmark landmark);
+
     Landmark mapRowToLandmark(SqlRowSet rowSet);
 
 
