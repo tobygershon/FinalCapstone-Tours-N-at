@@ -1,4 +1,3 @@
-<!-- Pittsburgh Glass Center, Apteka, The Winter Mausoleum, Chantal's Cheese Shop -->
 <template>
     <div class="text-center">
         <div class="text-center-paragraph">
