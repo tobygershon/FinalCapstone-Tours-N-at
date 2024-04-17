@@ -22,10 +22,9 @@
   </div>
 
   <div id="curated">
-    <h2>Go to Search Landmarks!</h2>
+    <router-link :to="{name: 'landmarkList'}"><h2>Click Here to Search Landmarks!</h2></router-link>
     <h2>See our Curated Tours Below</h2>
     <div id="curatedTours">
-      <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/steelcity">Steel City Historical Tour</a></div>
       <div class="cardsList"><a href="http://127.0.0.1:5173/offthebeatenpath">Off the Beaten Path</a></div>
@@ -57,7 +56,7 @@ export default {
   border-radius: 20px;
   border: 2px solid #FBE134;
   width: 85vw;
-  min-height: 45vh;
+  min-height: 40vh;
   color: #FBE134;
   margin-bottom: 10px;
 }
@@ -66,7 +65,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 45vh;
+  min-height: 40vh;
   padding-bottom: 5px;
   margin: 0 5px 0 10px;
 }
@@ -76,8 +75,8 @@ export default {
 }
 
 #tour-logo {
-  min-height: 250px;
-  min-width: 250px;
+  min-height: 225px;
+  min-width: 225px;
   max-height: 35vh;
   max-width: 35vw;
 }
@@ -111,27 +110,27 @@ p {
   display: flex;
   flex-direction: column;
   max-width: 85vw;
-  max-height: 5vh;
 }
 
 #curatedTours {
   display: flex;
   max-height: 35vh;
+  text-decoration: none;
+  color:#2A2E34;
 }
 
 h2 {
   background-color: #FBE134;
   font-size: 1rem;
   font-weight: 700;
-  width: 15rem;
-  margin: 0 auto;
+  width: 20rem;
+  margin: 5px auto;
   text-align: center;
   border-radius: 20px;
   border: solid #2A2E34 2px;
 }
 
 .cardsList {
-
   display: flex;
   align-items: center;
   justify-content: center;
