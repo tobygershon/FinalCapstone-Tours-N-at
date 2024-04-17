@@ -112,12 +112,14 @@ p {
 }
 
 #curated {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   max-width: 85vw;
 }
 
 #curatedTours {
+  margin-top: 30px;
   display: flex;
   max-height: 35vh;
 }
