@@ -142,7 +142,7 @@ INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Carnegie Museum of Art'), (SELECT designation_id FROM designations WHERE designation_name = 'Museum'));
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Pittsburgh Zoo & Aquarium'), (SELECT designation_id FROM designations WHERE designation_name = 'Attraction'));
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Pittsburgh Zoo & Aquarium'), (SELECT designation_id FROM designations WHERE designation_name = 'Kid-Friendly'));
-INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Federal Galley'), (SELECT designation_id FROM designations WHERE designation_name = 'Kid Friendly'));
+INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Federal Galley'), (SELECT designation_id FROM designations WHERE designation_name = 'Kid-Friendly'));
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Federal Galley'), (SELECT designation_id FROM designations WHERE designation_name = 'Food'));
 
 INSERT INTO landmarks_designations (landmark_id, designation_id) VALUES ((SELECT landmark_id FROM landmarks WHERE landmark_name = 'Kimpton Hotel Monaco Pittsburgh'), (SELECT designation_id FROM designations WHERE designation_name = 'Hotel'));
