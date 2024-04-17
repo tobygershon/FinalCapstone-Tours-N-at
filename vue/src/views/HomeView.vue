@@ -12,7 +12,7 @@
         N'at is slang for 'and that', and is often tacked on at the end of sentences.</h6>
       </div>
       
-      <h3>Search Pittsburgh Landmarks and Create Daily Itineraries to Explore the Sites!</h3>
+      <h3>Search Pittsburgh landmarks and create daily itineraries to explore the sites!</h3>
       <p>Tours N'at lets you explore tourist attractions, museums, landmarks, restuarants
         and more throughout the city. Login to build daily itineraries and get directions.</p>
       
@@ -22,7 +22,7 @@
   <div id="curated">
     <h2>Curated Tours</h2>
     <div id="curatedTours">
-      <div class="cardsList">"Dantan" (aka: Downtown) Pittsburgh</div>
+      <div class="cardsList">"Dahntahn" (aka: Downtown) Pittsburgh</div>
       <div class="cardsList">Steel City Historical Tour</div>
       <div class="cardsList">Off the Beaten Path</div>
       <div class="cardsList">Kid'sburgh</div>
@@ -47,12 +47,13 @@ export default {
 #home {
   font-weight: 700;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #2A2E34;
   border-radius: 20px;
   border: 2px solid #FBE134;
   width: 85vw;
+  min-height: 45vh;
   color: #FBE134;
   margin-bottom: 10px;
 }
@@ -60,9 +61,10 @@ export default {
 #about {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 250px;
+  justify-content: space-between;
+  min-height: 45vh;
   padding-bottom: 5px;
+  margin: 0 5px 0 10px;
 }
 
 #logo-div {
@@ -70,8 +72,10 @@ export default {
 }
 
 #tour-logo {
-  height: 250px;
-  width: 250px;
+  min-height: 250px;
+  min-width: 250px;
+  max-height: 35vh;
+  max-width: 35vw;
 }
 
 h1 {
@@ -102,20 +106,22 @@ p {
   display: flex;
   flex-direction: column;
   max-width: 85vw;
+  max-height: 5vh;
 }
 
 #curatedTours {
   display: flex;
+  max-height: 35vh;
 }
 
 h2 {
   background-color: #FBE134;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 900;
   width: 15rem;
   margin: 0 auto;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 20px;
   border: solid #2A2E34 2px;
 }
 
