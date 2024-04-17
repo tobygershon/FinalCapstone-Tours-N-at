@@ -14,6 +14,10 @@ import TourRouteView from '../views/TourRouteView.vue';
 import AddItineraryDetailsView from '../views/AddItineraryDetailsView.vue';
 import EditItineraryDetailsView from '../views/EditItineraryDetailsView.vue';
 import UserRatingView from '../views/UserRatingView.vue';
+import Downtown from '../views/DowntownView.vue';
+import Kidsburgh from '../views/KidsburghView.vue';
+import OffTheBeatenPath from '../views/OffTheBeatenPathView.vue';
+import SteelCity from '../views/SteelCityHistoryView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -94,6 +98,38 @@ const routes = [
     component: UserRatingView,
     meta: {
       requiredAuth: true
+    }
+  },
+  {
+    path: '/downtown',
+    name: 'downtown',
+    component: Downtown,
+    meta: {
+      requiredAuth: false
+    }
+  },
+  {
+    path: '/kidsburgh',
+    name: 'kidsburgh',
+    component: Kidsburgh,
+    meta: {
+      requiredAuth: false
+    }
+  },
+  {
+    path: '/offthebeatenpath',
+    name: 'offTheBeatenPath',
+    component: OffTheBeatenPath,
+    meta: {
+      requiredAuth: false
+    }
+  },
+  {
+    path: '/steelcity',
+    name: 'steelcity',
+    component: SteelCity,
+    meta: {
+      requiredAuth: false
     }
   },
   {
