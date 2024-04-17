@@ -6,7 +6,8 @@ export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
+      user: currentUser || {},
+      interestSearch: ''
     },
     getters: {
       isLoggedIn(state) {
@@ -65,6 +66,12 @@ export function createStore(currentToken, currentUser) {
         }
         state.notification = null;
       },
+      CLEAR_SEARCH(state) {
+        state.interestSearch = '';
+      },
+      SET_INTEREST_SEARCH(state,term) {
+        state.interestSearch = term;
+      }
     },
   });
   return store;

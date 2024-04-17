@@ -24,7 +24,8 @@
     </div>
     <LandmarkRating v-if="isLoggedIn" :landmark-id="landmark.landmarkId" @rated="handleRating" />
 
-    <router-link class="back-button" to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link>
+    <!-- <router-link class="back-button" to="/landmarks"><i class="fas fa-arrow-left">Back</i></router-link> -->
+    <a class="back-button" @click="$router.back()"><i class="fas fa-arrow-left">Back</i></a>
 
     <div id="landmarkPhotos" v-for="(photo, index) in photos" :key="index">
 
