@@ -54,6 +54,8 @@ export default {
 
     methods: {
         retrieveLandmarks() {
+            // set the interest text
+            this.$store.commit('SET_INTEREST_SEARCH',this.designationSelection);
             if (this.designationSelection === '' || this.designationSelection === 'Search All') {
                 landmarkService.getAllLandmarks().then(response => {
                     this.landmarks = response.data;
@@ -105,7 +107,12 @@ export default {
     },
 
     created() {
-
+        // look to see if there is a interestSearch in store, 
+        // if so, load up
+        if(this.$store.state.interestSearch) {
+            this.designationSelection = this.$store.state.interestSearch;
+            this.retrieveLandmarks();
+        }
     }
 }
 
