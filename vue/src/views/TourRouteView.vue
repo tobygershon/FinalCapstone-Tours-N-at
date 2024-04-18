@@ -3,11 +3,11 @@
 <template>
   <div id="directionsStep" v-for="(route, index) in routes" :key="index">
     <div v-if="!isCollapsed.includes(index)" class="directionStepDiv">
-      <Map :thisRoute="route" :url="urlList[index]"></Map>
+      <Map :thisRoute="route" :url="urlList[index]" :destination="destinations[index]"></Map>
       <TourDirections @collapse="collapse" :thisRoute="route" :index="index" />
     </div>
     <div v-else class="directionStepDiv" id="collapsedDiv">
-      <span>Step {{ index + 1 }}</span><span id="expandBTN" @click="expand(index)">+ EXPAND</span>
+      <span>Destination {{ index + 1 }}: {{ destinations[index] }}</span><span id="expandBTN" @click="expand(index)">+ EXPAND</span>
     </div>
   </div>
   <router-link class="back-button" :to="{ name: 'itineraryDetail', params: { itineraryId :this.$route.params.itineraryId} }"><i class="fas fa-arrow-left">Back</i></router-link>
@@ -31,7 +31,8 @@ export default {
     return {
       routes: [],
       isCollapsed: [],
-      urlList: []
+      urlList: [],
+      destinations: []
     }
   },
 
@@ -45,7 +46,13 @@ export default {
 
     getURLs() {
       ItineraryService.getListOfPlaceUrlByItineraryId(this.$route.params.itineraryId).then(response => {
-        this.urlList = response.data;
+        this.urlList = response.data.urls;
+      })
+    },
+
+    getDestinations() {
+      ItineraryService.getListOfPlaceUrlByItineraryId(this.$route.params.itineraryId).then(response => {
+        this.destinations = response.data.destinations;
       })
     },
 
@@ -63,6 +70,7 @@ export default {
   created() {
     this.getRoutes();
     this.getURLs();
+    this.getDestinations();
   }
 
 }

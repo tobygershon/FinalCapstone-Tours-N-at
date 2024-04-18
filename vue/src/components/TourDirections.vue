@@ -48,10 +48,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 35px;
+    height: 25px;
     font-size: 1.25rem;
     font-weight: 700;
     cursor: pointer;
+    margin-bottom: 25px;
 }
 
 #directionsBox {
@@ -63,7 +64,7 @@ export default {
 
 #directionStep {
     display: flex;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
 
 #step {
