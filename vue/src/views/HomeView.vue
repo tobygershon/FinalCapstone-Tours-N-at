@@ -21,7 +21,7 @@
   </div>
 
   <div id="curated">
-    <router-link :to="{name: 'landmarkList'}" ><h2>Click Here to Search Landmarks</h2></router-link>
+    <router-link :to="{name: 'landmarkList'}" ><h2>Click to Search for Points of Interest</h2></router-link>
     <h2 id="banner">See our Curated Tours Below!</h2>
     <div id="curatedTours">
       <div class="cardsList"><a href="http://127.0.0.1:5173/downtown">"Dahntahn" (aka: Downtown) Pittsburgh</a></div>
@@ -119,6 +119,18 @@ p {
   max-width: 85vw;
 }
 
+#curated a h2 {
+  text-decoration: none;
+  color:#2A2E34;
+  font-size: 1.1rem;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+.cardsList:hover, #curated a h2:hover {
+  background-color: #ffe121;
+}
+
 #curatedTours {
   display: flex;
   max-height: 35vh;
@@ -126,14 +138,15 @@ p {
 }
 
 h2 {
-  background-color: #FBE134;
+  background-color: rgb(251, 225, 52, .9);
   font-size: 1.25rem;
   font-weight: 700;
   width: 14rem;
   margin: 3px auto;
   text-align: center;
-  border-radius: 5px;
+  border-radius:40px;
   border: solid #2A2E34 2px;
+  text-decoration: none;
 }
 
 .cardsList {
@@ -142,12 +155,7 @@ h2 {
   justify-content: center;
   font-weight: 700;
   font-size: 1.25rem;
-
-}
-
-h2 {
-  text-decoration: none;
-  text-decoration-color:#2A2E34;
+  height: 20vh;
 }
 
 #banner {

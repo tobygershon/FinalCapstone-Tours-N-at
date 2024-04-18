@@ -3,6 +3,7 @@
 
 <template>
     <div id=mapDiv>
+        <div id="destination">Destination: {{destination}}</div>
         <div id="distance">Distance: {{ distance.text }}</div>
         <img :src=mapURL alt="map route" id="map">
         <a :href="url" :target="'_blank'">Click to see Interactive Map for your Destination</a>
@@ -14,7 +15,7 @@
 
 export default {
 
-    props: ['thisRoute', 'url'],
+    props: ['thisRoute', 'url', 'destination'],
 
     data() {
         return {
@@ -68,11 +69,11 @@ export default {
             const lng = this.longitude;
             const zoomURL = '&zoom=';
             const zoomLevel = this.zoomLevel;
-            const middleURL = '&path=weight:4%7Ccolor:red%7Cenc:';
+            const middleURL = '&path=weight:9%7Ccolor:black%7Cenc:';
             const line = this.polyline;
             const APIKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
 
-            return (baseURL + lat + comma + lng + zoomURL + zoomLevel + middleURL + line + APIKey);
+            return (baseURL + lat + comma + lng + zoomURL + zoomLevel + ('&markers=size:mid|color:yellow|label:D|') + lat + comma + lng + middleURL + line + APIKey);
         }
     },
 
@@ -94,8 +95,18 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 35px;
-    font-size: 25px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#destination {
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 25px;
+    font-size: 20px;
     font-weight: 700;
 }
 
