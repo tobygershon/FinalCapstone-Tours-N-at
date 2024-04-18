@@ -123,8 +123,9 @@ p {
   text-decoration: none;
   color:#2A2E34;
   font-size: 1.1rem;
-  padding: 5px;
+  padding: 7px;
   margin: 10px auto;
+  width: 20rem;
 }
 
 .cardsList:hover, #curated a h2:hover {

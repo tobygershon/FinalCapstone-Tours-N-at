@@ -69,7 +69,7 @@ export default {
             const lng = this.longitude;
             const zoomURL = '&zoom=';
             const zoomLevel = this.zoomLevel;
-            const middleURL = '&path=weight:9%7Ccolor:black%7Cenc:';
+            const middleURL = '&path=weight:7%7Ccolor:red%7Cenc:';
             const line = this.polyline;
             const APIKey = '&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI';
 
