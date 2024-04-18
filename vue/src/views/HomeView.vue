@@ -66,12 +66,16 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   min-height: 40vh;
-  padding-bottom: 5px;
+  padding-bottom: .5rem;
+  padding-right: 1rem;
   margin: 0 5px 0 0px;
 }
 
 #logo-div {
   min-width: 250px;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 #tour-logo {
@@ -87,30 +91,29 @@ h1 {
   justify-content: flex-start;
   font-size: 3rem;
   font-weight: 800;
-  margin-bottom: 3px;
+  padding: .5rem 0 0 .75rem;
+  flex-grow: 1;
 }
 
 h3 {
   font-size: 1.35rem;
   font-weight: 600;
-  margin-bottom: 5px;
-  margin-left: 10px;
+  padding: .75rem;
+  flex-grow: 1;
 }
 
 h6 {
   font-size: 1rem;
   font-style: italic;
-  margin-bottom: 5px;
-  margin-left: 20px;
+  padding: .75rem;
+  flex-grow: 1;
 }
 
 p {
   font-weight: 400;
   font-size: .9rem;
-  padding-bottom: 5px;
-  padding-right: 5px;
-  margin-bottom: 3px;
-  margin-left: 30px;
+  padding: .75rem;
+  flex-grow: 1;
 }
 
 #curated {

@@ -41,6 +41,7 @@ export default {
       this.currentRating = isGood;
       ratingService.createOrUpdateRating(this.landmarkId, isGood)
         .then(response => {
+          this.ratingId = response.data.ratingId;
           this.$emit('rated', response.data);
         })
         .catch(error => {
@@ -60,7 +61,7 @@ export default {
         .catch(error => {
           if (error.response) {
             this.$store.commit('SET_NOTIFICATION',
-              "Error deleting rating. Response received was '" + error.response.statusText + "'.");
+              "Error deleting rating.");
           } else if (error.request) {
             this.$store.commit('SET_NOTIFICATION', "Error deleting rating. Server could not be reached.");
           } else {
