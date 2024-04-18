@@ -6,6 +6,7 @@ import com.techelevator.dao.Landmarks.Model.Landmark;
 import com.techelevator.service.PlacesService;
 import com.techelevator.service.models.places.PlacesResponse;
 import com.techelevator.service.models.places.Result;
+import com.techelevator.service.models.places.newPlacesDTO;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,16 +37,24 @@ public class PlacesController {
     }
 
     @GetMapping("/places/itineraries/{itineraryId}")
-    public List<String> getDestinationUrlList(@PathVariable int itineraryId) {
+    public newPlacesDTO getDestinationUrlList(@PathVariable int itineraryId) {
+        newPlacesDTO newPlacesDTO = new newPlacesDTO();
         List<String> urlList = new ArrayList<>();
+        List<String> destinations = new ArrayList<>();
 
-        List<String> result = itineraryDao.retrieveItineraryStops(itineraryId);
+        List<String> resultList = itineraryDao.retrieveItineraryStops(itineraryId);
 
-        for(int i = 1; i < result.size(); i++) {
-            String url = placesService.getPlaceInfoByPlaceId(result.get(i)).getUrl();
+        for(int i = 1; i < resultList.size(); i++) {
+            Result result = placesService.getPlaceInfoByPlaceId(resultList.get(i));
+            String url = result.getUrl();
             urlList.add(url);
+            String destinationName = result.getName();
+            destinations.add(destinationName);
         }
 
-        return urlList;
+        newPlacesDTO.setUrls(urlList);
+        newPlacesDTO.setDestinations(destinations);
+
+        return newPlacesDTO;
     }
 }
