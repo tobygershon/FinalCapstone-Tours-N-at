@@ -11,7 +11,7 @@ public class GeocodingService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     private final String BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-    private final String API_KEY = "&key=AIzaSyBqJyZCzD-m22Izo98cXLx_PcND6cHoKWI";
+    private final String API_KEY = "&key=" + GOOGLE_API_KEY;
 
 
     public GeocodeResults getGeocodeInfo(String addressInput) {
